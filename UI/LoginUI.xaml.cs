@@ -16,7 +16,7 @@ namespace UI
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
             VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
-            if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, TextBoxPassword.Text))
+            if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, TextBoxPassword.Password))
             {
                 DashboardUI dashboardWindow = new DashboardUI();
                 dashboardWindow.Show();
