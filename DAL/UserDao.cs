@@ -1,24 +1,26 @@
-﻿using MongoDB.Driver;
+﻿using System.Collections.ObjectModel;
+using Model;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 
 namespace DAL;
 
 public class UserDao
 {
-    private readonly MongoClient _client;
     private readonly BaseDao _baseDao;
-    private IMongoCollection<Ticket> _ticketCollection;
-    private IMongoDatabase _database;
+    private IMongoCollection<User> _userCollection;
     
-    public UserDao()
+    public UserDao(BaseDao baseDao)
     {
         _baseDao = new BaseDao();
-        _client = _baseDao.GetMongoClient();
-        _database = _client.GetDatabase("TheGardenGroup");//geting the database
-        _ticketCollection = _database.GetCollection<Ticket>("IncidentTicket");//the table that we want to work on
+        _userCollection = _baseDao.GetUserCollection();
     }
     
-    public void GetUsers()
+    public List<User> GetUsers()
     {
         
+        
+        return new List<User>();
     }
 }

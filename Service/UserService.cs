@@ -13,6 +13,6 @@ public class UserService
     
     public void GetUsers()
     {
-        _userDao.GetUsers();
+        UserDao.GetUsers();
     }
 }
