@@ -8,8 +8,17 @@ namespace DAL;
 
 public class UserDao
 {
-
     private readonly BaseDao _baseDao;
     private IMongoCollection<User> _userCollection;
 
+    public UserDao()
+    {
+        _baseDao = new BaseDao();
+        _userCollection = _baseDao.GetUserCollection();
+    }
+    
+    public List<User> GetAllUsers()
+    {
+        return _userCollection.Find(new BsonDocument()).ToList();
+    }
 }
