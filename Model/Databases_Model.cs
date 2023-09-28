@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Model
 {
-    public abstract class DatabasesModel
+    public class DatabasesModel
     {
         [BsonElement("name")]
         public string name { get; set; }
