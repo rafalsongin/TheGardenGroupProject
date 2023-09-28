@@ -2,17 +2,27 @@
 using Service;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Documents;
+using UI;
 
 namespace TheGardenGroupProject
 {
     public partial class DashboardUI : Window
     {
 
-        public DashboardUI()
+        public DashboardUI(string username)
         {
             InitializeComponent();
+            
+            DisplayUserByUsername(username);
         }
+        
+        // TODO: add logout button later
+        /*private void buttonLogout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginUI loginWindow = new LoginUI();
+            loginWindow.Show();
+            this.Close();
+        }*/
 
         // Working, created for testing
         private void DisplayAllUsersUsernames()
@@ -27,9 +37,9 @@ namespace TheGardenGroupProject
         }
 
         // Working, created for testing
-        private void DisplayUserByUsername()
+        private void DisplayUserByUsername(string username)
         {
-            string? username = "jstatham";
+            // string? username = "jstatham";
             UserService userService = new UserService();
             User user = userService.GetUserByUsername(username);
             

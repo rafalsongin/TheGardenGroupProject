@@ -18,7 +18,7 @@ namespace UI
             VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
             if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, TextBoxPassword.Password))
             {
-                DashboardUI dashboardWindow = new DashboardUI();
+                DashboardUI dashboardWindow = new DashboardUI(TextBoxUsername.Text);
                 dashboardWindow.Show();
             }
             else
