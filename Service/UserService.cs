@@ -10,9 +10,4 @@ public class UserService
     {
         _userDao = userDao;
     }
-    
-    public void GetUsers()
-    {
-        UserDao.GetUsers();
-    }
 }
