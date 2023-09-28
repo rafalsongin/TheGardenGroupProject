@@ -11,8 +11,8 @@ public class UserService
         _userDao = userDao;
     }
     
-    public void GetUsers()
+    /*public void GetUsers()
     {
         _userDao.GetUsers();
-    }
+    }*/
 }
