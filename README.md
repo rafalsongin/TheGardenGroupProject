@@ -1,4 +1,6 @@
 # TheGardenGroupProject
 
-All users passwords are the same as username + Login.
-username:usernameLogin
+Users (not all):
+Service Desk Employee - jstatham:jstathamLogin
+Company Employee - tholland:thollandLogin
+Company Manager - jsmith:jsmithLogin
