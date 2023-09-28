@@ -4,17 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="App name" Height="450" Width="600" ResizeMode="NoResize">
-    <Grid>
-        <Button x:Name="ButtonLogin" Content="Login" HorizontalAlignment="Left" Margin="256,326,0,0" VerticalAlignment="Top" Height="29" Width="107" FontSize="16" AutomationProperties.Name="buttonLogin" Background="#FF169BD5" Foreground="White"/><!--Click="buttonLogin_Click"-->
-        <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Center" Margin="0,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="24" FontSize="16" AutomationProperties.Name="textBoxUsernameInput"/> <!--TextChanged="textBoxUsername_TextChanged"-->
-        <Label x:Name="LabelHeading" Content="NoDesk: TGG" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
-        <TextBox x:Name="TextBoxPassword" HorizontalAlignment="Center" Margin="0,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="24" FontSize="16" AutomationProperties.Name="textBoxPasswordInput"/> <!--TextChanged="textBoxPassword_TextChanged"-->
-        <Label x:Name="LabelEnterPassword" Content="Password&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="192,0,0,0" VerticalAlignment="Center" AutomationProperties.Name="labelLogin" Height="31" RenderTransformOrigin="0.579,-0.174" FontSize="14"/>
-        <Label x:Name="LabelEnterUsername" Content="Username&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="192,136,0,0" VerticalAlignment="Top" AutomationProperties.Name="labelLogin" Height="31" RenderTransformOrigin="0.579,-0.174" FontSize="14"/>
-        <CheckBox x:Name="CheckBoxRememberMe" Content="Remember Me" HorizontalAlignment="Left" Margin="179,278,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LabelHeading2" Content="Please provide login credentials to login to &#xD;&#xA;NoDesk for The Garden Group" Margin="152,75,0,0" VerticalAlignment="Top" FontSize="16" AutomationProperties.Name="labelLogin" Height="56" RenderTransformOrigin="0.579,-0.174" FontWeight="Bold" Width="339" HorizontalAlignment="Left"/>
-        <Label x:Name="LabelForgotLoginDetails" Content="Forgot Login Details?" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="317,270,0,0" VerticalAlignment="Top" AutomationProperties.Name="labelLogin" Height="31" RenderTransformOrigin="0.579,-0.174"/> <!--MouseLeftButtonUp="labelForgotLoginDetails_MouseLeftButtonUp"-->
-        <ListBox x:Name="ListBoxAllDbTest" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,63,426,63"/> <!--SelectionChanged="listBoxAllDBTest_SelectionChanged"-->
+        Title="NoDesk Application" Height="440" Width="300" ResizeMode="NoResize">
+    <Grid Height="434" VerticalAlignment="Center" Background="White">
+        <Button x:Name="ButtonLogin" Content="Login" HorizontalAlignment="Center" Margin="0,305,0,0" VerticalAlignment="Top" Height="29" Width="108" FontSize="16" AutomationProperties.Name="buttonLogin" Background="#FF282828" Foreground="#FFA3BB88" FontWeight="Bold" Click="buttonLogin_Click"/>
+        <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Left" Margin="65,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Height="24" FontSize="16" AutomationProperties.Name="textBoxUsernameInput" TextChanged="textBoxUsername_TextChanged" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
+        <Label x:Name="LabelHeading" Content="NoDesk: TGG&#xD;&#xA;(logo?)" HorizontalAlignment="Center" Margin="0,37,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
+        <TextBox x:Name="TextBoxPassword" HorizontalAlignment="Left" Margin="65,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Height="24" FontSize="16" AutomationProperties.Name="textBoxPasswordInput" TextChanged="textBoxPassword_TextChanged" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
+        <Label x:Name="LabelEnterPassword" Content="Password&#xD;&#xA;&#xA;" Margin="65,230,0,0" AutomationProperties.Name="labelLogin" RenderTransformOrigin="0.579,-0.174" FontSize="14" HorizontalAlignment="Left" Width="76" Height="30" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LabelEnterUsername" Content="Username&#xD;&#xA;&#xA;" Margin="65,161,0,242" AutomationProperties.Name="labelLogin" RenderTransformOrigin="0.579,-0.174" FontSize="14" HorizontalAlignment="Left" Width="78" FontWeight="Bold"/>
+        <Label x:Name="LabelHeading2" Content="Please enter login credentials" Margin="0,113,0,0" VerticalAlignment="Top" FontSize="16" AutomationProperties.Name="labelLogin" Height="32" RenderTransformOrigin="0.579,-0.174" FontWeight="Bold" Width="238" HorizontalAlignment="Center"/>
+        <Label x:Name="LabelForgotLoginDetails" Content="Forgot Login Details?" HorizontalAlignment="Center" HorizontalContentAlignment="Right" Margin="0,360,0,0" VerticalAlignment="Top" AutomationProperties.Name="labelLogin" Height="30" RenderTransformOrigin="0.579,-0.174" BorderThickness="3,0,0,0" FontStyle="Italic" MouseLeftButtonUp="labelForgotLoginDetails_MouseLeftButtonUp"/>
     </Grid>
 </Window>

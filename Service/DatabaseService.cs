@@ -3,11 +3,11 @@ using Model;
 
 namespace Service
 {
-    public class Databases
+    public class DatabaseService
     {
         private BaseDao dao;
 
-        public Databases()
+        public DatabaseService()
         {
             dao = new BaseDao();
         }
