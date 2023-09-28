@@ -6,5 +6,7 @@ riderModule.iml
 /*.bin
 /*.v2
 /*.suo
-/.idea/
-/.vs/
+.idea/
+.vs/
+TheGardenGroupProject/.vs 
+.idea/.idea.TheGardenGroupProject/.idea
