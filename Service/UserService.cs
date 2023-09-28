@@ -1,13 +1,19 @@
 ﻿using DAL;
+using Model;
 
 namespace Service;
 
 public class UserService
 {
-    private UserDao _userDao;
+    private readonly UserDao _userDao;
 
-    public UserService(UserDao userDao)
+    public UserService()
     {
-        _userDao = userDao;
+        _userDao = new UserDao();
+    }
+    
+    public List<User> GetAllUsers()
+    {
+        return _userDao.GetAllUsers();
     }
 }

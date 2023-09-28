@@ -1,27 +1,27 @@
-﻿using System;
+﻿using Model;
+using Service;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for Dashboard.xaml
-    /// </summary>
     public partial class DashboardUI : Window
     {
+
         public DashboardUI()
         {
             InitializeComponent();
+
+            // TODO: Test it (doesn't work)
+            /*UserService userService = new UserService();
+            List<User> userList = userService.GetAllUsers();
+
+
+            foreach (var user in userList)
+            {
+                ListViewTest.Items.Add(user.Username);
+            }*/
         }
     }
 }
