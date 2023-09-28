@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Service;
 
-namespace TheGardenGroupProject
+namespace UI
 {
     public partial class LoginUI : Window
     {
@@ -11,7 +11,7 @@ namespace TheGardenGroupProject
         public LoginUI()
         {
             _databases = new Databases();
-            //InitializeComponent();
+            InitializeComponent();
             LoginUI_Load();
         }
 
@@ -21,7 +21,7 @@ namespace TheGardenGroupProject
 
             foreach (var db in dbList)
             {
-                //ListBoxAllDbTest.Items.Add(db.name);
+                // ListBoxAllDbTest.Items.Add(db.name);
             }
         }
 
@@ -44,11 +44,6 @@ namespace TheGardenGroupProject
         private void labelForgotLoginDetails_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("Forgot details");
-        }
-
-        private void listBoxAllDBTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
