@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:TheGardenGroupProject"
         mc:Ignorable="d"
         Title="Dashboard" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid/>
 </Window>
