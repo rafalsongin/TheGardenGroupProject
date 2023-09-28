@@ -5,14 +5,14 @@ namespace Service
 {
     public class Databases
     {
-        private Dao dao;
+        private BaseDao dao;
 
         public Databases()
         {
-            dao = new Dao();
+            dao = new BaseDao();
         }
         
-        public List<Databases_Model> Get_All_Databases()
+        public List<DatabasesModel> Get_All_Databases()
         {
             return dao.GetDatabases();
         }

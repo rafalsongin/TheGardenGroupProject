@@ -5,22 +5,22 @@ using Model;
 
 namespace DAL
 {
-    public class Dao
+    public class BaseDao
     {
         private MongoClient client;
 
-        public Dao()
+        public BaseDao()
         {
             client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
         }
 
-        public List<Databases_Model> GetDatabases()
+        public List<DatabasesModel> GetDatabases()
         {
-            List<Databases_Model> allDatabases = new List<Databases_Model>();
+            List<DatabasesModel> allDatabases = new List<DatabasesModel>();
 
             foreach (BsonDocument db in client.ListDatabases().ToList())
             {
-                allDatabases.Add(BsonSerializer.Deserialize<Databases_Model>(db));
+                allDatabases.Add(BsonSerializer.Deserialize<DatabasesModel>(db));
             }
             return allDatabases;
         }
