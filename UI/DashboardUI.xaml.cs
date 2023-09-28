@@ -25,5 +25,15 @@ namespace TheGardenGroupProject
                 ListViewTest.Items.Add(user.Username);
             }
         }
+
+        // Working, created for testing
+        private void DisplayUserByUsername()
+        {
+            string username = "jstatham";
+            UserService userService = new UserService();
+            User user = userService.GetUserByUsername(username);
+            
+            ListViewTest.Items.Add(user.Username);
+        }
     }
 }
