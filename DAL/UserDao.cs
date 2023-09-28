@@ -16,9 +16,20 @@ public class UserDao
         _baseDao = new BaseDao();
         _userCollection = _baseDao.GetUserCollection();
     }
+
+    public User GetUserByUsername(string username)
+    {
+        var filter = Builders<User>.Filter.Eq("username", username);
+        var user = _userCollection.Find(filter).FirstOrDefault();
+
+        return user;
+    }
     
     public List<User> GetAllUsers()
     {
-        return _userCollection.Find(new BsonDocument()).ToList();
+        var filter = Builders<User>.Filter.Empty;
+        var userList = _userCollection.Find(filter).ToList();
+
+        return userList;
     }
 }

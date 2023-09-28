@@ -1,12 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Model;
 
 public class User
 {
-    public User(string ticketId, string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
+    public User(ObjectId objectId , string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
     {
-        TicketId = ticketId;
+        ObjectId = objectId;
         Username = username;
         Password = password;
         FirstName = firstName;
@@ -18,7 +19,7 @@ public class User
     }
 
     [BsonElement("_id")]
-    public string TicketId { get; set; }
+    public ObjectId ObjectId { get; set; }
     
     [BsonElement("username")]
     public string Username { get; set; }

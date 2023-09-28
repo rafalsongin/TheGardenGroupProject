@@ -12,16 +12,18 @@ namespace TheGardenGroupProject
         public DashboardUI()
         {
             InitializeComponent();
+        }
 
-            // TODO: Test it (doesn't work)
-            /*UserService userService = new UserService();
+        // Working, created for testing
+        private void DisplayAllUsersUsernames()
+        {
+            UserService userService = new UserService();
             List<User> userList = userService.GetAllUsers();
-
-
+            
             foreach (var user in userList)
             {
                 ListViewTest.Items.Add(user.Username);
-            }*/
+            }
         }
     }
 }
