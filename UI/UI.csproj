@@ -5,6 +5,11 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <RootNamespace>TheGardenGroupProject</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Service\Service.csproj" />
+    </ItemGroup>
 
 </Project>
