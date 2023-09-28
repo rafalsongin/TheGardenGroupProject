@@ -29,7 +29,7 @@ namespace TheGardenGroupProject
         // Working, created for testing
         private void DisplayUserByUsername()
         {
-            string username = "jstatham";
+            string? username = "jstatham";
             UserService userService = new UserService();
             User user = userService.GetUserByUsername(username);
             

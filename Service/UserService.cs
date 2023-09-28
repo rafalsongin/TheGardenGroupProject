@@ -17,7 +17,7 @@ public class UserService
         return _userDao.GetAllUsers();
     }
 
-    public User GetUserByUsername(string username)
+    public User GetUserByUsername(string? username)
     {
         return _userDao.GetUserByUsername(username);
     }

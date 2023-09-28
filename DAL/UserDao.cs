@@ -16,7 +16,7 @@ public class UserDao
         _userCollection = baseDao.GetUserCollection();
     }
 
-    public User GetUserByUsername(string username)
+    public User GetUserByUsername(string? username)
     {
         var filter = Builders<User>.Filter.Eq("username", username);
         var user = _userCollection.Find(filter).FirstOrDefault();
