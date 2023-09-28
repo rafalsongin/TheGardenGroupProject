@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System.Runtime.InteropServices.JavaScript;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Model;
@@ -8,10 +9,12 @@ namespace DAL
     public class BaseDao
     {
         private readonly MongoClient _client;
+        private readonly IMongoDatabase _database;
 
         public BaseDao()
         {
             _client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
+            _database = _client.GetDatabase("TheGardenGroup");
         }
 
         public List<DatabasesModel> GetDatabases()
@@ -24,10 +27,11 @@ namespace DAL
             }
             return allDatabases;
         }
-
-        public MongoClient GetMongoClient()
+        
+        // Add your GetCollection methods here below
+        public IMongoCollection<User> GetUserCollection()
         {
-            return _client;
+            return _database.GetCollection<User>("User");
         }
     }
 }
