@@ -7,9 +7,9 @@ public class UserService
 {
     private readonly UserDao _userDao;
 
-    public UserService(UserDao userDao)
+    public UserService()
     {
-        _userDao = userDao;
+        _userDao = new UserDao();
     }
     
     public List<User> GetAllUsers()
