@@ -17,9 +17,9 @@ namespace TheGardenGroupProject
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class DashboardUI : Window
     {
-        public Dashboard()
+        public DashboardUI()
         {
             InitializeComponent();
         }

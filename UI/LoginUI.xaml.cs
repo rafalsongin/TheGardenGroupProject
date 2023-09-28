@@ -2,22 +2,23 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Service;
+using TheGardenGroupProject;
 
 namespace UI
 {
     public partial class LoginUI : Window
     {
-        private readonly Databases _databases;
+        private readonly DatabaseService _databaseService;
         public LoginUI()
         {
-            _databases = new Databases();
+            _databaseService = new DatabaseService();
             InitializeComponent();
             LoginUI_Load();
         }
 
         private void LoginUI_Load()
         {
-            var dbList = _databases.Get_All_Databases();
+            var dbList = _databaseService.Get_All_Databases();
 
             foreach (var db in dbList)
             {
@@ -27,8 +28,9 @@ namespace UI
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello");
-
+            // MessageBox.Show("Hello");
+            DashboardUI dashboardWindow = new DashboardUI();
+            dashboardWindow.Show();
         }
 
         private void textBoxUsername_TextChanged(object sender, TextChangedEventArgs e)
