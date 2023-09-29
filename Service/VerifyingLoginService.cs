@@ -1,31 +1,33 @@
-﻿namespace Service;
+﻿using DAL;
+using Model;
+
+namespace Service;
 
 using BCrypt.Net;
 
 public class VerifyingLoginService
 {
-    /*// TODO: hash passwords in the database
-    private EmployeeDao employeeDb;
+    private readonly UserDao _userDb;
 
-    public VerifyingService()
+    public VerifyingLoginService()
     {
-        employeeDb = new EmployeeDao();
+        _userDb = new UserDao();
     }
 
-    public bool isCorrectPassword(string inputUsername, string inputPassword)
+    public bool IsCorrectPassword(string? inputUsername, string inputPassword)
     {
-        if (employeeDb.GetEmployeeByUsername(inputUsername) == null)
+        if (_userDb?.GetUserByUsername(inputUsername) == null)
         {
             return false;
         }
 
         // get hashed password from the database
-        Employee employee = employeeDb.GetEmployeeByUsername(inputUsername);
-        string hashedPassword = employee.LoginPassword;
+        User user = _userDb.GetUserByUsername(inputUsername);
+        string hashedPassword = user.Password;
 
         // check if the password is correct
         bool passwordMatch = BCrypt.Verify(inputPassword, hashedPassword);
 
         return passwordMatch;
-    }*/
+    }
 }

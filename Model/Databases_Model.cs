@@ -1,6 +1,4 @@
-﻿using System;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace Model
 {
@@ -14,7 +12,5 @@ namespace Model
         
         [BsonElement("empty")]
         public bool empty { get; set; }
-        
-        
     }
 }
