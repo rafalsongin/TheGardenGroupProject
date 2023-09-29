@@ -6,8 +6,6 @@ namespace Service;
 
 public class PasswordResetService
 {
-    
-    
     public void ResetPassword(string? username)
     {
         User user = GetUserByUsername(username);
@@ -21,7 +19,7 @@ public class PasswordResetService
             Console.WriteLine("Email sent successfully!");
         }
         catch (Exception e)
-        {
+        { 
             Console.WriteLine($"Error sending email: {e.Message}");
         }
     }
@@ -31,8 +29,9 @@ public class PasswordResetService
         // Configure SMTP settings.
         SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
         smtpClient.Port = 587; // Specify the SMTP port you need.
-        smtpClient.Credentials = new NetworkCredential("thegardengroupinholland@gmail.com", "thegardengrouplogin");
+        smtpClient.Credentials = new NetworkCredential("thegardengroupinholland@gmail.com", "hbts qzyg nyij pckr "); // the "App password" (secure connection)
         smtpClient.EnableSsl = true; // Use SSL for secure communication with the SMTP server.
+        
         
         return smtpClient;
     }
@@ -55,5 +54,20 @@ public class PasswordResetService
         User user = userService.GetUserByUsername(username);
         
         return user;
+    }
+
+    public bool ValidateUsername(string username)
+    {
+        UserService userService = new UserService();
+        List<User> userList = userService.GetAllUsers();
+
+        foreach (var user in userList)
+        {
+            if (user.Username == username)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -24,6 +24,7 @@ namespace UI
             }
             else
             {
+                LabelPasswordResetSuccess.Visibility = Visibility.Hidden;
                 LabelIncorrectCredentials.Visibility = Visibility.Visible;
             }
         }
@@ -35,7 +36,33 @@ namespace UI
 
         private void labelForgotLoginDetails_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Forgot details");
+            // GridLoginPage.Visibility = Visibility.Hidden;
+            GridPasswordResetPage.Visibility = Visibility.Visible;
+        }
+
+        private void buttonPasswordResetBack_Click(object sender, RoutedEventArgs e)
+        {
+            GridPasswordResetPage.Visibility = Visibility.Hidden;
+        }
+
+        private void buttonPasswordReset_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBoxPasswordResetUsername.Text == "")
+            {
+                LabelPasswordResetError.Visibility = Visibility.Visible;
+                return;
+            }
+            
+            PasswordResetService passwordResetService = new PasswordResetService();
+            if (!passwordResetService.ValidateUsername(TextBoxPasswordResetUsername.Text))
+            {
+                LabelPasswordResetError.Visibility = Visibility.Visible;
+                return;
+            }
+            passwordResetService.ResetPassword(TextBoxPasswordResetUsername.Text);
+
+            GridPasswordResetPage.Visibility = Visibility.Hidden;
+            LabelPasswordResetSuccess.Visibility = Visibility.Visible;
         }
     }
 }
