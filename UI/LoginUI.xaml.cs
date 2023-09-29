@@ -16,7 +16,7 @@ namespace UI
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
             VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
-            if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, TextBoxPassword.Password))
+            if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
             {
                 DashboardUI dashboardWindow = new DashboardUI(TextBoxUsername.Text);
                 dashboardWindow.Show();
@@ -30,11 +30,6 @@ namespace UI
         private void textBoxUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
  
-        }
-
-        private void textBoxPassword_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
         private void labelForgotLoginDetails_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
