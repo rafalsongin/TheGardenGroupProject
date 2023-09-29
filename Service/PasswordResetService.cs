@@ -6,6 +6,8 @@ namespace Service;
 
 public class PasswordResetService
 {
+    // TODO: Add password reset by user functionality.
+    // TODO: Add expiration date to password reset link. (use tokens?)
     public void ResetPassword(string? username)
     {
         User user = GetUserByUsername(username);
