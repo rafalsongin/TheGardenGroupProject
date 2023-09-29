@@ -27,7 +27,7 @@ namespace TheGardenGroupProject
             this.Close();
         }
 
-        // Working, created for testing
+        /*// Working, created for testing
         private void DisplayAllUsersUsernames()
         {
             UserService userService = new UserService();
@@ -46,6 +46,6 @@ namespace TheGardenGroupProject
             User user = userService.GetUserByUsername(username);
             
             ListViewTest.Items.Add(user.Username);
-        }
+        }*/
     }
 }
