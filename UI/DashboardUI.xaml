@@ -7,13 +7,6 @@
         mc:Ignorable="d"
         Title="Dashboard" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="ListViewTest" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,649,255">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Button x:Name="ButtonLogout" Content="Logout" HorizontalAlignment="Left" Margin="709,10,0,0" VerticalAlignment="Top" Height="32" Width="81" FontSize="16" AutomationProperties.Name="buttonLogin" Background="#FF282828" Foreground="#FFA3BB88" FontWeight="Bold" Click="buttonLogin_Click" RenderTransformOrigin="-0.228,2.062"/>
         <Label x:Name="LabelDisplayLoggedInUsername" Content="Logged in as: " HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="457,10,0,0" VerticalAlignment="Top" FontSize="16" Height="32" Width="247"/>
     </Grid>
