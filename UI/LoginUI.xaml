@@ -17,7 +17,7 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-        <Label x:Name="LabelForgotLoginDetails" Content="Forgot Login Details?" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,403,0,0" VerticalAlignment="Top" AutomationProperties.Name="labelLogin" Height="37" RenderTransformOrigin="0.579,-0.174" BorderThickness="3,0,0,0" FontStyle="Italic" MouseLeftButtonUp="labelForgotLoginDetails_MouseLeftButtonUp" FontSize="18" Width="198"/>
+        <Label x:Name="LabelForgotLoginDetails" Content="Forgot Login Details?" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,397,0,0" VerticalAlignment="Top" AutomationProperties.Name="labelLogin" Height="43" RenderTransformOrigin="0.579,-0.174" BorderThickness="3,0,0,0" FontStyle="Italic" MouseLeftButtonUp="labelForgotLoginDetails_MouseLeftButtonUp" FontSize="18" Width="198"/>
         <Label x:Name="LabelIncorrectCredentials" Content="Incorrect username or password" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" AutomationProperties.Name="labelLogin" Height="42" RenderTransformOrigin="0.579,-0.174" BorderThickness="3,0,0,0" FontStyle="Italic" Background="White" Foreground="Red" Visibility="Hidden" FontSize="20" Width="316"/>
     </Grid>
 </Window>
