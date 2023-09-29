@@ -8,21 +8,24 @@ namespace TheGardenGroupProject
 {
     public partial class DashboardUI : Window
     {
+        private User ActiveUser { get; }
 
         public DashboardUI(string username)
         {
             InitializeComponent();
             
-            DisplayUserByUsername(username);
+            // Set ActiveUser so that it can be used in other methods
+            UserService userService = new UserService();
+            ActiveUser = userService.GetUserByUsername(username);
+            LabelDisplayLoggedInUsername.Content = "Logged in as: " + ActiveUser.Username;
         }
-        
-        // TODO: add logout button later
-        /*private void buttonLogout_Click(object sender, RoutedEventArgs e)
+
+        private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginUI loginWindow = new LoginUI();
             loginWindow.Show();
             this.Close();
-        }*/
+        }
 
         // Working, created for testing
         private void DisplayAllUsersUsernames()
@@ -39,7 +42,6 @@ namespace TheGardenGroupProject
         // Working, created for testing
         private void DisplayUserByUsername(string username)
         {
-            // string? username = "jstatham";
             UserService userService = new UserService();
             User user = userService.GetUserByUsername(username);
             

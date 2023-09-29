@@ -20,6 +20,7 @@ namespace UI
             {
                 DashboardUI dashboardWindow = new DashboardUI(TextBoxUsername.Text);
                 dashboardWindow.Show();
+                this.Close();
             }
             else
             {
