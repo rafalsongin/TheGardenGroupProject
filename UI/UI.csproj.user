@@ -2,20 +2,12 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Update="AddTicketUI.xaml.cs">
-=======
-    <Compile Update="Dashboard.xaml.cs">
->>>>>>> 0cbe1039fe883d32515ad3bd60124e47ae0ea06f
+    <Compile Update="NewUserUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Page Update="AddTicketUI.xaml">
-=======
-    <Page Update="Dashboard.xaml">
->>>>>>> 0cbe1039fe883d32515ad3bd60124e47ae0ea06f
+    <Page Update="NewUserUI.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

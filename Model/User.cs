@@ -5,9 +5,9 @@ namespace Model;
 
 public class User
 {
-    public User(ObjectId objectId , string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
+    public User(string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
     {
-        ObjectId = objectId;
+        //ObjectId = objectId;
         Username = username;
         Password = password;
         FirstName = firstName;
@@ -18,8 +18,10 @@ public class User
         City = city;
     }
 
+    /**
     [BsonElement("_id")]
     public ObjectId ObjectId { get; set; }
+    **/
     
     [BsonElement("username")]
     public string Username { get; set; }
