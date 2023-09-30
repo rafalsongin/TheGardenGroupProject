@@ -29,40 +29,13 @@ namespace UI
             }
         }
 
-        private void textBoxUsername_TextChanged(object sender, TextChangedEventArgs e)
-        {
- 
-        }
-
         private void labelForgotLoginDetails_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            // TODO: opens a new PasswordResetUI window
             // GridLoginPage.Visibility = Visibility.Hidden;
-            GridPasswordResetPage.Visibility = Visibility.Visible;
+            // GridPasswordResetPage.Visibility = Visibility.Visible;
         }
 
-        private void buttonPasswordResetBack_Click(object sender, RoutedEventArgs e)
-        {
-            GridPasswordResetPage.Visibility = Visibility.Hidden;
-        }
-
-        private void buttonPasswordReset_Click(object sender, RoutedEventArgs e)
-        {
-            if (TextBoxPasswordResetUsername.Text == "")
-            {
-                LabelPasswordResetError.Visibility = Visibility.Visible;
-                return;
-            }
-            
-            PasswordResetService passwordResetService = new PasswordResetService();
-            if (!passwordResetService.ValidateUsername(TextBoxPasswordResetUsername.Text))
-            {
-                LabelPasswordResetError.Visibility = Visibility.Visible;
-                return;
-            }
-            passwordResetService.ResetPassword(TextBoxPasswordResetUsername.Text);
-
-            GridPasswordResetPage.Visibility = Visibility.Hidden;
-            LabelPasswordResetSuccess.Visibility = Visibility.Visible;
-        }
+        
     }
 }
