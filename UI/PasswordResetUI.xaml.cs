@@ -34,4 +34,24 @@ public partial class PasswordResetUI : Window
         GridPasswordResetPage.Visibility = Visibility.Hidden;
         // LabelPasswordResetSuccess.Visibility = Visibility.Visible;
     }
+    private void buttonTokenSubmit_Click(object sender, RoutedEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void buttonTokenValidationBack_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void buttonPasswordChangeSubmit_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void buttonGoToLogin_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
 }
