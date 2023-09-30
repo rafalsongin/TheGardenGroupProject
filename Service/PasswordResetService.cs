@@ -1,24 +1,31 @@
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using DAL;
 using Model;
 
 namespace Service;
 
 public class PasswordResetService
 {
-    // TODO: Add password reset by user functionality.
-    // TODO: Add expiration date to password reset link. (use tokens?)
-    public void ResetPassword(string? username)
+    private User _user;
+    private readonly PasswordResetDao _passwordResetDao = new();
+
+    public void SendEmailConfirmation(string? username)
     {
-        User user = GetUserByUsername(username);
+        _user = GetUserByUsername(username);
         SmtpClient smtpClient = GetSmtpClient();
-        MailMessage mailMessage = GetMailMessage(user.Email);
+        String token = GenerateResetToken();
+        MailMessage mailMessage = GetMailMessage(_user.Email, token);
         
         try
         {
             // Send the email.
             smtpClient.Send(mailMessage);
             Console.WriteLine("Email sent successfully!");
+            
+            // if email is sent successfully, add the token to the database
+            _passwordResetDao.AddPasswordResetToken(_user.Username, token);
         }
         catch (Exception e)
         { 
@@ -38,16 +45,26 @@ public class PasswordResetService
         return smtpClient;
     }
 
-    private MailMessage GetMailMessage(string recipientEmail)
+    private MailMessage GetMailMessage(string recipientEmail, string token)
     {
         // Create an email message.
         MailMessage mailMessage = new MailMessage();
         mailMessage.From = new MailAddress("thegardengroupinholland@gmail.com");
         mailMessage.To.Add(recipientEmail);
-        mailMessage.Subject = "Test Email";
-        mailMessage.Body = "This is a test email sent from C#.";
+        mailMessage.Subject = "Account Password Reset";
+        mailMessage.Body = $"Please enter the provided token in the app to reset the password:\n\nToken: {token}\n\nIf you did not request a password reset, please ignore this email.";
 
         return mailMessage;
+    }
+
+    private static string GenerateResetToken()
+    {
+        byte[] randomBytes = new byte[8];
+        using (var rng = new RNGCryptoServiceProvider())
+        {
+            rng.GetBytes(randomBytes);
+        }
+        return Convert.ToBase64String(randomBytes);
     }
 
     private User GetUserByUsername(string username)
@@ -71,5 +88,25 @@ public class PasswordResetService
             }
         }
         return false;
+    }
+    
+    public bool ValidateResetToken(string inputToken)
+    {
+        string? dbToken = _passwordResetDao.GetPasswordResetToken(_user.Username);
+        
+        if (inputToken == dbToken)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    public void ChangePassword(string newPassword)
+    {
+        VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
+        string newPasswordHashed = verifyingLoginService.HashPassword(newPassword);
+        
+        _passwordResetDao.ChangePassword(_user.Username, newPasswordHashed);
     }
 }

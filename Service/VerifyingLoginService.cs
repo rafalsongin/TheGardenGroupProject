@@ -30,4 +30,11 @@ public class VerifyingLoginService
 
         return passwordMatch;
     }
+    
+    public string HashPassword(string password)
+    {
+        string hashedPassword = BCrypt.HashPassword(password);
+        return hashedPassword;
+    }
+    
 }
