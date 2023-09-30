@@ -9,11 +9,9 @@ namespace Service;
 public class PasswordResetService
 {
     private User _user;
-    private readonly PasswordResetDao _passwordResetDao;
-    
-    // TODO: Add password reset by user functionality.
-    // TODO: Add expiration date to password reset link. (use tokens?)
-    public void ResetPassword(string? username)
+    private readonly PasswordResetDao _passwordResetDao = new();
+
+    public void SendEmailConfirmation(string? username)
     {
         _user = GetUserByUsername(username);
         SmtpClient smtpClient = GetSmtpClient();
@@ -61,7 +59,7 @@ public class PasswordResetService
 
     private static string GenerateResetToken()
     {
-        byte[] randomBytes = new byte[32];
+        byte[] randomBytes = new byte[8];
         using (var rng = new RNGCryptoServiceProvider())
         {
             rng.GetBytes(randomBytes);
@@ -102,5 +100,13 @@ public class PasswordResetService
         }
         
         return false;
+    }
+
+    public void ChangePassword(string newPassword)
+    {
+        VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
+        string newPasswordHashed = verifyingLoginService.HashPassword(newPassword);
+        
+        _passwordResetDao.ChangePassword(_user.Username, newPasswordHashed);
     }
 }

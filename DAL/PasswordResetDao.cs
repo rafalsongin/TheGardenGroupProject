@@ -23,7 +23,7 @@ public class PasswordResetDao
     
     public string? GetPasswordResetToken(string userUsername)
     {
-        // get only passwordResetToken field from user
+        // get only passwordResetToken field from user document
         var projection = Builders<User>.Projection.Include("passwordResetToken").Exclude("_id");
         var userToken = _userCollection.Find(new BsonDocument("username", userUsername)).Project(projection).FirstOrDefault();
         var token = "";
@@ -38,5 +38,12 @@ public class PasswordResetDao
         }
         
         return token;
+    }
+
+    public void ChangePassword(string userUsername, string newPasswordHashed)
+    {
+        var filter = Builders<User>.Filter.Eq("username", userUsername);
+        var update = Builders<User>.Update.Set("password", newPasswordHashed);
+        _userCollection.UpdateOne(filter, update);
     }
 }

@@ -31,11 +31,11 @@ namespace UI
 
         private void labelForgotLoginDetails_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            // TODO: opens a new PasswordResetUI window
-            // GridLoginPage.Visibility = Visibility.Hidden;
-            // GridPasswordResetPage.Visibility = Visibility.Visible;
+            GridLoginPage.Visibility = Visibility.Hidden;
+            
+            PasswordResetUI passwordResetWindow = new PasswordResetUI();
+            passwordResetWindow.Show();
+            this.Close();
         }
-
-        
     }
 }
