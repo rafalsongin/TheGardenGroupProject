@@ -44,6 +44,7 @@ namespace TheGardenGroupProject
                     Assignedby = txtReportedBy.Text,
                     Priority = (Priority)boxPriority.SelectedValue,
                     Deadline = DateTime.ParseExact(txtDeadLine.Text,dateFormat,CultureInfo.InvariantCulture),
+
                 };
 
                 
