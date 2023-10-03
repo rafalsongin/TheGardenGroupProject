@@ -19,37 +19,58 @@ namespace DAL
 
         public void CreateTicket(Ticket ticket)
         {
+            string stringTicket = ticket.Priority.ToString();
+
             ticketCollection.InsertOne(ticket);
         }
 
 
 
-        public bool UpdateTicket(Ticket ticket, Dictionary<string, Ticket> updates)//dictionary containing the fields to update and their new values.
+        /* public bool UpdateTicket(Ticket ticket, Dictionary<string, Ticket> updates)//dictionary containing the fields to update and their new values.
+         {
+             FilterDefinition<Ticket> filter = FilterByID(ticket);
+
+             var updateDefinitions = new List<UpdateDefinition<Ticket>>();//Dynamic update
+
+             foreach (KeyValuePair<string, Ticket> field in updates)
+             {
+                 var updateField = Builders<Ticket>.Update.Set(field.Key, field.Value);
+                 updateDefinitions.Add(updateField);
+             }
+             var combinedUpdate = Builders<Ticket>.Update.Combine(updateDefinitions);
+             var result = ticketCollection.UpdateOne(filter, combinedUpdate);
+
+             return result.IsAcknowledged && result.ModifiedCount > 0;
+         }*/
+        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket)
         {
-            FilterDefinition<Ticket> filter = CreateIdFilter(ticket);
+            Ticket existingTicket = GetTicketByFilter(filter);
 
-            var updateDefinitions = new List<UpdateDefinition<Ticket>>();//Dynamic update
-
-            foreach (KeyValuePair<string, Ticket> field in updates)
+            if (existingTicket != null)
             {
-                var updateField = Builders<Ticket>.Update.Set(field.Key, field.Value);
-                updateDefinitions.Add(updateField);
-            }
-            var combinedUpdate = Builders<Ticket>.Update.Combine(updateDefinitions);
-            var result = ticketCollection.UpdateOne(filter, combinedUpdate);
+                // Update the properties of the existing ticket with the values from the updated ticket
+                existingTicket.TicketId = updatedTicket.TicketId;
+                existingTicket.Subject = updatedTicket.Subject;
+                existingTicket.IncidentType = updatedTicket.IncidentType;
+                existingTicket.Assignedby = updatedTicket.Assignedby;
+                existingTicket.Priority = updatedTicket.Priority;
+                existingTicket.Deadline = updatedTicket.Deadline;
 
-            return result.IsAcknowledged && result.ModifiedCount > 0;
+                // Replace the existing ticket in the collection with the updated ticket
+                ticketCollection.ReplaceOne(filter, existingTicket);
+            }
         }
 
-        public bool DeleteTicket(Ticket ticket)
+        public void DeleteTicket(FilterDefinition<Ticket> filter)
         {
-            FilterDefinition<Ticket> deleteDefinitions = CreateIdFilter(ticket);
+            // FilterDefinition<Ticket> deleteDefinitions = GetTicketByFilter(new );
 
+            var ticketToDelete = GetTicketByFilter(filter);
             //Execute the delete operation
-            DeleteResult result = ticketCollection.DeleteOne(deleteDefinitions);
-
-            // Check if the delete was successful
-            return result.IsAcknowledged && result.DeletedCount > 0;
+            if(ticketToDelete != null)
+            { 
+                ticketCollection.DeleteOne(filter);
+            }
 
         }
 
@@ -62,9 +83,16 @@ namespace DAL
             return ticketCollection.Find(filter).FirstOrDefault();
         }
 
-        private FilterDefinition<Ticket> CreateIdFilter(Ticket ticket)
+        /*public FilterDefinition<Ticket> FilterByID(Ticket ticket)
         {
             return Builders<Ticket>.Filter.Eq("_id", ticket.TicketId);
+        }*/
+
+        public Ticket GetTicketByFilter(FilterDefinition<Ticket> filter)
+        {
+            // Assuming ticketCollection is your MongoDB collection
+            var ticket = ticketCollection.Find(filter).FirstOrDefault();
+            return ticket;
         }
     }
 }
