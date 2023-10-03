@@ -16,6 +16,7 @@ public class User
         Email = email;
         PhoneNumber = phoneNumber;
         City = city;
+        PasswordResetToken = null;
     }
 
     /**
@@ -47,5 +48,6 @@ public class User
     [BsonElement("city")]
     public City City { get; set; }
     
-    
+    [BsonElement("passwordResetToken")]
+    public string? PasswordResetToken { get; set; }
 }
