@@ -26,19 +26,40 @@ namespace Model
         [BsonElement("LastUpdated")]
         public DateTime LastUpdated { get; set; }
 
+        private Priority priority;
+
         [BsonElement("Priority")]
-        public Priority Priority {get;set;}
-        // try to compare here and create a backup field 
+        [BsonRepresentation(BsonType.String)]
+        public Priority Priority {get
+            {
+                return priority;
+                
+            }
+            set
+            { 
+                priority = value;
+            }
+        }
+
+        private IncidentType selectedIncidentType;
+        [BsonElement ("IncidentType")]
+        [BsonRepresentation(BsonType.String)]// Store enum as string
+        public IncidentType IncidentType { get
+            {
+                return selectedIncidentType;
+            } set
+            {
+                selectedIncidentType = value;
+            } 
+        }
 
         [BsonElement("Status")]
         [BsonIgnoreIfDefault]
         public Status Status { get; set; }
 
-        [BsonElement ("IncidentType")]
-        public IncidentType IncidentType { get; set; }
-
         [BsonElement ("Employee")]
         public string Assignedby { get; set; } // should by employee but I am waiting for the class to be created
+        public string Email { get; set; }
        
 
 

@@ -9,11 +9,11 @@ namespace Model
     public enum IncidentType
     {
         Bug,
-        ApplicationIncident,
+        Application,
         ServiceRequest,
-        MajorIncident,
-        AccessIncident,
-        PerformanceIncident,
-        SecurityIncident,
+        Major,
+        Access,
+        Performance,
+        Security,
     }
 }

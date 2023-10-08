@@ -38,7 +38,7 @@
         <Button x:Name="btnAddUser" Content="Add User" Style="{StaticResource ModernButtonStyle}" Margin="10,144,0,0" Width="95" Background="#FFC8C6C8" />
         <Button x:Name="btnAddTicket" Content="Add Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,184,0,0" Width="95" Background="#FFC8C6C8" />
         <Button x:Name="btnCreateIncidentTicket" Content="Create Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,226,0,0" Width="95" />
-        <Button x:Name="btnRUDTicket" Content="RUD Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,266,0,0" Width="95" Background="#FFC3C3C3" />
+        <Button x:Name="btnRUDTicket" Content="RUD Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,266,0,0" Width="95" Background="#FFC3C3C3" Click="btnRUDTicket_Click" />
         <Label Content="..." HorizontalAlignment="Left" Margin="-101,216,0,216" RenderTransformOrigin="0.5,0.5" Width="429" Background="#FF919090">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -56,22 +56,22 @@
         <Label Content="Reported by:" HorizontalAlignment="Left" Margin="180,201,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
         <Label Content="Priority:" HorizontalAlignment="Left" Margin="180,241,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
         <Label Content="Deadline/Follow up:" HorizontalAlignment="Left" Margin="180,287,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <TextBox x:Name="txtTimeReported" HorizontalAlignment="Left" Margin="382,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="txtSubjectOfIncident" HorizontalAlignment="Left" Margin="382,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="txtReportedBy" HorizontalAlignment="Left" Margin="382,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="txtDeadLine" HorizontalAlignment="Left" Margin="382,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <ComboBox x:Name="boxIncidentType" HorizontalAlignment="Left" Margin="382,175,0,0" VerticalAlignment="Top" Width="120">
-
+        <ComboBox x:Name="boxIncidentType" HorizontalAlignment="Left" Margin="382,175,0,0" VerticalAlignment="Top" Width="120"
+          SelectedValue="{Binding IncidentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem Content="Bug" />
-            <ComboBoxItem Content="Application Incident" />
-            <ComboBoxItem Content="Service Request" />
-            <ComboBoxItem Content="Major Incident" />
-            <ComboBoxItem Content="Access Incident" />
-            <ComboBoxItem Content="Performance Incident" />
-            <ComboBoxItem Content="Security Incident" />
+            <ComboBoxItem Content="Application" />
+            <ComboBoxItem Content="ServiceRequest" />
+            <ComboBoxItem Content="Major" />
+            <ComboBoxItem Content="Access" />
+            <ComboBoxItem Content="Performance" />
+            <ComboBoxItem Content="Security" />
         </ComboBox>
-        <ComboBox x:Name="boxPriority" HorizontalAlignment="Left" Margin="382,245,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Low " />
+
+        <ComboBox x:Name="boxPriority" HorizontalAlignment="Left" Margin="382,245,0,0" VerticalAlignment="Top" Width="120"
+          SelectedValue="{Binding Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBoxItem Content="Low" />
             <ComboBoxItem Content="Medium" />
             <ComboBoxItem Content="High" />
         </ComboBox>
@@ -99,5 +99,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <DatePicker x:Name="DpDeadline" HorizontalAlignment="Left" Margin="382,292,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker HorizontalAlignment="Left" Height="0" Margin="442,311,0,0" VerticalAlignment="Top" Width="0"/>
+        <DatePicker x:Name="DpTimeReported" HorizontalAlignment="Left" Margin="382,96,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
