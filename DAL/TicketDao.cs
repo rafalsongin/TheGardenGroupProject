@@ -19,29 +19,10 @@ namespace DAL
 
         public void CreateTicket(Ticket ticket)
         {
-            string stringTicket = ticket.Priority.ToString();
 
             ticketCollection.InsertOne(ticket);
         }
 
-
-
-        /* public bool UpdateTicket(Ticket ticket, Dictionary<string, Ticket> updates)//dictionary containing the fields to update and their new values.
-         {
-             FilterDefinition<Ticket> filter = FilterByID(ticket);
-
-             var updateDefinitions = new List<UpdateDefinition<Ticket>>();//Dynamic update
-
-             foreach (KeyValuePair<string, Ticket> field in updates)
-             {
-                 var updateField = Builders<Ticket>.Update.Set(field.Key, field.Value);
-                 updateDefinitions.Add(updateField);
-             }
-             var combinedUpdate = Builders<Ticket>.Update.Combine(updateDefinitions);
-             var result = ticketCollection.UpdateOne(filter, combinedUpdate);
-
-             return result.IsAcknowledged && result.ModifiedCount > 0;
-         }*/
         public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket)
         {
             Ticket existingTicket = GetTicketByFilter(filter);
@@ -83,10 +64,6 @@ namespace DAL
             return ticketCollection.Find(filter).FirstOrDefault();
         }
 
-        /*public FilterDefinition<Ticket> FilterByID(Ticket ticket)
-        {
-            return Builders<Ticket>.Filter.Eq("_id", ticket.TicketId);
-        }*/
 
         public Ticket GetTicketByFilter(FilterDefinition<Ticket> filter)
         {

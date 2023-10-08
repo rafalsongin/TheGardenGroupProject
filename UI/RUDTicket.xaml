@@ -40,7 +40,7 @@
         <Button x:Name="btnViewUser" Content="View User" Style="{StaticResource ModernButtonStyle}" Margin="10,101,0,0" Width="95" Background="#FFC8C6C8" />
         <Button x:Name="btnAddUser" Content="Add User" Style="{StaticResource ModernButtonStyle}" Margin="10,144,0,0" Width="95" Background="#FFC8C6C8" />
         <Button x:Name="btnAddTicket" Content="Add Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,184,0,0" Width="95" Background="#FFC8C6C8" />
-        <Button x:Name="btnCreateIncidentTicket" Content="Create Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,226,0,0" Width="95" Background="#FFC2BAC5" />
+        <Button x:Name="btnCreateIncidentTicket" Content="Create Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,226,0,0" Width="95" Background="#FFC2BAC5" Click="btnCreateIncidentTicket_Click" />
         <Button x:Name="btnRUDTicket" Content="RUD Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,266,0,0" Width="95" Background="#FFD6A3E8" />
         <Label Content="..." HorizontalAlignment="Left" Margin="-101,216,0,216" RenderTransformOrigin="0.5,0.5" Width="429" Background="#FF919090">
             <Label.RenderTransform>
@@ -52,10 +52,9 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="RUD TICKETS" HorizontalAlignment="Left" Margin="148,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.404,0.629" FontFamily="Segoe UI Semibold" FontSize="18"/>
+        <Label Content="RUD TICKETS" HorizontalAlignment="Left" Margin="324,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.404,0.629" FontFamily="Segoe UI Semibold" FontSize="18"/>
 
-        <TextBox x:Name="txtFilterByEmail" HorizontalAlignment="Center" Margin="0,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" Height="30"
-        Text="Filter by ID" Foreground="Gray"  FontSize="16" TextChanged="txtFilterByEmail_TextChanged"/>
+        <TextBox x:Name="txtFilterByEmail" HorizontalAlignment="Center" Margin="0,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" Height="30" Foreground="Gray"  FontSize="16"/>
 
         <Button x:Name="btnSearch" Content="Search" Margin="479,131,0,0"
         Style="{StaticResource ModernButtonStyle}" Width="96" FontSize="14" Height="33" Click="btnSearch_Click">
@@ -74,33 +73,69 @@
             </Button.Background>
         </Button>
 
-        <TextBlock Text="Search Result: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,159,0,0" FontSize="16" FontWeight="Bold" FontFamily="Yu Gothic Medium" />
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="172,190,0,0" Height="25" Width="520">
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Padding" Value="5" />
-                    <!-- Adjust the padding as needed -->
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding TicketId}" Width="50" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150" />
-                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="80"/>
-                <DataGridTextColumn Header="Assigned By" Binding="{Binding AssignedBy}" Width="150"/>
-                <DataGridTextColumn Header="DeadLine" Binding="{Binding DeadLine}" Width="250" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,215,0,0" Orientation="Horizontal">
-            <TextBlock Text="Details:" FontWeight="Bold" />
-            <TextBlock Text="{Binding SelectedItem.TicketId, ElementName=dataGrid}" Margin="10,0,0,0"/>
-            <TextBlock Text="{Binding SelectedItem.Email, ElementName=dataGrid}" Margin="10,0,0,0"/>
-            <TextBlock Text="{Binding SelectedItem.Priority, ElementName=dataGrid}" Margin="10,0,0,0"/>
-            <TextBlock Text="{Binding SelectedItem.Assignedby, ElementName=dataGrid}" Margin="10,0,0,0"/>
-            <TextBlock Text="{Binding SelectedItem.Deadline, ElementName=dataGrid}" Margin="10,0,0,0"/>
-        </StackPanel>
-        <Label x:Name="lblDelete" Content="X" HorizontalAlignment="Left" Margin="697,213,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="16"/>
-        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="148,266,0,0"
-            Style="{StaticResource ModernButtonStyle}" Width="96" FontSize="14" Height="33">
+
+        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="452,356,0,0"
+            Style="{StaticResource ModernButtonStyle}" Width="96" FontSize="14" Height="32" Click="btnUpdateTicekt_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5CE745" Offset="0" />
+                    <GradientStop Color="#FF58E93B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label Content="Filter by Status:" HorizontalAlignment="Left" Margin="139,94,0,0" VerticalAlignment="Top" Width="134" FontSize="16" FontFamily="Segoe UI Black"/>
+        <Label x:Name="IDlabel" Content="ID" HorizontalAlignment="Left" Margin="140,177,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Black"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="140,208,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Black"/>
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="139,235,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Black"/>
+        <Label Content="Assigned By" HorizontalAlignment="Left" Margin="137,266,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Black"/>
+        <Label Content="Deadline" HorizontalAlignment="Left" Margin="138,297,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Black"/>
+        <TextBox x:Name="IDTextBox" HorizontalAlignment="Left" Margin="280,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.136"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="280,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.136"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+
+        <ComboBox x:Name="PriorityComboBox" HorizontalAlignment="Left" Margin="280,240,0,0" VerticalAlignment="Top" Width="120"
+   SelectedValue="{Binding Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBoxItem Content="Low" />
+            <ComboBoxItem Content="Medium" />
+            <ComboBoxItem Content="High" />
+        </ComboBox>
+        <TextBox x:Name="AssignedByTextBox" HorizontalAlignment="Left" Margin="280,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.136"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <DatePicker x:Name="DeadlineDatePicker" HorizontalAlignment="Left" Margin="280,304,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnDeleteTicket" Content="Delete" Margin="177,356,0,0"
+            Style="{StaticResource ModernButtonStyle}" Width="96" FontSize="14" Height="32" Click="btnDeleteTicket_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
