@@ -5,9 +5,9 @@ namespace Model;
 
 public class User
 {
-    public User(ObjectId objectId , string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
+    public User(string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
     {
-        ObjectId = objectId;
+        //ObjectId = objectId;
         Username = username;
         Password = password;
         FirstName = firstName;
@@ -19,22 +19,25 @@ public class User
         PasswordResetToken = null;
     }
 
+    /**
     [BsonElement("_id")]
     public ObjectId ObjectId { get; set; }
-    
+    **/
+
     [BsonElement("username")]
     public string Username { get; set; }
-    
+
     [BsonElement("password")]
     public string Password { get; set; }
-    
+
     [BsonElement("firstName")]
     public string FirstName { get; set; }
-    
+
     [BsonElement("lastName")]
     public string LastName { get; set; }
-    
+
     [BsonElement("userType")]
+    [BsonRepresentation(BsonType.String)]
     public UserType UserType { get; set; }
     
     [BsonElement("email")]
@@ -44,6 +47,7 @@ public class User
     public string PhoneNumber { get; set; }
     
     [BsonElement("city")]
+    [BsonRepresentation(BsonType.String)]
     public City City { get; set; }
     
     [BsonElement("passwordResetToken")]
