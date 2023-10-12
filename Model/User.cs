@@ -19,10 +19,10 @@ public class User
         PasswordResetToken = null;
     }
 
-    /**
+    
     [BsonElement("_id")]
     public ObjectId ObjectId { get; set; }
-    **/
+    
 
     [BsonElement("username")]
     public string Username { get; set; }
@@ -52,4 +52,5 @@ public class User
     
     [BsonElement("passwordResetToken")]
     public string? PasswordResetToken { get; set; }
+    
 }

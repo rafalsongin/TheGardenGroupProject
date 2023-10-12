@@ -14,6 +14,7 @@ public class VerifyingLoginService
         _userDb = new UserDao();
     }
 
+    
     public bool IsCorrectPassword(string? inputUsername, string inputPassword)
     {
         if (_userDb?.GetUserByUsername(inputUsername) == null)

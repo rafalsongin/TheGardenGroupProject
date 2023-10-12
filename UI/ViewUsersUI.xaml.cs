@@ -24,7 +24,7 @@ namespace TheGardenGroupProject
 
             for (int i = 0; i < usersList.Count; i++)
             {
-                listViewAllUsers.Items.Add(usersList[i].Username);
+                ListViewAllUsers.Items.Add(usersList[i].Username);
                  // add it to the listview
             }
         }

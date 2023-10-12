@@ -27,10 +27,15 @@ public class UserDao
     public List<User> GetAllUsers()
     {
         var filter = Builders<User>.Filter.Empty;
-        var userList = _userCollection.Find(filter).ToList();
-        
+    
+        // Define the projection to exclude the "_id" field
+        var projection = Builders<User>.Projection.Exclude(u => u.ObjectId);
+    
+        var userList = _userCollection.Find(filter).Project<User>(projection).ToList();
+
         return userList;
     }
+
 
     public void AddUser(User user)
     {
