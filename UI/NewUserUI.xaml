@@ -8,7 +8,7 @@
         Title="NewUserUI" Height="450" Width="800">
     <Grid>
         <Label x:Name="Dashboard" Content="Dashboard" HorizontalAlignment="Left" Margin="30,58,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
-        <Label x:Name="ViewUser" Content="View User" HorizontalAlignment="Left" Margin="30,98,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
+        <Label x:Name="ViewUser" Content="View Users" HorizontalAlignment="Left" Margin="30,98,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
         <Label x:Name="AddUser" Content="Add User" HorizontalAlignment="Left" Margin="30,139,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
         <Label x:Name="AddTicket" Content="Add Ticket" HorizontalAlignment="Left" Margin="30,178,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
         <Label x:Name="CrudTickets" Content="CRUD Tickets" HorizontalAlignment="Left" Margin="30,217,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
@@ -30,7 +30,7 @@
         <Label x:Name="PhoneNumber" Content="Phone number:" HorizontalAlignment="Left" Margin="273,233,0,0" VerticalAlignment="Top" Height="28" Width="93"/>
         <Label x:Name="Location" Content="Location/branch:" HorizontalAlignment="Left" Margin="273,266,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
         <Label x:Name="SendPassword" Content="Send password?" HorizontalAlignment="Left" Margin="273,299,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
-        <TextBox x:Name="FirstName_txt" HorizontalAlignment="Left" Margin="395,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="FirstName_txt" HorizontalAlignment="Left" Margin="395,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
         <TextBox x:Name="LastName_txt" HorizontalAlignment="Left" Margin="395,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
         <TextBox x:Name="EmailAddress_txt" HorizontalAlignment="Left" Margin="395,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
         <TextBox x:Name="PhoneNumber_txt" HorizontalAlignment="Left" Margin="395,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
@@ -40,7 +40,7 @@
             <ComboBoxItem Content="Company Employee"/>
             <ComboBoxItem Content="Manager"/>
         </ComboBox>
-        <ComboBox x:Name="Location_combo" HorizontalAlignment="Left" Margin="395,271,0,0" VerticalAlignment="Top" Width="187" Height="18" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox x:Name="Location_combo" HorizontalAlignment="Left" Margin="395,271,0,0" VerticalAlignment="Top" Width="187" Height="18">
             <ComboBoxItem Content="Haarlem"/>
             <ComboBoxItem Content="Amsterdam"/>
             <ComboBoxItem Content="Den Haag"/>

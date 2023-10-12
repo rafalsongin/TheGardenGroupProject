@@ -1,5 +1,7 @@
+using System.Collections.ObjectModel;
 using Model;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace DAL;
@@ -14,6 +16,14 @@ public class UserDao
         _userCollection = baseDao.GetUserCollection();
     }
 
+    public User GetUserByUsername(string? username)
+    {
+        var filter = Builders<User>.Filter.Eq("username", username);
+        var user = _userCollection.Find(filter).FirstOrDefault();
+        
+        return user;
+    }
+    
     public List<User> GetAllUsers()
     {
         var filter = Builders<User>.Filter.Empty;
@@ -22,11 +32,9 @@ public class UserDao
         return userList;
     }
 
-    public User GetUserByUsername(string? username)
+    public void AddUser(User user)
     {
-        var filter = Builders<User>.Filter.Eq("username", username);
-        var user = _userCollection.Find(filter).FirstOrDefault();
-        
-        return user;
+        _userCollection.InsertOne(user);
     }
+
 }
