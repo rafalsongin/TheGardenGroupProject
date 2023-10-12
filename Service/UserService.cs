@@ -21,4 +21,9 @@ public class UserService
     {
         return _userDao.GetUserByUsername(username);
     }
+
+    public void AddUser(User user)
+    {
+        _userDao.AddUser(user);
+    }
 }
