@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="AddTicketUI" Height="450" Width="800">
     <Grid>
-        
+        <WrapPanel Margin="0,0,10,377">
+            <Label Content="Label"/>
+            <Label Content="Label"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,62,667,0">
+            <Button Content="New Ticket" Height="50" Width="133"/>
+            <Button Content="View Tickets" Height="50" Width="133"/>
+            <Button Content="Dashboard" Height="50" Width="133"/>
+        </WrapPanel>
+        <Label Content="New Ticket" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Title" HorizontalAlignment="Left" Margin="244,103,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="titleTextBox" HorizontalAlignment="Left" Margin="244,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Priority*" HorizontalAlignment="Left" Margin="244,177,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="244,248,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button Content="Create" HorizontalAlignment="Left" Margin="364,364,0,0" VerticalAlignment="Top" Width="212" Height="38" Click="CreateTicket_Click"/>
+        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="545,217,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="567,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.092,0.021"/>
+        <ComboBox x:Name="priorityComboBox" HorizontalAlignment="Left" Margin="244,212,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="244,279,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="421" Height="63"/>
+
     </Grid>
 </Window>
