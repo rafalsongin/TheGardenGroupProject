@@ -28,7 +28,7 @@ namespace TheGardenGroupProject
             InitializeComponent();
             user = new User("Kim", "kim123", "Kim", "van Schagen", UserType.Manager, "smt", "000", City.Amsterdam);
             LoadComboBoxes();
-            
+
         }
 
         private void CreateTicket_Click(object sender, RoutedEventArgs e)
@@ -36,9 +36,13 @@ namespace TheGardenGroupProject
             EmptyErrorLabels();
             if (CheckIfFieldsFilledIn())
             {
-                MessageBox.Show("Hello");
+                CreateTicketConcept();
             }
-/*            string title = titleTextBox.Text;
+        }
+
+        private void CreateTicketConcept()
+        {
+            string title = titleTextBox.Text;
             Priority priority = (Priority)priorityComboBox.SelectedItem;
             IncidentType incidentType = (IncidentType)typeComboBox.SelectedItem;
             string description = descriptionTextBox.Text;
@@ -46,7 +50,7 @@ namespace TheGardenGroupProject
             Ticket ticket = new Ticket();
             ticket.createConceptTicket(title, priority, description, incidentType, user);
 
-            TicketService service = new TicketService();*/
+            TicketService service = new TicketService();
         }
 
         private bool CheckIfFieldsFilledIn()
@@ -86,12 +90,12 @@ namespace TheGardenGroupProject
 
         }
 
-        private bool CheckIfTitleFilled ()
+        private bool CheckIfTitleFilled()
         {
-            if (titleTextBox.Text.Length == 0) 
+            if (titleTextBox.Text.Length == 0)
             {
                 titleError.Content = "Enter a title";
-                return false; 
+                return false;
             }
             else { return true; }
         }
@@ -122,7 +126,7 @@ namespace TheGardenGroupProject
         private void LoadComboBoxes()
         {
             typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
-            priorityComboBox.ItemsSource = Enum.GetValues(typeof (Priority));
+            priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
         }
 
         private void EmptyErrorLabels()
