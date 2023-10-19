@@ -40,11 +40,20 @@ public class UserService
 
     private static UserType GetUserTypeEnum(string userType)
     {
-        // declaring variable, otherwise doesn't work
-        UserType newUserType = UserType.ServiceDeskEmployee;
-        if (userType == "Service desk employee")
+        // declaring variable
+        UserType newUserType = UserType.ServiceDeskEmployee; //a default value
+
+        switch (userType)
         {
-            newUserType = UserType.ServiceDeskEmployee;
+            case "Service desk employee":
+                newUserType = UserType.ServiceDeskEmployee;
+                break;
+            case "Company employee":
+                newUserType = UserType.CompanyEmployee;
+                break;
+            case "Manager":
+                newUserType = UserType.Manager;
+                break;
         }
 
         return newUserType;
@@ -52,11 +61,27 @@ public class UserService
 
     private static City GetCityEnum(string city)
     {
-        // declaring variable, otherwise doesn't work
+        // declaring variable
+
         City newCity = City.Haarlem;
-        if (city == "Haarlem")
+
+        switch (city)
         {
-            newCity = City.Haarlem;
+            case "Haarlem":
+                newCity = City.Haarlem;
+                break;
+            case "Amsterdam":
+                newCity = City.Amsterdam;
+                break;
+            case "DenHaag":
+                newCity = City.DenHaag;
+                break;
+            case "Rotterdam":
+                newCity = City.Rotterdam;
+                break;
+            case "Eindhoven":
+                newCity = City.Eindhoven;
+                break;
         }
 
         return newCity;

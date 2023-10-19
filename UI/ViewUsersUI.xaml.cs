@@ -1,7 +1,10 @@
 ﻿using Model;
 using Service;
 using System.Collections.Generic;
+using System.Printing;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace TheGardenGroupProject
@@ -22,16 +25,42 @@ namespace TheGardenGroupProject
             UserService userService = new UserService();
             List<User> usersList = userService.GetAllUsers();
 
-            for (int i = 0; i < usersList.Count; i++)
+            ListViewAllUsers.Items.Clear();
+            foreach (User user in usersList)
             {
-                ListViewAllUsers.Items.Add(usersList[i].Username);
-                 // add it to the listview
+                //here I create a ListViewItem with the user's username 
+                //ListViewItem item = new ListViewItem();
+                //item.Content = user.Username;
+                
             }
+            ListViewItem item = new ListViewItem();
+            GridViewRowPresenter rowPresenter = new GridViewRowPresenter();
+            ListViewItemData data = new ListViewItemData();
+            data.Id = 1;
+            data.Email = usersList[0].Email;
+            data.FirstName = usersList[0].FirstName;
+            data.LastName = usersList[0].LastName;
+            data.AmountOfTickets = 2; // hardcoded
+
+            List<ListViewItemData> dataList = new List<ListViewItemData>();
+            dataList.Add(data);
+
+            ListViewAllUsers.ItemsSource = dataList;
+            
         }
 
         private void listViewAllUsers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
+        }
+
+        public class ListViewItemData
+        {
+            public int Id { get; set; }
+            public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int AmountOfTickets { get; set; }
         }
     }
 }
