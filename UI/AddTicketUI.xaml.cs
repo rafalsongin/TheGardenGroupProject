@@ -33,7 +33,12 @@ namespace TheGardenGroupProject
 
         private void CreateTicket_Click(object sender, RoutedEventArgs e)
         {
-            string title = titleTextBox.Text;
+            EmptyErrorLabels();
+            if (CheckIfFieldsFilledIn())
+            {
+                MessageBox.Show("Hello");
+            }
+/*            string title = titleTextBox.Text;
             Priority priority = (Priority)priorityComboBox.SelectedItem;
             IncidentType incidentType = (IncidentType)typeComboBox.SelectedItem;
             string description = descriptionTextBox.Text;
@@ -41,13 +46,91 @@ namespace TheGardenGroupProject
             Ticket ticket = new Ticket();
             ticket.createConceptTicket(title, priority, description, incidentType, user);
 
-            TicketService service = new TicketService();
+            TicketService service = new TicketService();*/
+        }
+
+        private bool CheckIfFieldsFilledIn()
+        {
+            bool filledIn = true;
+            if (!CheckIfTitleFilled())
+            {
+                filledIn = false;
+            }
+            if (!CheckIfPrioritySelected())
+            {
+                filledIn = false;
+            }
+            if (!CheckIfIncidentTypeSelected())
+            {
+                filledIn = false;
+            }
+            if (!CheckIfDescriptionFilled())
+            {
+                filledIn = false;
+            }
+
+            return filledIn;
+        }
+
+        private bool CheckIfPrioritySelected()
+        {
+            if (priorityComboBox.SelectedIndex == -1)
+            {
+                priorityError.Content = "Select a priority";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        private bool CheckIfTitleFilled ()
+        {
+            if (titleTextBox.Text.Length == 0) 
+            {
+                titleError.Content = "Enter a title";
+                return false; 
+            }
+            else { return true; }
+        }
+
+        private bool CheckIfIncidentTypeSelected()
+        {
+            if (typeComboBox.SelectedIndex == -1)
+            {
+                incidentTypeError.Content = "Select an incident type";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool CheckIfDescriptionFilled()
+        {
+            if (descriptionTextBox.Text.Length == 0)
+            {
+                descriptionError.Content = "Give a description";
+                return false;
+            }
+            else { return true; }
         }
 
         private void LoadComboBoxes()
         {
             typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
             priorityComboBox.ItemsSource = Enum.GetValues(typeof (Priority));
+        }
+
+        private void EmptyErrorLabels()
+        {
+            titleError.Content = "";
+            priorityError.Content = "";
+            incidentTypeError.Content = "";
+            descriptionError.Content = "";
         }
     }
 }
