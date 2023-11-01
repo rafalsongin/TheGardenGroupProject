@@ -26,6 +26,8 @@ namespace TheGardenGroupProject
             List<User> usersList = userService.GetAllUsers();
 
             ListViewAllUsers.Items.Clear();
+            int id = 1;
+
             foreach (User user in usersList)
             {
                 //here I create a ListViewItem with the user's username 
@@ -35,14 +37,18 @@ namespace TheGardenGroupProject
             }
             ListViewItem item = new ListViewItem();
             GridViewRowPresenter rowPresenter = new GridViewRowPresenter();
+            List<ListViewItemData> dataList = new List<ListViewItemData>();
+
+
             ListViewItemData data = new ListViewItemData();
-            data.Id = 1;
+            data.Id = id;
             data.Email = usersList[0].Email;
             data.FirstName = usersList[0].FirstName;
             data.LastName = usersList[0].LastName;
             data.AmountOfTickets = 2; // hardcoded
 
-            List<ListViewItemData> dataList = new List<ListViewItemData>();
+            id++;
+
             dataList.Add(data);
 
             ListViewAllUsers.ItemsSource = dataList;

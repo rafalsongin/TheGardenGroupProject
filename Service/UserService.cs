@@ -35,6 +35,8 @@ public class UserService
         string password = firstName + lastName + "login"; // hardcoded password
         User newUser = new User(username, password, firstName, lastName, newUserType, emailAddress, phoneNumber, newCity);
 
+        Console.WriteLine(newUser.ToString());
+
         _userDao.AddUser(newUser);
     }
 
