@@ -52,5 +52,10 @@ public class User
     
     [BsonElement("passwordResetToken")]
     public string? PasswordResetToken { get; set; }
-    
+
+    public override string ToString()
+    {
+        return $"User: {FirstName} {LastName} {Email}";
+    }
+
 }

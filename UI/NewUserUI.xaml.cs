@@ -37,7 +37,7 @@ namespace TheGardenGroupProject
                 MessageBox.Show("Please fill in all required fields.");
                 return;
             }
-           
+
             UserService userService = new UserService();
             userService.CreateAndAddUser(firstName, lastName, emailAddress, phoneNumber, city, userType);
 

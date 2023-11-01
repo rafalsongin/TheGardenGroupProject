@@ -7,10 +7,15 @@
         mc:Ignorable="d"
         Title="ViewUsersUI" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="169,71,42,37" SelectionChanged="listViewAllUsers_SelectionChanged" Grid.ColumnSpan="1">
+        <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,71,30,37" SelectionChanged="listViewAllUsers_SelectionChanged" Grid.ColumnSpan="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
+                    <GridViewColumn Header="First Name" Width="100" DisplayMemberBinding="{Binding FirstName}" />
+                    <GridViewColumn Header="Last Name" Width="100" DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn Header="#tickets" Width="75" DisplayMemberBinding="{Binding TicketCount}" />
+
                 </GridView>
             </ListView.View>
         </ListView>
