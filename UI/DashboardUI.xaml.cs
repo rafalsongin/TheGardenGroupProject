@@ -104,7 +104,7 @@ namespace TheGardenGroupProject
                 LegendLocation = LegendLocation.Right,
                 Width = 400,
                 Height = 400,
-                Margin = new Thickness(10, 10, 10, 10),
+                Margin = new Thickness(350, 10, 10, 10),
                 Hoverable = true,
                 DisableAnimations = true,
                 DataTooltip = null
