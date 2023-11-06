@@ -15,6 +15,7 @@ public class UserDao
         var baseDao = new BaseDao();
         _userCollection = baseDao.GetUserCollection();
     }
+    
 
     public User GetUserByUsername(string? username)
     {
