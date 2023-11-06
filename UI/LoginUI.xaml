@@ -7,8 +7,8 @@
         Title="NoDesk Application" Height="465" Width="495" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid x:Name="GridLoginPage" Height="450" VerticalAlignment="Center" Background="White" Visibility="Visible">
-        <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="229,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Height="35" FontSize="20" AutomationProperties.Name="textBoxUsernameInput" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="229,239,0,0" VerticalAlignment="Top" Width="176" Height="36" FontSize="20" AutomationProperties.Name="textBoxPasswordInput" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
+        <TextBox x:Name="TextBoxUsername" Text="jstatham" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="229,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Height="35" FontSize="20" AutomationProperties.Name="textBoxUsernameInput" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
+        <PasswordBox x:Name="PasswordBox" Password="jstathamlogin" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="229,239,0,0" VerticalAlignment="Top" Width="176" Height="36" FontSize="20" AutomationProperties.Name="textBoxPasswordInput" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
         <!-- TODO: Add logo-->
         <Label x:Name="LabelLogoTemporary" Content="NoDesk: TGG (logo?)" HorizontalAlignment="Left" Margin="118,40,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Width="241"/>
         <Label x:Name="LabelHeading" Content="LOGIN" Margin="172,94,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="36" AutomationProperties.Name="labelLogin" Height="57" RenderTransformOrigin="0.579,-0.174" FontWeight="Bold" Width="134" HorizontalAlignment="Left" Foreground="#FFA3BB88">

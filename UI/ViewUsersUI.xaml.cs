@@ -52,7 +52,6 @@ namespace TheGardenGroupProject
             dataList.Add(data);
 
             ListViewAllUsers.ItemsSource = dataList;
-            
         }
 
         private void listViewAllUsers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

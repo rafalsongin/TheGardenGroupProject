@@ -71,5 +71,12 @@ namespace DAL
             var ticket = ticketCollection.Find(filter).FirstOrDefault();
             return ticket;
         }
+
+        public List<Ticket> GetAllTickets()
+        {
+            // Find all tickets
+            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            return tickets;
+        }
     }
 }
