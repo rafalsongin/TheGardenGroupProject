@@ -1,14 +1,22 @@
-﻿using Model;
+﻿using System;
+using Model;
 using Service;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Windows;
+using LiveCharts;
+using LiveCharts.Wpf;
 using UI;
 
 namespace TheGardenGroupProject
 {
     public partial class DashboardUI : Window
     {
+        
+        
         private User ActiveUser { get; }
+        public SeriesCollection TicketStatusData { get; set; }
+        public Func<ChartPoint, string> TicketStatusLabelPoint { get; set; }
 
         public DashboardUI(string username)
         {
@@ -18,34 +26,58 @@ namespace TheGardenGroupProject
             UserService userService = new UserService();
             ActiveUser = userService.GetUserByUsername(username);
             LabelDisplayLoggedInUsername.Content = "Logged in as: " + ActiveUser.Username;
+            
+            DataContext = this;
+            
+            // Display PieChart
+            //DisplayPieChart();
         }
 
-        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        /*public DashboardUI()
+        {
+            InitializeComponent();
+        }*/
+
+        private void buttonLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginUI loginWindow = new LoginUI();
             loginWindow.Show();
             this.Close();
         }
-
-        /*// Working, created for testing
-        private void DisplayAllUsersUsernames()
+        
+        private void DisplayPieChart()
         {
-            UserService userService = new UserService();
-            List<User> userList = userService.GetAllUsers();
-            
-            foreach (var user in userList)
+            TicketStatusData = new SeriesCollection
             {
-                ListViewTest.Items.Add(user.Username);
-            }
-        }
-
-        // Working, created for testing
-        private void DisplayUserByUsername(string username)
-        {
-            UserService userService = new UserService();
-            User user = userService.GetUserByUsername(username);
+                new PieSeries
+                {
+                    Title = "Open",
+                    Values = new ChartValues<double> { 5 },
+                    DataLabels = true,
+                    LabelPoint = TicketStatusLabelPoint,
+                    Fill = System.Windows.Media.Brushes.Green
+                },
+                new PieSeries
+                {
+                    Title = "Closed",
+                    Values = new ChartValues<double> { 3 },
+                    DataLabels = true,
+                    LabelPoint = TicketStatusLabelPoint,
+                    Fill = System.Windows.Media.Brushes.Red
+                },
+                new PieSeries
+                {
+                    Title = "In Progress",
+                    Values = new ChartValues<double> { 2 },
+                    DataLabels = true,
+                    LabelPoint = TicketStatusLabelPoint,
+                    Fill = System.Windows.Media.Brushes.Yellow
+                }
+            };
             
-            ListViewTest.Items.Add(user.Username);
-        }*/
+            TicketStatusLabelPoint = chartPoint => $"{chartPoint.Y} ({chartPoint.Participation})";
+            
+            DataContext = this;
+        }
     }
 }
