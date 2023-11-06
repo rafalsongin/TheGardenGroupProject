@@ -34,5 +34,20 @@ namespace Service
         { 
             return ticketDao.GetTicketByFilter(filter);
         }
+        
+        public List<Ticket> GetOpenedTickets()
+        {
+            return ticketDao.GetOpenedTickets();
+        }
+        
+        public List<Ticket> GetResolvedTickets()
+        {
+            return ticketDao.GetResolvedTickets();
+        }
+        
+        public List<Ticket> GetClosedTickets()
+        {
+            return ticketDao.GetClosedTickets();
+        }
     }
 }

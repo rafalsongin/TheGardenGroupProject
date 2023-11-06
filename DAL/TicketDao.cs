@@ -78,5 +78,50 @@ namespace DAL
             var tickets = ticketCollection.Find(new BsonDocument()).ToList();
             return tickets;
         }
+
+        public List<Ticket> GetOpenedTickets()
+        {
+            // Find all tickets
+            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            List<Ticket> openedTickets = new List<Ticket>();
+            foreach (var ticket in tickets)
+            {
+                if (ticket.Status == Status.Opened)
+                {
+                    openedTickets.Add(ticket);
+                }
+            }
+            return openedTickets;   
+        }
+
+        public List<Ticket> GetResolvedTickets()
+        {
+            // Find all tickets
+            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            List<Ticket> resolvedTickets = new List<Ticket>();
+            foreach (var ticket in tickets)
+            {
+                if (ticket.Status == Status.Resolved)
+                {
+                    resolvedTickets.Add(ticket);
+                }
+            }
+            return resolvedTickets;
+        }
+
+        public List<Ticket> GetClosedTickets()
+        {
+            // Find all tickets
+            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            List<Ticket> closedTickets = new List<Ticket>();
+            foreach (var ticket in tickets)
+            {
+                if (ticket.Status == Status.Closed)
+                {
+                    closedTickets.Add(ticket);
+                }
+            }
+            return closedTickets;
+        }
     }
 }
