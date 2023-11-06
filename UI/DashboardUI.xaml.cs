@@ -15,11 +15,7 @@ namespace TheGardenGroupProject
 {
     public partial class DashboardUI : Window
     {
-        
-        
         private User ActiveUser { get; }
-        public SeriesCollection TicketStatusData { get; set; }
-        public Func<ChartPoint, string> TicketStatusLabelPoint { get; set; }
 
         public DashboardUI(string username)
         {
@@ -36,11 +32,6 @@ namespace TheGardenGroupProject
             DisplayPieChart();
         }
 
-        /*public DashboardUI()
-        {
-            InitializeComponent();
-        }*/
-
         private void buttonLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginUI loginWindow = new LoginUI();
@@ -50,54 +41,19 @@ namespace TheGardenGroupProject
         
         private void DisplayPieChart()
         {
-            var ticketDao = new TicketDao();
-            var tickets = ticketDao.GetAllTickets();
+            ChartContainer.Children.Add(GetPieChart());
+        }
 
-            List<Ticket> openedTickets = new List<Ticket>();
-            List<Ticket> resolvedTickets = new List<Ticket>();
-            List<Ticket> closedTickets = new List<Ticket>();
-            
-            foreach (var ticket in tickets)
-            {
-                if (ticket.Status == Status.Opened)
-                {
-                    openedTickets.Add(ticket);
-                }
-                else if (ticket.Status == Status.Resolved)
-                {
-                    resolvedTickets.Add(ticket);
-                }
-                else if (ticket.Status == Status.Closed)
-                {
-                    closedTickets.Add(ticket);
-                }
-            }
-            
-            SeriesCollection pieSeries = new SeriesCollection
-            {
-                new PieSeries
-                {
-                    Title = "Opened tickets",
-                    Values = new ChartValues<double> { openedTickets.Count },
-                    DataLabels = true,
-                    FontSize = 20
-                },
-                new PieSeries
-                {
-                    Title = "Resolved tickets",
-                    Values = new ChartValues<double> { resolvedTickets.Count },
-                    DataLabels = true,
-                    FontSize = 20
-                },
-                new PieSeries
-                {
-                    Title = "Closed tickets",
-                    Values = new ChartValues<double> { closedTickets.Count },
-                    DataLabels = true,
-                    FontSize = 20
-                }
-            };
+        private static PieChart GetPieChart()
+        {
+            TicketService ticketService = new TicketService();
 
+            List<Ticket> openedTickets = ticketService.GetOpenedTickets();
+            List<Ticket> resolvedTickets = ticketService.GetResolvedTickets();
+            List<Ticket> closedTickets = ticketService.GetClosedTickets();
+            
+            SeriesCollection pieSeries = GetPieSeriesCollection(openedTickets, resolvedTickets, closedTickets);
+            
             PieChart pieChart = new PieChart
             {
                 Series = pieSeries,
@@ -109,9 +65,36 @@ namespace TheGardenGroupProject
                 DisableAnimations = true,
                 DataTooltip = null
             };
-            
-            ChartContainer.Children.Add(pieChart);
-            
+            return pieChart;
+        }
+
+        private static SeriesCollection GetPieSeriesCollection(List<Ticket> openedTickets, List<Ticket> resolvedTickets, List<Ticket> closedTickets)
+        {
+            SeriesCollection pieSeries = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Opened tickets",
+                    Values = new ChartValues<double> { openedTickets.Count },
+                    DataLabels = true,
+                    FontSize = 22
+                },
+                new PieSeries
+                {
+                    Title = "Resolved tickets",
+                    Values = new ChartValues<double> { resolvedTickets.Count },
+                    DataLabels = true,
+                    FontSize = 22
+                },
+                new PieSeries
+                {
+                    Title = "Closed tickets",
+                    Values = new ChartValues<double> { closedTickets.Count },
+                    DataLabels = true,
+                    FontSize = 22
+                }
+            };
+            return pieSeries;
         }
     }
 }
