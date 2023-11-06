@@ -7,24 +7,10 @@
         xmlns:theGardenGroupProject="clr-namespace:TheGardenGroupProject"
         mc:Ignorable="d"
         Title="Dashboard" Height="450" Width="800">
-    <!--<Window.DataContext>
-        <theGardenGroupProject:DashboardUI/>
-    </Window.DataContext>-->
-    <Grid>
+    <Grid Width="800" Height="450" x:Name="ChartContainer">
         <Button x:Name="ButtonLogout" Content="Logout" HorizontalAlignment="Left" Margin="709,10,0,0" VerticalAlignment="Top" Height="32" Width="81" FontSize="16" AutomationProperties.Name="buttonLogin" Background="#FF282828" Foreground="#FFA3BB88" FontWeight="Bold" Click="buttonLogout_Click" RenderTransformOrigin="-0.228,2.062"/>
         <Label x:Name="LabelDisplayLoggedInUsername" Content="Logged in as: " HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="457,10,0,0" VerticalAlignment="Top" FontSize="16" Height="32" Width="247"/>
-        <Grid>
-            <!--<lvc:PieChart LegendLocation="Bottom" Hoverable="False">
-                <lvc:PieChart.Series>
-                    <lvc:PieSeries Title="Maria"
-                                   Values="3"
-                                   DataLabels="True"
-                                   LabelPoint="{Binding TicketStatusLabelPoint}">
-                    </lvc:PieSeries>
-                </lvc:PieChart.Series>
-            </lvc:PieChart>-->
-            
-        </Grid>
+        
     </Grid>
 </Window>
 
