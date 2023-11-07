@@ -5,22 +5,18 @@ using Model;
 
 namespace DAL
 {
-    public class TicketDao
+    public class TicketDao : BaseDao
     {
-        private MongoClient client;
-        private IMongoCollection<Ticket> ticketCollection;
-        private IMongoDatabase database;
+        private readonly IMongoCollection<Ticket> _ticketCollection;
+        
         public TicketDao()
         {
-            client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
-            database = client.GetDatabase("TheGardenGroup");//geting the database
-            ticketCollection = database.GetCollection<Ticket>("IncidentTicket");//the table that we want to work on
+            _ticketCollection = GetTicketCollection();
         }
 
         public void CreateTicket(Ticket ticket)
         {
-
-            ticketCollection.InsertOne(ticket);
+            _ticketCollection.InsertOne(ticket);
         }
 
         public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket)
@@ -38,7 +34,7 @@ namespace DAL
                 existingTicket.Deadline = updatedTicket.Deadline;
 
                 // Replace the existing ticket in the collection with the updated ticket
-                ticketCollection.ReplaceOne(filter, existingTicket);
+                _ticketCollection.ReplaceOne(filter, existingTicket);
             }
         }
 
@@ -50,7 +46,7 @@ namespace DAL
             //Execute the delete operation
             if(ticketToDelete != null)
             { 
-                ticketCollection.DeleteOne(filter);
+                _ticketCollection.DeleteOne(filter);
             }
 
         }
@@ -61,28 +57,28 @@ namespace DAL
             var filter = Builders<Ticket>.Filter.Eq("_id", ticket.TicketId);
 
             // Execute the find operation to retrieve the ticket
-            return ticketCollection.Find(filter).FirstOrDefault();
+            return _ticketCollection.Find(filter).FirstOrDefault();
         }
 
 
         public Ticket GetTicketByFilter(FilterDefinition<Ticket> filter)
         {
             // Assuming ticketCollection is your MongoDB collection
-            var ticket = ticketCollection.Find(filter).FirstOrDefault();
+            var ticket = _ticketCollection.Find(filter).FirstOrDefault();
             return ticket;
         }
 
         public List<Ticket> GetAllTickets()
         {
             // Find all tickets
-            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
             return tickets;
         }
 
         public List<Ticket> GetOpenedTickets()
         {
             // Find all tickets
-            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
             List<Ticket> openedTickets = new List<Ticket>();
             foreach (var ticket in tickets)
             {
@@ -97,7 +93,7 @@ namespace DAL
         public List<Ticket> GetResolvedTickets()
         {
             // Find all tickets
-            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
             List<Ticket> resolvedTickets = new List<Ticket>();
             foreach (var ticket in tickets)
             {
@@ -112,7 +108,7 @@ namespace DAL
         public List<Ticket> GetClosedTickets()
         {
             // Find all tickets
-            var tickets = ticketCollection.Find(new BsonDocument()).ToList();
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
             List<Ticket> closedTickets = new List<Ticket>();
             foreach (var ticket in tickets)
             {

@@ -12,9 +12,9 @@ namespace TheGardenGroupProject
     /// <summary>
     /// Interaction logic for ViewUsersUI.xaml
     /// </summary>
-    public partial class ViewUsersUI : Window
+    public partial class ViewUsersPage : Page
     {
-        public ViewUsersUI()
+        public ViewUsersPage()
         {
             InitializeComponent();
             DisplayAllUsers();

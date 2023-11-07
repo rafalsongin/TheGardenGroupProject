@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Model;
 using Service;
 using TheGardenGroupProject;
 
@@ -18,8 +19,20 @@ namespace UI
             VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
             if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
             {
-                DashboardUI dashboardWindow = new DashboardUI(TextBoxUsername.Text);
-                dashboardWindow.Show();
+                UserService userService = new UserService();
+                User user = userService.GetUserByUsername(TextBoxUsername.Text);
+                
+                if (user.UserType == UserType.ServiceDeskEmployee)
+                {
+                    ServiceDeskWindow serviceDeskWindow = new ServiceDeskWindow();
+                    serviceDeskWindow.Show();
+                }
+                else
+                {
+                    CompanyEmployeeWindow companyEmployeeWindow = new CompanyEmployeeWindow();
+                    companyEmployeeWindow.Show();
+                }
+                
                 this.Close();
             }
             else
@@ -33,7 +46,7 @@ namespace UI
         {
             GridLoginPage.Visibility = Visibility.Hidden;
             
-            PasswordResetUI passwordResetWindow = new PasswordResetUI();
+            PasswordResetWindow passwordResetWindow = new PasswordResetWindow();
             passwordResetWindow.Show();
             this.Close();
         }

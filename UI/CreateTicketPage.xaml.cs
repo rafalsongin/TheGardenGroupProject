@@ -20,11 +20,11 @@ namespace TheGardenGroupProject
     /// <summary>
     /// Interaction logic for CreateTicketUIxaml.xaml
     /// </summary>
-    public partial class CreateTicketUIxaml : Window
+    public partial class CreateTicketPage : Page
     {
-        private TicketService ticketService;
+        private readonly TicketService ticketService;
 
-        public CreateTicketUIxaml()
+        public CreateTicketPage()
         {
             InitializeComponent();
             ticketService = new TicketService();
@@ -84,11 +84,11 @@ namespace TheGardenGroupProject
             }
         }
 
-        private void btnRUDTicket_Click(object sender, RoutedEventArgs e)
+        /*private void btnRUDTicket_Click(object sender, RoutedEventArgs e)
         {
             RUDTicket rudTicket = new RUDTicket();
             rudTicket.Show();
             this.Close();
-        }
+        }*/
     }
 }
