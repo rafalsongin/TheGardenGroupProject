@@ -15,7 +15,7 @@
 
         </StackPanel>
         <Rectangle HorizontalAlignment="Left" Height="700" Margin="270,10,0,0" VerticalAlignment="Top" Width="2" Fill="Black"/>
-        <Frame x:Name="ContentPage" Margin="280,2,0,2" Height="600" Width="900"/>
+        <Frame x:Name="ContentPage" Margin="280,2,0,2" Height="600" Width="900" NavigationUIVisibility="Hidden"/>
     </Grid>
 
 </Window>
