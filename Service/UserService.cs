@@ -23,16 +23,21 @@ public class UserService
         return _userDao.GetUserByUsername(username);
     }
 
-    public void CreateAndAddUser(string firstName, string lastName, string emailAddress, string phoneNumber, string city, string userType)
+    public void CreateAndAddUser(string firstName, string lastName, string emailAddress, string phoneNumber,
+        string city, string userType, bool doSendPassword)
     {
         City newCity = GetCityEnum(city);
         UserType newUserType = GetUserTypeEnum(userType);
 
-        // TODO: check if this is needed in the requirements
-        //bool sendPassword = SendPassword_CheckBox.IsChecked ?? false;
-
         string username = firstName + lastName;
         string password = firstName + lastName + "login"; // hardcoded password
+
+        if (doSendPassword)
+        {
+            EmailService emailService = new EmailService();
+            emailService.SendTemporaryPasswordByEmail(emailAddress, username, password);
+        }
+        
         User newUser = new User(username, password, firstName, lastName, newUserType, emailAddress, phoneNumber, newCity);
 
         Console.WriteLine(newUser.ToString());

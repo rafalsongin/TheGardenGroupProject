@@ -11,10 +11,7 @@ namespace TheGardenGroupProject
     /// Interaction logic for NewUserUI.xaml
     /// </summary>
     public partial class NewUserPage : Page
-
     {
-        private IMongoCollection<User> _userCollection;
-
         public NewUserPage()
         {
             InitializeComponent();
@@ -22,10 +19,9 @@ namespace TheGardenGroupProject
 
         private void AddUser_btn_Click(object sender, RoutedEventArgs e)
         {
-
             string firstName = FirstName_txt.Text;
             string lastName = LastName_txt.Text;
-            string emailAddress = EmailAddress_txt.Text;
+            string emailAddress = EmailAddress_txt.Text; // TODO: add email validation (if it has @ and .) 
             string phoneNumber = PhoneNumber_txt.Text;
             string userType = ((ComboBoxItem)TypeOfUse_combo.SelectedItem)?.Content.ToString();
             string city = ((ComboBoxItem)Location_combo.SelectedItem)?.Content.ToString();
@@ -38,9 +34,25 @@ namespace TheGardenGroupProject
                 return;
             }
 
-            UserService userService = new UserService();
-            userService.CreateAndAddUser(firstName, lastName, emailAddress, phoneNumber, city, userType);
+            bool doSendPassword = false;
+            
+            if (SendPassword_CheckBox.IsChecked == true)
+            {
+                doSendPassword = SendPassword_CheckBox.IsChecked == true;
+            }
+            else if (SendPassword_CheckBox.IsChecked == false)
+            {
+                doSendPassword = SendPassword_CheckBox.IsChecked == false;
+            }
 
+            UserService userService = new UserService();
+            userService.CreateAndAddUser(firstName, lastName, emailAddress, phoneNumber, city, userType, doSendPassword);
+
+            if (SendPassword_CheckBox.IsChecked == true)
+            {
+                   
+            }
+            
         }
 
         private void Cancel_btn_Click(object sender, RoutedEventArgs e)

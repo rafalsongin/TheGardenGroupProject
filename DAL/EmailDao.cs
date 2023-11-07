@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 namespace DAL;
 
-public class PasswordResetDao : BaseDao
+public class EmailDao : BaseDao
 {
     private readonly IMongoCollection<User> _userCollection;
 
-    public PasswordResetDao()
+    public EmailDao()
     {
         _userCollection = GetUserCollection();
     }
