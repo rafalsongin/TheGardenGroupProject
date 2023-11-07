@@ -5,12 +5,18 @@
     <Compile Update="NewUserUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Page1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewUsersUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="NewUserUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page1.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewUsersUI.xaml">
