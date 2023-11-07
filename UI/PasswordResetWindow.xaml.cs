@@ -4,11 +4,11 @@ using UI;
 
 namespace TheGardenGroupProject;
 
-public partial class PasswordResetUI : Window
+public partial class PasswordResetWindow : Window
 {
     private readonly PasswordResetService _passwordResetService;
     
-    public PasswordResetUI()
+    public PasswordResetWindow()
     {
         InitializeComponent();
         _passwordResetService = new PasswordResetService();

@@ -6,16 +6,14 @@ using MongoDB.Driver;
 
 namespace DAL;
 
-public class UserDao
+public class UserDao : BaseDao
 {
     private readonly IMongoCollection<User> _userCollection;
 
     public UserDao()
     {
-        var baseDao = new BaseDao();
-        _userCollection = baseDao.GetUserCollection();
+        _userCollection = GetUserCollection();
     }
-    
 
     public User GetUserByUsername(string? username)
     {
@@ -42,5 +40,4 @@ public class UserDao
     {
         _userCollection.InsertOne(user);
     }
-
 }

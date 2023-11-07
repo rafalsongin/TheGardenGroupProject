@@ -17,4 +17,12 @@
       <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Page Update="sdtest.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
 </Project>

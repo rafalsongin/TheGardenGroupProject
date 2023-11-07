@@ -10,12 +10,12 @@ namespace TheGardenGroupProject
     /// <summary>
     /// Interaction logic for NewUserUI.xaml
     /// </summary>
-    public partial class NewUserUI : Window
+    public partial class NewUserPage : Page
 
     {
         private IMongoCollection<User> _userCollection;
 
-        public NewUserUI()
+        public NewUserPage()
         {
             InitializeComponent();
         }
@@ -45,7 +45,8 @@ namespace TheGardenGroupProject
 
         private void Cancel_btn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            // TODO: replace with "clear" or something similar
+            // this.Close();
         }
     }
 }
