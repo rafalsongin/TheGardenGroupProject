@@ -6,7 +6,6 @@ namespace TheGardenGroupProject;
 
 public partial class CompanyEmployeeWindow : Window
 {
-    private User ActiveUser { get; }
     private DashboardPage DashboardPage { get; }
     private CreateTicketPage CreateTicketPage { get; }
 
@@ -15,8 +14,6 @@ public partial class CompanyEmployeeWindow : Window
         CreateTicketPage = new CreateTicketPage();
         DashboardPage = new DashboardPage();
         InitializeComponent();
-        // TODO: get the user from the login page
-        ActiveUser = new User("test", "test", "test", "test", UserType.Manager, "test", "test", City.Amsterdam);
     }
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)
