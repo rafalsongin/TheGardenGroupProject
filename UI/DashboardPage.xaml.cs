@@ -34,7 +34,7 @@ namespace TheGardenGroupProject
             // TODO: check why it's not working (something with the Model.Ticket)
             try
             {
-                DisplayPieChart();
+                //DisplayPieChart();
             }
             catch (Exception e)
             {
