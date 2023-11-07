@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DAL;
 using Model;
 using Service;
 using TheGardenGroupProject;
@@ -9,8 +10,11 @@ namespace UI
 {
     public partial class LoginUI : Window
     {
+        private readonly UserService _userService;
+        
         public LoginUI()
         {
+            _userService = new UserService();
             InitializeComponent();
         }
 
@@ -19,8 +23,7 @@ namespace UI
             VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
             if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
             {
-                UserService userService = new UserService();
-                User user = userService.GetUserByUsername(TextBoxUsername.Text);
+                User user = _userService.GetUserByUsername(TextBoxUsername.Text);
                 
                 if (user.UserType == UserType.ServiceDeskEmployee)
                 {
