@@ -17,8 +17,8 @@ namespace Model
         [BsonElement("Subject")]
         public string Subject { get; set; }
 
-        [BsonElement("DataReported")]
-        public DateTime DateReported { get; set; }
+        [BsonElement("ReportedOn")]
+        public DateTime ReportedOn { get; set; }
 
         [BsonElement("DeadLine")]
         public DateTime Deadline { get; set; }
@@ -53,26 +53,30 @@ namespace Model
             } 
         }
 
+        private Status status;
         [BsonElement("Status")]
-        [BsonIgnoreIfDefault]
-        public Status Status { get; set; }
+        [BsonRepresentation (BsonType.String)]
+        public Status Status { get { return status; } set { status = value; } }
 
         [BsonElement ("Employee")]
         public string Assignedby { get; set; } // should by employee but I am waiting for the class to be created
         public string Email { get; set; }
 
-        public User CreatedBy { get; set; }
+        [BsonElement ("ReportedBy")]
+        public User reportedBy { get; set; }
+
+        public User assignedTo { get; set; }
        
-        public void createConceptTicket(string title, Priority priority, string description, IncidentType incidentType, User user)
+        public void createConceptTicket(string subject, Priority priority, string description, IncidentType incidentType, User user)
         {
-            Subject = title;
+            Subject = subject;
             this.priority = priority;
             Description = description;
             Status = Status.Pending;
-            DateReported = DateTime.Now;
+            ReportedOn = DateTime.Now;
             LastUpdated = DateTime.Now;
             IncidentType = incidentType;
-            CreatedBy = user;
+            reportedBy = user;
         }
 
     }

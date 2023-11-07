@@ -49,7 +49,7 @@ namespace TheGardenGroupProject
                 DateTime dateReported = DateTime.Now;
                 Ticket ticket = new Ticket
                 {
-                    DateReported = dateReported,
+                    ReportedOn = dateReported,
                     Subject = txtSubjectOfIncident.Text,
                     IncidentType = (IncidentType)Enum.Parse(typeof(IncidentType), incidentType),// Convert string to enum
                     Assignedby = txtReportedBy.Text,

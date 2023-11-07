@@ -33,5 +33,10 @@ namespace DAL
         {
             return _database.GetCollection<User>("User");
         }
+
+        public IMongoCollection<Ticket> GetTicketCollection()
+        {
+            return _database.GetCollection<Ticket>("IncidentTicket");
+        }
     }
 }
