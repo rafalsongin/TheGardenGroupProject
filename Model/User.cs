@@ -5,6 +5,7 @@ namespace Model;
 
 public class User
 {
+    //dana
     public User(string username, string password, string firstName, string lastName, UserType userType, string email, string phoneNumber, City city)
     {
         //ObjectId = objectId;
@@ -19,11 +20,11 @@ public class User
         PasswordResetToken = null;
     }
 
-    
-    [BsonElement("_id")]
-    public ObjectId ObjectId { get; set; }
-    
 
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public ObjectId Id { get; set; }
+    
     [BsonElement("username")]
     public string Username { get; set; }
 
@@ -52,6 +53,9 @@ public class User
     
     [BsonElement("passwordResetToken")]
     public string? PasswordResetToken { get; set; }
+
+    [BsonElement("amountOfTickets")]
+    public string AmountOfTickets { get; set; }
 
     public override string ToString()
     {
