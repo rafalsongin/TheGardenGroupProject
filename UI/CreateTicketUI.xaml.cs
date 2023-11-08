@@ -43,21 +43,14 @@ namespace TheGardenGroupProject
             {
                 // Get the selected incident type as a string from the ComboBox
                 string incidentType = ((ComboBoxItem)boxIncidentType.SelectedItem).Content.ToString();
-                string Priority= ((ComboBoxItem)boxPriority.SelectedItem).Content.ToString();
+                string ticketsPriority= ((ComboBoxItem)boxPriority.SelectedItem).Content.ToString();
                 // Get the selected date from the DatePicker control
-                DateTime selectedDate = DpDeadline.SelectedDate ?? DateTime.MinValue;
+                DateTime deadLine = DpDeadline.SelectedDate ?? DateTime.MinValue;
                 DateTime dateReported = DateTime.Now;
-                Ticket ticket = new Ticket
-                {
-                    DateReported = dateReported,
-                    Subject = txtSubjectOfIncident.Text,
-                    IncidentType = (IncidentType)Enum.Parse(typeof(IncidentType), incidentType),// Convert string to enum
-                    Assignedby = txtReportedBy.Text,
-                    Priority = (Priority)Enum.Parse(typeof(Priority), Priority),
-                    Deadline = selectedDate,
-
-                };
-
+                IncidentType incident = (IncidentType)Enum.Parse(typeof(IncidentType), incidentType);
+                Priority priority = (Priority)Enum.Parse(typeof(Priority),ticketsPriority);
+                Ticket ticket = new Ticket(dateReported, txtSubjectOfIncident.Text, txtDescription.Text, incident,txtReportedBy.Text,priority, deadLine);
+                
                 ticketService.CreateTicket(ticket);
                 MessageBox.Show("Ticket created successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 

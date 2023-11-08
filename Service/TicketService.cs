@@ -16,9 +16,9 @@ namespace Service
             ticketDao.CreateTicket(ticket);
         }
 
-        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket) 
+        public void UpdateTicket(Ticket updatedTicket)
         {
-             ticketDao.UpdateTicket(filter, updatedTicket);
+            ticketDao.UpdateTicket(updatedTicket);
         }
 
         public void DeleteTicket(FilterDefinition<Ticket> filter)
@@ -33,6 +33,11 @@ namespace Service
         public Ticket GetTicketByFilter(FilterDefinition<Ticket> filter)
         { 
             return ticketDao.GetTicketByFilter(filter);
+        }
+
+        public List<Ticket> GetAllTickets()
+        {
+            return ticketDao.GetAllTickets();
         }
     }
 }

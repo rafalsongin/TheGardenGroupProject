@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Model;
+using System.ComponentModel;
 
 namespace DAL
 {
@@ -23,9 +24,10 @@ namespace DAL
             ticketCollection.InsertOne(ticket);
         }
 
-        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket)
+        public void UpdateTicket(Ticket updatedTicket)
         {
-            Ticket existingTicket = GetTicketByFilter(filter);
+            var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
+            var existingTicket = GetTicketByFilter(filter);
 
             if (existingTicket != null)
             {
@@ -33,9 +35,10 @@ namespace DAL
                 existingTicket.TicketId = updatedTicket.TicketId;
                 existingTicket.Subject = updatedTicket.Subject;
                 existingTicket.IncidentType = updatedTicket.IncidentType;
-                existingTicket.Assignedby = updatedTicket.Assignedby;
+                existingTicket.ReportedBy = updatedTicket.ReportedBy;
                 existingTicket.Priority = updatedTicket.Priority;
                 existingTicket.Deadline = updatedTicket.Deadline;
+                existingTicket.Status = updatedTicket.Status;
 
                 // Replace the existing ticket in the collection with the updated ticket
                 ticketCollection.ReplaceOne(filter, existingTicket);
@@ -62,6 +65,13 @@ namespace DAL
 
             // Execute the find operation to retrieve the ticket
             return ticketCollection.Find(filter).FirstOrDefault();
+        }
+
+        public List<Ticket> GetAllTickets()
+        {
+            List<Ticket> tickets = ticketCollection.Find(_ => true).ToList();
+
+            return tickets;
         }
 
 

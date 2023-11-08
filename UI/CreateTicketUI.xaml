@@ -50,15 +50,15 @@
             </Label.RenderTransform>
         </Label>
         <Label Content="Create New Incident Ticket" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="20" />
-        <Label Content="Date/Time reported:" HorizontalAlignment="Left" Margin="180,89,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Subject of incident:" HorizontalAlignment="Left" Margin="180,127,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Type of incident:" HorizontalAlignment="Left" Margin="180,167,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Reported by:" HorizontalAlignment="Left" Margin="180,201,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Priority:" HorizontalAlignment="Left" Margin="180,241,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+        <Label Content="Date/Time reported:" HorizontalAlignment="Left" Margin="181,82,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+        <Label Content="Subject of incident:" HorizontalAlignment="Left" Margin="181,109,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+        <Label Content="Type of incident:" HorizontalAlignment="Left" Margin="180,185,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+        <Label Content="Reported by:" HorizontalAlignment="Left" Margin="180,225,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+        <Label Content="Priority:" HorizontalAlignment="Left" Margin="180,259,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
         <Label Content="Deadline/Follow up:" HorizontalAlignment="Left" Margin="180,287,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <TextBox x:Name="txtSubjectOfIncident" HorizontalAlignment="Left" Margin="382,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="txtReportedBy" HorizontalAlignment="Left" Margin="382,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <ComboBox x:Name="boxIncidentType" HorizontalAlignment="Left" Margin="382,175,0,0" VerticalAlignment="Top" Width="120"
+        <TextBox x:Name="txtSubjectOfIncident" HorizontalAlignment="Left" Margin="383,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="txtReportedBy" HorizontalAlignment="Left" Margin="382,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <ComboBox x:Name="boxIncidentType" HorizontalAlignment="Left" Margin="382,193,0,0" VerticalAlignment="Top" Width="120"
           SelectedValue="{Binding IncidentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem Content="Bug" />
             <ComboBoxItem Content="Application" />
@@ -69,7 +69,7 @@
             <ComboBoxItem Content="Security" />
         </ComboBox>
 
-        <ComboBox x:Name="boxPriority" HorizontalAlignment="Left" Margin="382,245,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox x:Name="boxPriority" HorizontalAlignment="Left" Margin="382,263,0,0" VerticalAlignment="Top" Width="120"
           SelectedValue="{Binding Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem Content="Low" />
             <ComboBoxItem Content="Medium" />
@@ -101,6 +101,8 @@
         </Button>
         <DatePicker x:Name="DpDeadline" HorizontalAlignment="Left" Margin="382,292,0,0" VerticalAlignment="Top" Width="120"/>
         <DatePicker HorizontalAlignment="Left" Height="0" Margin="442,311,0,0" VerticalAlignment="Top" Width="0"/>
-        <DatePicker x:Name="DpTimeReported" HorizontalAlignment="Left" Margin="382,96,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="DpTimeReported" HorizontalAlignment="Left" Margin="383,86,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="descritopnLabel" Content="Description:" HorizontalAlignment="Left" Margin="180,142,0,0" VerticalAlignment="Top" Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="382,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="33" />
     </Grid>
 </Window>

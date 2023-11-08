@@ -16,6 +16,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace TheGardenGroupProject
 {
@@ -24,104 +26,93 @@ namespace TheGardenGroupProject
     /// </summary>
     public partial class RUDTicket : Window
     {
-        private FilterDefinition<Ticket> filter;
+        public List<Ticket> TicketList { get; set; }
+
+        private TicketService ticketService;
+        public List<Priority> Priorities { get; set; }
+        public List<IncidentType> IncidentTypes { get; set; }
+        public List<Status> Statuses { get; set; }
         public RUDTicket()
         {
+            ticketService = new TicketService();
             InitializeComponent();
+            TicketList = ticketService.GetAllTickets();
+            DataContext = this;
+
+            Priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            IncidentTypes = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+            Statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
         }
 
-     
-
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+  private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
         {
-           string serachCriteria=txtFilterByEmail.Text;// i will change it filter by id or email
-            TicketService ticketService = new TicketService();
-
-            // Create a filter based on the search criteria (e.g., by subject)
-             filter = Builders<Ticket>.Filter.Eq("Subject", serachCriteria);
-
-            // Call the service method to get the filtered tickets
-            Ticket matchingTicket = ticketService.GetTicketByFilter(filter);
-
-            IDTextBox.Text = matchingTicket.TicketId.ToString();
-            EmailTextBox.Text = matchingTicket.Email;
-            PriorityComboBox.Text = matchingTicket.Priority.ToString();
-            AssignedByTextBox.Text = matchingTicket.Assignedby;
-            DeadlineDatePicker.SelectedDate = matchingTicket.Deadline;
-        }
-
-        private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
-        {
-            TicketService ticketService = new TicketService();
-            if (filter != null)
+            try
             {
+                // Get the selected ticket from the list or other source
+                Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
 
+                // Update the properties of the selected ticket with the values from the UI
+                selectedTicket.Subject = subjectTxt.Text; // Replace with the actual UI elements
+                selectedTicket.IncidentType = (IncidentType)incidentTypeCombobox.SelectedItem;
+                selectedTicket.ReportedBy = reportedByTxt.Text;
+                selectedTicket.Priority = (Priority)priorityCombobox.SelectedItem;
+                selectedTicket.Deadline = DPDeadLine.SelectedDate ?? DateTime.MinValue;
+                selectedTicket.Status = (Status)statusCombobox.SelectedItem;
+                selectedTicket.ReportedOn=DPTimeReported.SelectedDate ?? DateTime.MinValue;
 
-                 DateTime selectedDeadline = DeadlineDatePicker.SelectedDate ?? DateTime.MinValue;
-                string Priority = ((ComboBoxItem)PriorityComboBox.SelectedItem).Content.ToString();
+                // Call the service layer to update the ticket
+                ticketService.UpdateTicket(selectedTicket);
+                RefreshListView();
 
-
-                Ticket upgradedTicket = new Ticket()
-                {
-                    Subject=txtFilterByEmail.Text,
-                        TicketId= ObjectId.Parse(IDTextBox.Text),
-                        Email = EmailTextBox.Text,
-                        Priority = (Priority)Enum.Parse(typeof(Priority), Priority),
-                        Assignedby = AssignedByTextBox.Text,
-                        Deadline = selectedDeadline,
-
-                };
-                   ticketService.UpdateTicket(filter, upgradedTicket);
-                   MessageBox.Show("Ticket updated successfully !");
-             
+                MessageBox.Show("Ticket updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No matching ticket found for updating.");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+      
 
         private void btnDeleteTicket_Click(object sender, RoutedEventArgs e)
         {
-            if (filter != null)
-            {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this ticket?", "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    // User confirmed the deletion, so proceed with deleting the ticket
-                    TicketService ticketService = new TicketService();
-                    ticketService.DeleteTicket(filter);
-                    MessageBox.Show("Ticket deleted successfully!");
-                    ClearUIElements();
-
-                }
-                else
-                {
-                    // User chose not to delete the ticket
-                    MessageBox.Show("Ticket deletion canceled.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Nothing selected");
-            }
+           
         }
-        private void ClearUIElements()
-        {
-            // Clear the content of text boxes, combo boxes, date pickers, etc.
-            IDTextBox.Text = "";
-            EmailTextBox.Text = "";
-            PriorityComboBox.SelectedIndex = -1;
-            AssignedByTextBox.Text = "";
-            DeadlineDatePicker.SelectedDate = null;
-        }
+        
 
         private void btnCreateIncidentTicket_Click(object sender, RoutedEventArgs e)
         {
             CreateTicketUIxaml createTicketUI = new CreateTicketUIxaml();
             createTicketUI.Show();
             this.Close();
+        }
+
+        private void ticketsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ticketsListView.SelectedItem != null)
+            {
+                Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
+
+                subjectTxt.Text = selectedTicket.Subject;
+                priorityCombobox.SelectedValue = selectedTicket.Priority;
+                reportedByTxt.Text = selectedTicket.ReportedBy;
+                DPTimeReported.SelectedDate=selectedTicket.ReportedOn;
+                DPDeadLine.SelectedDate = selectedTicket.Deadline;
+                incidentTypeCombobox.SelectedValue = selectedTicket.IncidentType;
+                statusCombobox.SelectedValue = selectedTicket.Status;
+
+            }
+        }
+        private void RefreshListView()
+        {
+            using (ticketsListView.Items.DeferRefresh())
+            {
+                // Make your changes to the collection
+                TicketList.Clear();
+                foreach (var ticket in ticketService.GetAllTickets())
+                {
+                    TicketList.Add(ticket);
+                }
+            }
         }
     }
 }
