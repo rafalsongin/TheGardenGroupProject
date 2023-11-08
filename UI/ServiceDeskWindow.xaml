@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="ServiceDeskWindow" Height="720" Width="1280">
+        Title="ServiceDeskWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel MinHeight="700" Width="265" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button x:Name="ViewUsersButton" Click="ViewUsersButton_Click" Content="View users" MinHeight="50"

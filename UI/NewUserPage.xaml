@@ -4,7 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
-      Title="NewUserUI" Height="450" Width="800">
+      Title="NewUserPage" Height="700" Width="1000">
     <Grid>
         <Label x:Name="Dashboard" Content="Dashboard" HorizontalAlignment="Left" Margin="30,58,0,0"
                VerticalAlignment="Top" Height="28" Width="81" />
@@ -35,25 +35,25 @@
         <Label x:Name="PhoneNumber" Content="Phone number:" HorizontalAlignment="Left" Margin="276,209,0,0" VerticalAlignment="Top" Height="28" Width="93"/>
         <Label x:Name="Location" Content="Location/branch:" HorizontalAlignment="Left" Margin="276,242,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
         <Label x:Name="SendPassword" Content="Send password?" HorizontalAlignment="Left" Margin="276,275,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
-        <TextBox x:Name="FirstName_txt" HorizontalAlignment="Left" Margin="398,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <TextBox x:Name="LastName_txt" HorizontalAlignment="Left" Margin="398,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <TextBox x:Name="EmailAddress_txt" HorizontalAlignment="Left" Margin="398,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <TextBox x:Name="PhoneNumber_txt" HorizontalAlignment="Left" Margin="398,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <CheckBox x:Name="SendPassword_CheckBox" Content="yes, a password e-mail will be sent to the user" HorizontalAlignment="Left" Margin="398,281,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="TypeOfUse_combo" HorizontalAlignment="Left" Margin="398,148,0,0" VerticalAlignment="Top" Width="187" Height="20">
+        <TextBox x:Name="FirstNameTxt" HorizontalAlignment="Left" Margin="398,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="LastNameTxt" HorizontalAlignment="Left" Margin="398,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="EmailAddressTxt" HorizontalAlignment="Left" Margin="398,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="PhoneNumberTxt" HorizontalAlignment="Left" Margin="398,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <CheckBox x:Name="SendPasswordCheckBox" Content="yes, a password e-mail will be sent to the user" HorizontalAlignment="Left" Margin="398,281,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="TypeOfUseCombo" HorizontalAlignment="Left" Margin="398,148,0,0" VerticalAlignment="Top" Width="187" Height="20">
             <ComboBoxItem Content="Service Desk Employee" />
             <ComboBoxItem Content="Company Employee" />
             <ComboBoxItem Content="Manager" />
         </ComboBox>
-        <ComboBox x:Name="Location_combo" HorizontalAlignment="Left" Margin="398,247,0,0" VerticalAlignment="Top" Width="187" Height="20">
+        <ComboBox x:Name="LocationCombo" HorizontalAlignment="Left" Margin="398,247,0,0" VerticalAlignment="Top" Width="187" Height="20">
             <ComboBoxItem Content="Haarlem" />
             <ComboBoxItem Content="Amsterdam" />
             <ComboBoxItem Content="Den Haag" />
             <ComboBoxItem Content="Rotterdam" />
             <ComboBoxItem Content="Eindhoven" />
         </ComboBox>
-        <Button x:Name="AddUser_btn" Content="ADD USER" HorizontalAlignment="Left" Margin="478,353,0,0" VerticalAlignment="Top" Height="33" Width="103" Background="#FF7FC08B" FontWeight="Bold" Click="AddUser_btn_Click"/>
-        <Button x:Name="Cancel_btn" Content="CANCEL" HorizontalAlignment="Left" Margin="339,353,0,0" VerticalAlignment="Top" Height="33" Width="103" FontWeight="Bold" Background="#FFFFFCFC" BorderBrush="#FFB2B2B2"/>
+        <Button x:Name="AddUserBtn" Content="ADD USER" HorizontalAlignment="Left" Margin="478,353,0,0" VerticalAlignment="Top" Height="33" Width="103" Background="#FF7FC08B" FontWeight="Bold" Click="AddUser_btn_Click"/>
+        <Button x:Name="CancelBtn" Content="CANCEL" HorizontalAlignment="Left" Margin="339,353,0,0" VerticalAlignment="Top" Height="33" Width="103" FontWeight="Bold" Background="#FFFFFCFC" BorderBrush="#FFB2B2B2"/>
         <Label x:Name="UserNotAddedMessage" Content="Failed" HorizontalAlignment="Left" Visibility="Hidden" Margin="339,315,0,0" VerticalAlignment="Top" Width="326">
                <Label.Foreground>
                       <SolidColorBrush Color="Red" />

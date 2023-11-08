@@ -11,17 +11,18 @@ namespace UI
     public partial class LoginUI : Window
     {
         private readonly UserService _userService;
+        private readonly VerifyingLoginService _verifyingLoginService;
         
         public LoginUI()
         {
-            _userService = new UserService();
             InitializeComponent();
+            _userService = new UserService();
+            _verifyingLoginService = new VerifyingLoginService();
         }
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
-            VerifyingLoginService verifyingLoginService = new VerifyingLoginService();
-            if (verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
+            if (_verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
             {
                 User user = _userService.GetUserByUsername(TextBoxUsername.Text);
                 

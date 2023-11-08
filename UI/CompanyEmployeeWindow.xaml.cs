@@ -11,9 +11,10 @@ public partial class CompanyEmployeeWindow : Window
 
     public CompanyEmployeeWindow()
     {
+        InitializeComponent();
+        
         CreateTicketPage = new CreateTicketPage();
         DashboardPage = new DashboardPage();
-        InitializeComponent();
     }
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)
