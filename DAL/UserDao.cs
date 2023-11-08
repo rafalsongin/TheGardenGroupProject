@@ -14,6 +14,7 @@ public class UserDao : BaseDao
     {
         _userCollection = GetUserCollection();
     }
+    
 
     public User GetUserByUsername(string? username)
     {

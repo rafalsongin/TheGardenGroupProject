@@ -28,7 +28,7 @@ public class VerifyingLoginService
 
         // check if the password is correct
         bool passwordMatch = BCrypt.Verify(inputPassword, hashedPassword);
-
+        
         return passwordMatch;
     }
     
