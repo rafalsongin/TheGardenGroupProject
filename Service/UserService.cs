@@ -11,6 +11,7 @@ public class UserService
     public UserService()
     {
         _userDao = new UserDao();
+
     }
     
     public List<User> GetAllUsers()
@@ -23,7 +24,8 @@ public class UserService
         return _userDao.GetUserByUsername(username);
     }
 
-    public void CreateAndAddUser(string firstName, string lastName, string emailAddress, string phoneNumber, string city, string userType)
+    //dana
+    public bool IsUserCreatedAndAddedSuccessfully(string firstName, string lastName, string emailAddress, string phoneNumber, string city, string userType)
     {
         City newCity = GetCityEnum(city);
         UserType newUserType = GetUserTypeEnum(userType);
@@ -37,10 +39,20 @@ public class UserService
 
         Console.WriteLine(newUser.ToString());
 
-        _userDao.AddUser(newUser);
+        try
+        {
+            _userDao.AddUser(newUser);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+            throw new Exception(ex.Message);
+        }
     }
 
-    private static UserType GetUserTypeEnum(string userType)
+    public static UserType GetUserTypeEnum(string userType)
     {
         // declaring variable
         UserType newUserType = UserType.ServiceDeskEmployee; //a default value
@@ -61,7 +73,7 @@ public class UserService
         return newUserType;
     }
 
-    private static City GetCityEnum(string city)
+    public static City GetCityEnum(string city)
     {
         // declaring variable
 
