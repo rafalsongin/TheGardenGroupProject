@@ -23,12 +23,12 @@ namespace TheGardenGroupProject
         private void AddUser_btn_Click(object sender, RoutedEventArgs e)
         {
 
-            string firstName = FirstName_txt.Text;
-            string lastName = LastName_txt.Text;
-            string emailAddress = EmailAddress_txt.Text;
-            string phoneNumber = PhoneNumber_txt.Text;
-            string userType = ((ComboBoxItem)TypeOfUse_combo.SelectedItem)?.Content.ToString();
-            string city = ((ComboBoxItem)Location_combo.SelectedItem)?.Content.ToString();
+            string firstName = FirstNameTxt.Text;
+            string lastName = LastNameTxt.Text;
+            string emailAddress = EmailAddressTxt.Text;
+            string phoneNumber = PhoneNumberTxt.Text;
+            string userType = ((ComboBoxItem)TypeOfUseCombo.SelectedItem)?.Content.ToString();
+            string city = ((ComboBoxItem)LocationCombo.SelectedItem)?.Content.ToString();
             
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName)
                 || string.IsNullOrWhiteSpace(emailAddress) || string.IsNullOrWhiteSpace(userType)
@@ -56,14 +56,14 @@ namespace TheGardenGroupProject
 
         private void Cancel_btn_Click(object sender, RoutedEventArgs e)
         {
-            FirstName_txt.Clear();
-            LastName_txt.Clear();
-            EmailAddress_txt.Clear();
-            PhoneNumber_txt.Clear();
+            FirstNameTxt.Clear();
+            LastNameTxt.Clear();
+            EmailAddressTxt.Clear();
+            PhoneNumberTxt.Clear();
 
             // Reset the ComboBox selections to the first item
-            TypeOfUse_combo.SelectedIndex = 0;
-            Location_combo.SelectedIndex = 0;
+            TypeOfUseCombo.SelectedIndex = 0;
+            LocationCombo.SelectedIndex = 0;
         }
     }
 }

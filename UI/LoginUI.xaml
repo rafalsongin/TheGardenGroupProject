@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="NoDesk Application" Height="465" Width="495" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Loaded="LoginWindow_Loaded">
     <Grid x:Name="GridLoginPage" Height="450" VerticalAlignment="Center" Background="White" Visibility="Visible">
         <TextBox x:Name="TextBoxUsername" Text="jstatham" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="229,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Height="35" FontSize="20" AutomationProperties.Name="textBoxUsernameInput" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>
         <PasswordBox x:Name="PasswordBox" Password="jstathamlogin" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="229,239,0,0" VerticalAlignment="Top" Width="176" Height="36" FontSize="20" AutomationProperties.Name="textBoxPasswordInput" BorderBrush="#FFA3BB88" BorderThickness="2,2,2,2"/>

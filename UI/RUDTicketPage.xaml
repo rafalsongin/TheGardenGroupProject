@@ -4,53 +4,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
-      Title="RUDTicket" Height="450" Width="800">
-    <!--<Window.Resources>
-        ~1~ Button Style for Modern Flat Buttons @1@
-        <Style x:Key="ModernButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Background" Value="#FFDC9FF1" />
-            <Setter Property="Padding" Value="15,5" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="10,5" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Width" Value="120" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFEBE8F1" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>-->
+      Title="RUDTicket" Height="700" Width="1000">
     <Grid Margin="0,2,0,-2">
-        <!--<TextBlock Text="GardenGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14" FontWeight="Bold" FontFamily="Times New Roman" Foreground="#FF23A908"/>
-        <Button x:Name="btnDashboard" Content="Dashboard" Style="{StaticResource ModernButtonStyle}" Margin="10,60,0,0" Width="95" Background="#FFC8C6C8" />
-        <Button x:Name="btnViewUser" Content="View User" Style="{StaticResource ModernButtonStyle}" Margin="10,101,0,0" Width="95" Background="#FFC8C6C8" />
-        <Button x:Name="btnAddUser" Content="Add User" Style="{StaticResource ModernButtonStyle}" Margin="10,144,0,0" Width="95" Background="#FFC8C6C8" />
-        <Button x:Name="btnAddTicket" Content="Add Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,184,0,0" Width="95" Background="#FFC8C6C8" />
-        <Button x:Name="btnCreateIncidentTicket" Content="Create Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,226,0,0" Width="95" Background="#FFC2BAC5" Click="btnCreateIncidentTicket_Click" />
-        <Button x:Name="btnRUDTicket" Content="RUD Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,266,0,0" Width="95" Background="#FFD6A3E8" />
-        <Label Content="..." HorizontalAlignment="Left" Margin="-101,216,0,216" RenderTransformOrigin="0.5,0.5" Width="429" Background="#FF919090">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform />
-                    <SkewTransform />
-                    <RotateTransform Angle="90.204" />
-                    <TranslateTransform />
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>-->
         <Label Content="RUD TICKETS" HorizontalAlignment="Left" Margin="324,18,0,0" VerticalAlignment="Top"
                RenderTransformOrigin="0.404,0.629" FontFamily="Segoe UI Semibold" FontSize="18" />
 

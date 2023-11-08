@@ -9,7 +9,7 @@ namespace DAL
     {
         private readonly IMongoCollection<Ticket> _ticketCollection;
         
-        public TicketDao()
+        public TicketDao() 
         {
             _ticketCollection = GetTicketCollection();
         }
