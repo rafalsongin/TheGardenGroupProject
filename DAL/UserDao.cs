@@ -28,7 +28,7 @@ public class UserDao : BaseDao
         var filter = Builders<User>.Filter.Empty;
     
         // Define the projection to exclude the "_id" field
-        var projection = Builders<User>.Projection.Exclude(u => u.ObjectId);
+        var projection = Builders<User>.Projection.Exclude(u => u.Id);
     
         var userList = _userCollection.Find(filter).Project<User>(projection).ToList();
 
