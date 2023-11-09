@@ -27,7 +27,7 @@
                RenderTransformOrigin="0.404,0.629" FontFamily="Segoe UI Semibold" FontSize="18" />
 
 
-        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="452,356,0,0" Width="96" FontSize="14" Height="32"
+        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="687,385,217,283" Width="96" FontSize="14" Height="32"
                 Click="btnUpdateTicekt_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -44,7 +44,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnDeleteTicket" Content="Delete" Margin="177,356,0,0" Width="96" FontSize="14" Height="32"
+        <Button x:Name="btnDeleteTicket" Content="Delete" Margin="556,385,348,283" Width="96" FontSize="14" Height="32"
                 Click="btnDeleteTicket_Click" Background="#FFED0E0E">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -55,7 +55,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="18,58,23,162" SelectionChanged="ticketsListView_SelectionChanged">
+        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="18,58,238,404" SelectionChanged="ticketsListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Subject" DisplayMemberBinding="{Binding Subject, TargetNullValue='Null '}" Width="120" />
