@@ -4,17 +4,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="ServiceDeskWindow" Height="720" Width="1280">
+        Title="ServiceDeskWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel MinHeight="700" Width="265" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button x:Name="ViewUsersButton" Click="ViewUsersButton_Click" Content="View users" MinHeight="50"
-                    FontSize="20" Margin="10, 20, 10, 0" />
+                    FontSize="20" Margin="10, 100, 10, 0" />
             <Button x:Name="AddUsersButton" Click="AddUsersButton_Click" Content="Add user" MinHeight="50"
                     FontSize="20" Margin="10, 20, 10, 0" />
             <Button x:Name="AddTicketButton" Click="AddTicketButton_Click" Content="Add ticket" MinHeight="50"
                     FontSize="20" Margin="10, 20, 10, 0" />
-            <Button x:Name="CrudTicketButton" Click="CrudTicketButton_Click" Content="CRUD ticket" MinHeight="50"
+            <Button x:Name="CreateTicketsButton" Click="CreateTicketsButton_Click" Content="Create ticket" MinHeight="50"
                     FontSize="20" Margin="10, 20, 10, 0" />
+            <Button x:Name="ViewTicketsButton" Click="ViewTicketsButton_Click" Content="View tickets" MinHeight="50"
+        FontSize="20" Margin="10, 20, 10, 0" />
             <Button x:Name="LogoutButton" Click="LogoutButton_Click" Content="Logout" MinHeight="50"
                     FontSize="20" Margin="10, 350, 10, 20" VerticalAlignment="Bottom" />
         </StackPanel>

@@ -9,7 +9,7 @@ namespace DAL
     {
         private readonly IMongoCollection<Ticket> _ticketCollection;
         
-        public TicketDao()
+        public TicketDao() 
         {
             _ticketCollection = GetTicketCollection();
         }
@@ -19,9 +19,10 @@ namespace DAL
             _ticketCollection.InsertOne(ticket);
         }
 
-        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket)
+        public void UpdateTicket(Ticket updatedTicket)
         {
-            Ticket existingTicket = GetTicketByFilter(filter);
+            var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
+            var existingTicket = GetTicketByFilter(filter);
 
             if (existingTicket != null)
             {
@@ -29,26 +30,20 @@ namespace DAL
                 existingTicket.TicketId = updatedTicket.TicketId;
                 existingTicket.Subject = updatedTicket.Subject;
                 existingTicket.IncidentType = updatedTicket.IncidentType;
-                existingTicket.Assignedby = updatedTicket.Assignedby;
+                existingTicket.ReportedBy = updatedTicket.ReportedBy;
                 existingTicket.Priority = updatedTicket.Priority;
                 existingTicket.Deadline = updatedTicket.Deadline;
+                existingTicket.Status = updatedTicket.Status;
 
                 // Replace the existing ticket in the collection with the updated ticket
-                _ticketCollection.ReplaceOne(filter, existingTicket);
+               _ticketCollection.ReplaceOne(filter, existingTicket);
             }
         }
 
-        public void DeleteTicket(FilterDefinition<Ticket> filter)
+        public void DeleteTicket(Ticket ticket)
         {
-            // FilterDefinition<Ticket> deleteDefinitions = GetTicketByFilter(new );
-
-            var ticketToDelete = GetTicketByFilter(filter);
-            //Execute the delete operation
-            if(ticketToDelete != null)
-            { 
-                _ticketCollection.DeleteOne(filter);
-            }
-
+            var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, ticket.TicketId);
+            _ticketCollection.DeleteOne(filter);
         }
 
         public Ticket ReadTicket(Ticket ticket)

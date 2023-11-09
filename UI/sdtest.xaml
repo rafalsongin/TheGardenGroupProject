@@ -8,12 +8,14 @@
     <Grid>
         <StackPanel MinHeight="700" Width="265" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button x:Name="ViewUsersButton" Click="ViewUsersButton_Click" Content="View users" MinHeight="50"
-                    FontSize="20" Margin="10, 20, 10, 0" />
+                    FontSize="20" Margin="10, 30, 10, 0" />
             <Button x:Name="AddUsersButton" Click="AddUsersButton_Click" Content="Add user" MinHeight="50"
                     FontSize="20" Margin="10, 20, 10, 0" />
             <Button x:Name="AddTicketButton" Click="AddTicketButton_Click" Content="Add ticket" MinHeight="50"
                     FontSize="20" Margin="10, 20, 10, 0" />
-            <Button x:Name="CrudTicketButton" Click="CrudTicketButton_Click" Content="CRUD ticket" MinHeight="50"
+            <Button x:Name="createTicketButton" Click="CreateTicketButton_Click" Content="Create ticket" MinHeight="50"
+         FontSize="20" Margin="10, 20, 10, 0" />
+            <Button x:Name="viewTicketsButton" Click="ViewTicketsButton_Click" Content="View ticket" MinHeight="50"
                     FontSize="20" Margin="10, 20, 10, 0" />
         </StackPanel>
         <Rectangle HorizontalAlignment="Left" Height="700" Margin="270,10,0,0" VerticalAlignment="Top" Width="2"

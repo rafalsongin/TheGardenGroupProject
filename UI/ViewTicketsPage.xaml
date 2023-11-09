@@ -1,0 +1,111 @@
+﻿<Page x:Class="TheGardenGroupProject.ViewTicketsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+      mc:Ignorable="d"
+      Title="RUDTicket" Height="700" Width="1000">
+    <Grid Margin="0,2,0,-2">
+        <!--<TextBlock Text="GardenGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14" FontWeight="Bold" FontFamily="Times New Roman" Foreground="#FF23A908"/>
+        <Button x:Name="btnDashboard" Content="Dashboard" Style="{StaticResource ModernButtonStyle}" Margin="10,60,0,0" Width="95" Background="#FFC8C6C8" />
+        <Button x:Name="btnViewUser" Content="View User" Style="{StaticResource ModernButtonStyle}" Margin="10,101,0,0" Width="95" Background="#FFC8C6C8" />
+        <Button x:Name="btnAddUser" Content="Add User" Style="{StaticResource ModernButtonStyle}" Margin="10,144,0,0" Width="95" Background="#FFC8C6C8" />
+        <Button x:Name="btnAddTicket" Content="Add Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,184,0,0" Width="95" Background="#FFC8C6C8" />
+        <Button x:Name="btnCreateIncidentTicket" Content="Create Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,226,0,0" Width="95" Background="#FFC2BAC5" Click="btnCreateIncidentTicket_Click" />
+        <Button x:Name="btnRUDTicket" Content="RUD Ticket" Style="{StaticResource ModernButtonStyle}" Margin="10,266,0,0" Width="95" Background="#FFD6A3E8" />
+        <Label Content="..." HorizontalAlignment="Left" Margin="-101,216,0,216" RenderTransformOrigin="0.5,0.5" Width="429" Background="#FF919090">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="90.204" />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>-->
+        <Label Content="View TICKETS" HorizontalAlignment="Left" Margin="324,18,0,0" VerticalAlignment="Top"
+               RenderTransformOrigin="0.404,0.629" FontFamily="Segoe UI Semibold" FontSize="18" />
+
+
+        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="687,385,217,283" Width="96" FontSize="14" Height="32"
+                Click="btnUpdateTicekt_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5CE745" Offset="0" />
+                    <GradientStop Color="#FF58E93B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnDeleteTicket" Content="Delete" Margin="556,385,348,283" Width="96" FontSize="14" Height="32"
+                Click="btnDeleteTicket_Click" Background="#FFED0E0E">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="18,58,238,404" SelectionChanged="ticketsListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Subject" DisplayMemberBinding="{Binding Subject, TargetNullValue='Null '}" Width="120" />
+                    <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" Width="80" />
+                    <GridViewColumn Header="ReprotedBy" DisplayMemberBinding="{Binding ReportedBy}" Width="100" />
+                    <GridViewColumn Header="Deadline" DisplayMemberBinding="{Binding Deadline, StringFormat=\{0:dd/MM/yyyy\}}" Width="100"/>
+                    <GridViewColumn Header="Incident Type" DisplayMemberBinding="{Binding IncidentType}" Width="150" />
+                    <GridViewColumn Header="DateReported" DisplayMemberBinding="{Binding ReportedOn,StringFormat=\{0:dd/MM/yyyy\}}" Width="100"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status,TargetNullValue='Null '}" Width="105"/>
+
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsClosed}" Value="True">
+                            <Setter Property="Foreground" Value="LightGray" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="119,301,0,0" VerticalAlignment="Top" Width="77"
+            ItemsSource="{Binding Priorities}" Height="24"/>
+        <TextBox x:Name="reportedByTxt" HorizontalAlignment="Left" Margin="207,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" RenderTransformOrigin="0.5,0.5" Height="24">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.136"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <TextBox x:Name="subjectTxt" HorizontalAlignment="Left" Margin="17,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91" RenderTransformOrigin="0.5,0.5" Height="24">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.136"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="425,302,0,0" VerticalAlignment="Top" Width="121"
+            ItemsSource="{Binding IncidentTypes}" Height="24"/>
+        <DatePicker x:Name="DPTimeReported" HorizontalAlignment="Left" Margin="566,302,0,0" VerticalAlignment="Top" Width="106"/>
+        <ComboBox x:Name="statusCombobox" HorizontalAlignment="Left" Margin="687,302,0,0" VerticalAlignment="Top" Width="86"
+            ItemsSource="{Binding Statuses}" Height="24"/>
+        <DatePicker x:Name="DPDeadLine" HorizontalAlignment="Left" Margin="301,302,0,0" VerticalAlignment="Top" Width="111" Height="24"/>
+
+    </Grid>
+</Page>
