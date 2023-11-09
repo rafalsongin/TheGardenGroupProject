@@ -14,6 +14,8 @@ public partial class ServiceDeskWindow : Window
     
     public ServiceDeskWindow()
     {
+        InitializeComponent();
+        
         ViewUsersPage = new ViewUsersPage();
         NewUserPage = new NewUserPage();
         AddTicketPage = new AddTicketPage();
@@ -25,17 +27,17 @@ public partial class ServiceDeskWindow : Window
 
     private void ViewUsersButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = ViewUsersPage;
+        ContentPage.NavigationService.Navigate(ViewUsersPage);
     }
 
     private void AddUsersButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = NewUserPage;
+        ContentPage.NavigationService.Navigate(NewUserPage);
     }
 
     private void AddTicketButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = AddTicketPage;
+        ContentPage.NavigationService.Navigate(AddTicketPage);
     }
 
     private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)

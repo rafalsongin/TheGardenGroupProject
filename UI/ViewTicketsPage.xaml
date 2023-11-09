@@ -4,35 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
       mc:Ignorable="d"
-      Title="RUDTicket" Height="450" Width="800">
-    <!--<Window.Resources>
-        ~1~ Button Style for Modern Flat Buttons @1@
-        <Style x:Key="ModernButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Background" Value="#FFDC9FF1" />
-            <Setter Property="Padding" Value="15,5" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="10,5" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Width" Value="120" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFEBE8F1" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>-->
+      Title="RUDTicket" Height="700" Width="1000">
     <Grid Margin="0,2,0,-2">
         <!--<TextBlock Text="GardenGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14" FontWeight="Bold" FontFamily="Times New Roman" Foreground="#FF23A908"/>
         <Button x:Name="btnDashboard" Content="Dashboard" Style="{StaticResource ModernButtonStyle}" Margin="10,60,0,0" Width="95" Background="#FFC8C6C8" />

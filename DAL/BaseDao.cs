@@ -8,10 +8,10 @@ namespace DAL;
 
 public class BaseDao
 {
-    private readonly MongoClient _client;
-    private readonly IMongoDatabase _database;
+    private MongoClient _client;
+    private IMongoDatabase _database;
 
-    public BaseDao()
+    protected BaseDao()
     {
         // Server (testing)
         _client = new MongoClient("mongodb+srv://dbUser:9BPqGfB5pEvENADf@thegardengroupserver.cbkve.mongodb.net/");
