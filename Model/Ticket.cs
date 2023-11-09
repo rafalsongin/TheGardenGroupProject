@@ -13,11 +13,10 @@ namespace Model
         [BsonIgnoreIfNull]
         public string Description { get; set; }
 
-
         [BsonElement("Subject")]
         public string Subject { get; set; }
 
-        [BsonElement("DataReported")]
+        [BsonElement("ReportedOn")]
         public DateTime DateReported { get; set; }
 
         [BsonElement("DeadLine")]
@@ -56,12 +55,11 @@ namespace Model
         [BsonElement("Status")]
         [BsonIgnoreIfDefault]
         public Status Status { get; set; }
-
-        [BsonElement ("Employee")]
-        public string Assignedby { get; set; } // should by employee but I am waiting for the class to be created
         public string Email { get; set; }
        
-
+        [BsonElement ("ReportedBy")]
+        [BsonIgnoreIfDefault]
+        public string Assignedby { get; set; } // should by employee but I am waiting for the class to be created
 
     }
 }
