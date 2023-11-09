@@ -55,6 +55,8 @@ namespace Service
             return ticketDao.GetTicketCountForUser(userEmail);
         }
 
+        }
+
         public List<Ticket> GetAllTickets()
         {
             return ticketDao.GetAllTickets();

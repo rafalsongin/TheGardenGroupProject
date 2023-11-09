@@ -67,6 +67,7 @@ namespace TheGardenGroupProject
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
+
             // Display a confirmation message box
             MessageBoxResult confirm = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 

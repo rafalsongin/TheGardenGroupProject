@@ -13,13 +13,12 @@ namespace Model
         [BsonIgnoreIfNull]
         public string Description { get; set; }
 
-
         [BsonElement("Subject")]
         public string Subject { get; set; }
 
         [BsonElement("ReportedOn")]
         public DateTime ReportedOn { get; set; }
-
+        
         [BsonElement("DeadLine")]
         public DateTime Deadline { get; set; }
 
@@ -40,6 +39,7 @@ namespace Model
         [BsonElement("Status")]
         [BsonRepresentation(BsonType.String)]// Store enum as string
         public Status Status { get; set; }
+
         public bool IsClosed => Status == Status.Closed;
 
         [BsonElement("ReportedBy")]

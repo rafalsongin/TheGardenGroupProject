@@ -27,14 +27,13 @@ namespace UI
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
-            
             if (_verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
             {
                 User user = _userService.GetUserByUsername(TextBoxUsername.Text);
                 
                 if (user.UserType == UserType.ServiceDeskEmployee)
                 {
-                    ServiceDeskWindow serviceDeskWindow = new ServiceDeskWindow();
+                    ServiceDeskWindow serviceDeskWindow = new ServiceDeskWindow(user);
                     serviceDeskWindow.Show();
                 }
                 else
