@@ -1,5 +1,7 @@
+using System;
 using System.Windows;
 using System.Windows.Media;
+using Model;
 using UI;
 
 namespace TheGardenGroupProject;
@@ -12,7 +14,9 @@ public partial class ServiceDeskWindow : Window
     private ViewTicketsPage ViewTicketsPage { get; }
     private CreateTicketPage CreateTicketPage { get; }
     
-    public ServiceDeskWindow()
+    private User LoggedInUser { get; }
+    
+    public ServiceDeskWindow(User user)
     {
         InitializeComponent();
         
@@ -22,12 +26,13 @@ public partial class ServiceDeskWindow : Window
         ViewTicketsPage = new ViewTicketsPage();
         CreateTicketPage = new CreateTicketPage();
         
-        InitializeComponent();
+        LoggedInUser = user;
     }
 
     private void ViewUsersButton_Click(object sender, RoutedEventArgs e)
     {
         ContentPage.NavigationService.Navigate(ViewUsersPage);
+        Console.WriteLine(LoggedInUser.Username);
     }
 
     private void AddUsersButton_Click(object sender, RoutedEventArgs e)
