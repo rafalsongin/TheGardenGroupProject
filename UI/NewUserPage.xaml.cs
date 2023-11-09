@@ -72,9 +72,9 @@ namespace TheGardenGroupProject
             EmailAddressTxt.Clear();
             PhoneNumberTxt.Clear();
 
-            //i reset the ComboBox selections to the first item
+            /*//i reset the ComboBox selections to the first item
             TypeOfUse_combo.SelectedIndex = 0;
-            Location_combo.SelectedIndex = 0;
+            Location_combo.SelectedIndex = 0;*/
 
         }
 

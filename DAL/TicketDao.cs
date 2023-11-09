@@ -80,7 +80,7 @@ namespace DAL
             {
                 if (ticket.Status == Status.Opened)
                 {
-                    openedTickets.Add(ticket);
+                    openedTickets.Add(ticket);  
                 }
             }
             return openedTickets;   
