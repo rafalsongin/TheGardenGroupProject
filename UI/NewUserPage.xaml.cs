@@ -25,7 +25,6 @@ namespace TheGardenGroupProject
         //dana
         private void AddUser_btn_Click(object sender, RoutedEventArgs e)
         {
-
             string firstName = FirstNameTxt.Text;
             string lastName = LastNameTxt.Text;
             string emailAddress = EmailAddressTxt.Text;
@@ -48,9 +47,10 @@ namespace TheGardenGroupProject
                 return;
             }
 
+            bool doSendPassword = SendPasswordCheckBox.IsChecked == true;
+            
             UserService userService = new UserService();
-            bool isCreated = userService.IsUserCreatedAndAddedSuccessfully(firstName, lastName, emailAddress, phoneNumber, city, userType);
-
+            bool isCreated = userService.IsUserCreatedAndAddedSuccessfully(firstName, lastName, emailAddress, phoneNumber, city, userType, doSendPassword);
 
             if (isCreated)
             {

@@ -12,8 +12,9 @@ public partial class CompanyEmployeeWindow : Window
     private AddTicketPage AddTicketPage { get; }
 
     private ViewTicketsForEmployeePage ViewTicketsForEmployeePage { get; }
+    private User LoggedInUser { get; }
 
-    public CompanyEmployeeWindow()
+    public CompanyEmployeeWindow(User user)
     {
         InitializeComponent();
         
@@ -21,6 +22,8 @@ public partial class CompanyEmployeeWindow : Window
         DashboardPage = new DashboardPage();
         AddTicketPage = new AddTicketPage();
         ViewTicketsForEmployeePage = new ViewTicketsForEmployeePage();
+        
+        LoggedInUser = user;
     }
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)

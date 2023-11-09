@@ -26,20 +26,22 @@ public class UserService
         return _userDao.GetUserByUsername(username);
     }
 
-    public bool IsUserCreatedAndAddedSuccessfully(string firstName, string lastName, string emailAddress, string phoneNumber, string city, string userType)
+    public bool IsUserCreatedAndAddedSuccessfully(string firstName, string lastName, string emailAddress,
+        string phoneNumber, string city, string userType, bool doSendPassword)
     {
         City newCity = GetCityEnum(city);
         UserType newUserType = GetUserTypeEnum(userType);
-
-        // TODO: check if this is needed in the requirements
-        //bool sendPassword = SendPassword_CheckBox.IsChecked ?? false;
-
-        string username = firstName + lastName;
-        string password = firstName + lastName + "login"; // hardcoded password
+        
+        string username = firstName.ToLower() + lastName.ToLower();
+        string password = firstName.ToLower() + lastName.ToLower() + "login"; // hardcoded temporary password (will be sent by email) (not generated randomly, to make it easier to remember for testing purposes)
         User newUser = new User(username, password, firstName, lastName, newUserType, emailAddress, phoneNumber, newCity);
-
-        Console.WriteLine(newUser.ToString());
-
+        
+        if (doSendPassword)
+        {
+            EmailService emailService = new EmailService();
+            emailService.SendTemporaryPasswordByEmail(emailAddress, username, password);
+        }
+        
         try
         {
             _userDao.AddUser(newUser);

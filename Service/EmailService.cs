@@ -19,7 +19,6 @@ public class EmailService
         _userService = new UserService();
     }
     
-    // TODO: test this method
     public void SendTemporaryPasswordByEmail(string emailAddress, string username, string password)
     {
         MailMessage mailMessage = GetMailMessage(emailAddress, username, password);

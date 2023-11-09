@@ -38,7 +38,7 @@ namespace UI
                 }
                 else
                 {
-                    CompanyEmployeeWindow companyEmployeeWindow = new CompanyEmployeeWindow();
+                    CompanyEmployeeWindow companyEmployeeWindow = new CompanyEmployeeWindow(user);
                     companyEmployeeWindow.Show();
                 }
                 
