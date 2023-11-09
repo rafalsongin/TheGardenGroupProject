@@ -6,15 +6,7 @@
         mc:Ignorable="d"
         Title="AddTicketUI" Height="700" Width="1000">
     <Grid>
-        <WrapPanel Margin="0,0,10,377">
-            <Label Content="Label"/>
-            <Label Content="Label"/>
-        </WrapPanel>
-        <WrapPanel Margin="0,62,667,0">
-            <Button Content="New Ticket" Height="50" Width="133"/>
-            <Button Content="View Tickets" Height="50" Width="133"/>
-            <Button Content="Dashboard" Height="50" Width="133"/>
-        </WrapPanel>
+        <WrapPanel Margin="0,0,10,377"/>
         <Label Content="New Ticket" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top"/>
         <Label Content="Subject" HorizontalAlignment="Left" Margin="244,103,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="titleTextBox" HorizontalAlignment="Left" Margin="244,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

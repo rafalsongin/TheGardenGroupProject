@@ -9,13 +9,12 @@ namespace Model
         [BsonId]
         public ObjectId TicketId { get; set; }
 
-        [BsonElement("Description")]
-        [BsonIgnoreIfNull]
-        public string Description { get; set; }
-
-
         [BsonElement("Subject")]
         public string Subject { get; set; }
+
+        [BsonElement("Description")]
+        [BsonIgnoreIfNull]
+        public string Description { get; set; }        
 
         [BsonElement("ReportedOn")]
         public DateTime ReportedOn { get; set; }
@@ -44,16 +43,35 @@ namespace Model
 
         [BsonElement("ReportedBy")]
         public string ReportedBy { get; set; }
+
+        public Ticket()
+        {
+
+        }
+
         public Ticket(DateTime reportedOn, string subject, string description, IncidentType incidentType, string reportedBy, Priority priority, DateTime deadLine)
         {
-            this.ReportedOn = reportedOn;
-            this.Subject = subject;
-            this.Description = description;
-            this.IncidentType = incidentType;
-            this.ReportedBy = reportedBy;
-            this.Priority = priority;
-            this.Deadline = deadLine;
+            ReportedOn = reportedOn;
+            Subject = subject;
+            Description = description;
+            IncidentType = incidentType;
+            ReportedBy = reportedBy;
+            Priority = priority;
+            Deadline = deadLine;
             Status = Status.Opened;
+            LastUpdated = DateTime.Now;
+        }
+
+        public void createConceptTicket(string subject, Priority priority, string description, IncidentType incidentType, User user)
+        {
+            Subject = subject;
+            this.priority = priority;
+            Description = description;
+            Status = Status.Pending;
+            ReportedOn = DateTime.Now;
+            LastUpdated = DateTime.Now;
+            IncidentType = incidentType;
+            ReportedBy = user.Username;
         }
     }
 }
