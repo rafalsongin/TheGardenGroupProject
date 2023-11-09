@@ -16,7 +16,7 @@ namespace TheGardenGroupProject
         public AddTicketPage()
         {
             InitializeComponent();
-            user = new User("Kim", "kim123", "Kim", "van Schagen", UserType.Manager, "smt", "000", City.Amsterdam);
+            user = new User("kim123", "smt", "Kim", "van Schagen", UserType.Manager, "smt", "000", City.Amsterdam);
             LoadComboBoxes();
         }
 
