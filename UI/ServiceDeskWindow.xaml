@@ -18,7 +18,7 @@
             <Button x:Name="ViewTicketsButton" Click="ViewTicketsButton_Click" Content="View tickets" MinHeight="50"
         FontSize="20" Margin="10, 20, 10, 0" />
             <Button x:Name="LogoutButton" Click="LogoutButton_Click" Content="Logout" MinHeight="50"
-                    FontSize="20" Margin="10, 350, 10, 20" VerticalAlignment="Bottom" />
+                    FontSize="20" Margin="10, 250, 10, 20" VerticalAlignment="Bottom" />
         </StackPanel>
         <Rectangle HorizontalAlignment="Left" Height="700" Margin="270,10,0,0" VerticalAlignment="Top" Width="2"
                    Fill="Black" />
