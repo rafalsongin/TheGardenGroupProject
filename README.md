@@ -2,8 +2,8 @@
 
 Users (not all):
 
-Service Desk Employee - jstatham:jstathamLogin
+Service Desk Employee - jstatham:jstathamlogin
 
-Company Employee - tholland:thollandLogin
+Company Employee - tholland:thollandlogin
 
-Company Manager - jsmith:jsmithLogin
+Company Manager - jsmith:jsmithlogin
