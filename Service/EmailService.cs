@@ -9,12 +9,13 @@ namespace Service;
 public class EmailService
 {
     private User _user;
-    private readonly EmailDao _emailDao = new();
+    private readonly EmailDao _emailDao;
     private readonly SmtpClient _smtpClient;
-    private readonly UserService _userService = new();
+    private readonly UserService _userService;
 
     public EmailService()
     {
+        _emailDao = new EmailDao();
         _smtpClient = GetSmtpClient();
         _userService = new UserService();
     }
@@ -44,10 +45,6 @@ public class EmailService
         mailMessage.Subject = "New Account's Password";
         mailMessage.Body =
             $"New user was created on The Garden Group application! This email stands as a reminder for your credentials:\n\nUsername: {username}\nPassword: {password}\n\nPlease note, this is temporary password and we ask you to change it as soon as possible using Password Reset Functionality in the login page of the app.\n\nIf you are not supposed to have account created on The Garden Group application, please ignore this email.";
-
-        // TODO: remove this line after testing
-        // testing (sending to myself)
-        mailMessage.CC.Add("rafal.songin@gmail.com");
 
         return mailMessage;
     }
@@ -96,10 +93,6 @@ public class EmailService
         mailMessage.Subject = "Account Password Reset";
         mailMessage.Body =
             $"Please enter the provided token in the app to reset the password:\n\nToken: {token}\n\nIf you did not request a password reset, please ignore this email.";
-
-        // TODO: remove this line after testing
-        // testing (sending to myself)
-        mailMessage.CC.Add("rafal.songin@gmail.com");
 
         return mailMessage;
     }
