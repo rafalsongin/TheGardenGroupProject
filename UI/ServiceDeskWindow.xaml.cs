@@ -9,14 +9,16 @@ public partial class ServiceDeskWindow : Window
     private ViewUsersPage ViewUsersPage { get; }
     private NewUserPage NewUserPage { get; }
     private AddTicketPage AddTicketPage { get; }
-    private RudTicketPage RudTicketPage { get; }
+    private ViewTicketsPage ViewTicketsPage { get; }
+    private CreateTicketPage CreateTicketPage { get; }
     
     public ServiceDeskWindow()
     {
         ViewUsersPage = new ViewUsersPage();
         NewUserPage = new NewUserPage();
         AddTicketPage = new AddTicketPage();
-        RudTicketPage = new RudTicketPage();
+        ViewTicketsPage = new ViewTicketsPage();
+        CreateTicketPage = new CreateTicketPage();
         
         InitializeComponent();
     }
@@ -36,9 +38,13 @@ public partial class ServiceDeskWindow : Window
         ContentPage.Content = AddTicketPage;
     }
 
-    private void CrudTicketButton_Click(object sender, RoutedEventArgs e)
+    private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = RudTicketPage;
+        ContentPage.Content = ViewTicketsPage;
+    }
+    private void CreateTicketsButton_Click(object sender, RoutedEventArgs e)
+    {
+        ContentPage.Content = CreateTicketPage;
     }
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)

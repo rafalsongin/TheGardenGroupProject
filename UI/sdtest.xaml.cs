@@ -7,7 +7,8 @@ public partial class sdtest : Window
     private ViewUsersPage ViewUsersPage { get; }
     private NewUserPage NewUserPage { get; }
     private AddTicketPage AddTicketPage { get; }
-    private RudTicketPage RudTicketPage { get; }
+    private ViewTicketsPage ViewTicketsPage { get; }
+    private CreateTicketPage CreateTicketPage { get; }
 
     public sdtest()
     {
@@ -33,8 +34,15 @@ public partial class sdtest : Window
         ContentPage.NavigationService.Navigate(AddTicketPage);
     }
 
-    private void CrudTicketButton_Click(object sender, RoutedEventArgs e)
+
+
+    private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.NavigationService.Navigate(RudTicketPage);
+        ContentPage.NavigationService.Navigate(ViewTicketsPage);
+    }
+
+    private void CreateTicketButton_Click(object sender, RoutedEventArgs e)
+    {
+        ContentPage.NavigationService.Navigate(CreateTicketPage);
     }
 }
