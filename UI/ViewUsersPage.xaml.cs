@@ -41,20 +41,11 @@ namespace TheGardenGroupProject
                 data.Email = user.Email;
                 data.FirstName = user.FirstName;
                 data.LastName = user.LastName;
-                data.AmountOfTickets = 2;
+                data.AmountOfTickets = GetUserTicketCount(user);
                 //int.Parse(user.AmountOfTickets); 
                 // hardcoded
 
-                if (IsValidEmail(user.Email))
-                {
-                    data.Email = user.Email;
-                }
-                else
-                {
-                    // Handle invalid email address (e.g., mark as invalid or display an error)
-                    data.Email = "Invalid Email";
-                }
-
+               
                 id++;
 
                 dataList.Add(data);
@@ -65,22 +56,15 @@ namespace TheGardenGroupProject
                 
             }
 
-
-
             ListViewAllUsers.ItemsSource = dataList;
         }
 
-        private bool IsValidEmail(string email)
+        private int GetUserTicketCount(User user)
         {
-            try
-            {
-                var mailAddress = new MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
+            UserService userService = new UserService();
+            string userEmail = user.Email;
+            long ticketCount = userService.GetTicketCountForUser(userEmail);
+            return (int)ticketCount;
         }
 
 

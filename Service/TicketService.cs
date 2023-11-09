@@ -16,14 +16,14 @@ namespace Service
             ticketDao.CreateTicket(ticket);
         }
 
-        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket) 
+        public void UpdateTicket( Ticket updatedTicket) 
         {
-             ticketDao.UpdateTicket(filter, updatedTicket);
+            ticketDao.UpdateTicket(updatedTicket);
         }
 
-        public void DeleteTicket(FilterDefinition<Ticket> filter)
+        public void DeleteTicket(Ticket ticket)
         {
-            ticketDao.DeleteTicket(filter);
+            ticketDao.DeleteTicket(ticket);
         }
         public Ticket ReadTicket(Ticket ticket) 
         {
@@ -48,6 +48,15 @@ namespace Service
         public List<Ticket> GetClosedTickets()
         {
             return ticketDao.GetClosedTickets();
+        }
+
+        public long GetTicketCountForUser(string userEmail)
+        {
+            return ticketDao.GetTicketCountForUser(userEmail);
+
+        public List<Ticket> GetAllTickets()
+        {
+            return ticketDao.GetAllTickets();
         }
     }
 }

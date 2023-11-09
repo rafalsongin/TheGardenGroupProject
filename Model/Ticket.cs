@@ -17,8 +17,8 @@ namespace Model
         public string Subject { get; set; }
 
         [BsonElement("ReportedOn")]
-        public DateTime DateReported { get; set; }
-
+        public DateTime ReportedOn { get; set; }
+        
         [BsonElement("DeadLine")]
         public DateTime Deadline { get; set; }
 
@@ -29,37 +29,31 @@ namespace Model
 
         [BsonElement("Priority")]
         [BsonRepresentation(BsonType.String)]
-        public Priority Priority {get
-            {
-                return priority;
-                
-            }
-            set
-            { 
-                priority = value;
-            }
-        }
+        public Priority Priority {get;set;}
 
         private IncidentType selectedIncidentType;
         [BsonElement ("IncidentType")]
         [BsonRepresentation(BsonType.String)]// Store enum as string
-        public IncidentType IncidentType { get
-            {
-                return selectedIncidentType;
-            } set
-            {
-                selectedIncidentType = value;
-            } 
-        }
+        public IncidentType IncidentType { get;set;}
 
         [BsonElement("Status")]
-        [BsonIgnoreIfDefault]
+        [BsonRepresentation(BsonType.String)]// Store enum as string
         public Status Status { get; set; }
-        public string Email { get; set; }
-       
-        [BsonElement ("ReportedBy")]
-        [BsonIgnoreIfDefault]
-        public string Assignedby { get; set; } // should by employee but I am waiting for the class to be created
 
+        public bool IsClosed => Status == Status.Closed;
+
+        [BsonElement("ReportedBy")]
+        public string ReportedBy { get; set; }
+        public Ticket(DateTime reportedOn, string subject, string description, IncidentType incidentType, string reportedBy, Priority priority, DateTime deadLine)
+        {
+            this.ReportedOn = reportedOn;
+            this.Subject = subject;
+            this.Description = description;
+            this.IncidentType = incidentType;
+            this.ReportedBy = reportedBy;
+            this.Priority = priority;
+            this.Deadline = deadLine;
+            Status = Status.Opened;
+        }
     }
 }
