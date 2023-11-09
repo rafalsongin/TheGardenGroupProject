@@ -65,18 +65,33 @@ namespace TheGardenGroupProject
 
         }
 
-        private void Cancel_btn_Click(object sender, RoutedEventArgs e)
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            FirstNameTxt.Clear();
-            LastNameTxt.Clear();
-            EmailAddressTxt.Clear();
-            PhoneNumberTxt.Clear();
 
-            /*//i reset the ComboBox selections to the first item
-            TypeOfUse_combo.SelectedIndex = 0;
-            Location_combo.SelectedIndex = 0;*/
+            // Display a confirmation message box
+            MessageBoxResult confirm = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            // Only clear the form controls if the user confirms the cancellation
+            if (confirm == MessageBoxResult.Yes)
+            {
+                // Call the method to clear form controls
+                ClearFormControls();
+            }
         }
+
+        private void ClearFormControls()
+        {
+            // Clear the text boxes
+            FirstNameTxt.Text = "";
+            LastNameTxt.Text = "";
+            EmailAddressTxt.Text = "";
+            PhoneNumberTxt.Text = "";
+
+            // Reset the ComboBox selections to the first item
+            TypeOfUseCombo.SelectedIndex = -1;
+            LocationCombo.SelectedIndex = -1;
+        }
+
 
         //the IsValidEmail method is defined here
         private bool IsValidEmail(string email)
@@ -87,5 +102,6 @@ namespace TheGardenGroupProject
             //Regex.IsMatch is used to check if the email matches the pattern
             return Regex.IsMatch(email, pattern);
         }
+        
     }
 }
