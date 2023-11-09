@@ -49,16 +49,40 @@ namespace Service
         {
             return ticketDao.GetClosedTickets();
         }
-
-        public long GetTicketCountForUser(string userEmail)
-        {
-            return ticketDao.GetTicketCountForUser(userEmail);
-        }
-
         public List<Ticket> GetAllTickets()
         {
             return ticketDao.GetAllTickets();
         }
-            
+
+        //kim
+        public List<Ticket> GetAllTicketsFromUser(User user)
+        {
+            return ticketDao.GetAllTicketsFromUser(user);
+        }
+
+        public List<Ticket> GetOpenTicketsFromUser(User user)
+        {
+            return ticketDao.GetOpenTicketsFromUser(user);
+        }
+
+        public List<Ticket> GetClosedTicketsFromUser(User user)
+        {
+            return ticketDao.GetClosedTicketsFromUser(user);
+        }
+
+        public List<Ticket> GetAllTickets1()
+        {
+            return ticketDao.GetAllTickets1();
+        }
+
+        public List<Ticket> GetAllOpenTickets()
+        {
+            return ticketDao.GetAllOpenTickets();
+        }
+
+        public List<Ticket> GetAllClosedTickets()
+        {
+            return ticketDao.GetAllClosedTickets();
+        }
     }
 }

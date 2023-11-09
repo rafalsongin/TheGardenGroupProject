@@ -4,6 +4,6 @@ namespace Model
 {
     public enum Status
     {
-        Opened,Resolved,Closed
+        Opened, Resolved, Closed, Pending
     }
 }
