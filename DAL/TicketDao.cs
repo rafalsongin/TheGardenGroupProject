@@ -119,5 +119,12 @@ namespace DAL
             }
             return closedTickets;
         }
+
+        public long GetTicketCountForUser(string userEmail)
+        {
+            var filter = Builders<Ticket>.Filter.Eq("Email", userEmail);
+            long ticketCount = _ticketCollection.CountDocuments(filter);
+            return ticketCount;
+        }
     }
 }

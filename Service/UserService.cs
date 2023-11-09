@@ -7,10 +7,12 @@ namespace Service;
 public class UserService
 {
     private readonly UserDao _userDao;
+    private readonly TicketDao _ticketDao;
 
     public UserService()
     {
         _userDao = new UserDao();
+        _ticketDao = new TicketDao();
     }
     
     public List<User> GetAllUsers()
@@ -49,6 +51,11 @@ public class UserService
             throw new Exception(ex.Message);
         }
     }
+    public long GetTicketCountForUser(string userEmail)
+    {
+        return _ticketDao.GetTicketCountForUser(userEmail);
+    }
+
 
     private static UserType GetUserTypeEnum(string userType)
     {
