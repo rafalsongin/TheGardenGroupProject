@@ -24,9 +24,9 @@ namespace TheGardenGroupProject
     {
         User user;
 
-        public ViewTicketsForEmployeePage()
+        public ViewTicketsForEmployeePage(User user)
         {
-            user = new User("kim123", "smt", "Kim", "van Schagen", UserType.Manager, "smt", "000", City.Amsterdam);
+            this.user = user;
             InitializeComponent();
             if (user.UserType == UserType.CompanyEmployee)
             {

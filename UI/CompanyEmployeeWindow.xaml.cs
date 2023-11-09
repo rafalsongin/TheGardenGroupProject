@@ -7,7 +7,6 @@ namespace TheGardenGroupProject;
 public partial class CompanyEmployeeWindow : Window
 {
     private DashboardPage DashboardPage { get; }
-    private CreateTicketPage CreateTicketPage { get; }
 
     private AddTicketPage AddTicketPage { get; }
 
@@ -17,13 +16,11 @@ public partial class CompanyEmployeeWindow : Window
     public CompanyEmployeeWindow(User user)
     {
         InitializeComponent();
-        
-        CreateTicketPage = new CreateTicketPage();
-        DashboardPage = new DashboardPage();
-        AddTicketPage = new AddTicketPage();
-        ViewTicketsForEmployeePage = new ViewTicketsForEmployeePage();
-        
         LoggedInUser = user;
+
+        DashboardPage = new DashboardPage();
+        AddTicketPage = new AddTicketPage(LoggedInUser);
+        ViewTicketsForEmployeePage = new ViewTicketsForEmployeePage(LoggedInUser);
     }
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)

@@ -13,10 +13,10 @@ namespace TheGardenGroupProject
     {
         private User user;
 
-        public AddTicketPage()
+        public AddTicketPage(User user)
         {
             InitializeComponent();
-            user = new User("kim123", "smt", "Kim", "van Schagen", UserType.Manager, "smt", "000", City.Amsterdam);
+            this.user = user;
             LoadComboBoxes();
         }
 
