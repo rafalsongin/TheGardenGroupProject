@@ -49,6 +49,11 @@ namespace Service
         {
             return ticketDao.GetClosedTickets();
         }
+
+        public long GetTicketCountForUser(string userEmail)
+        {
+            return ticketDao.GetTicketCountForUser(userEmail);
+
         public List<Ticket> GetAllTickets()
         {
             return ticketDao.GetAllTickets();

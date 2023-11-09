@@ -2,7 +2,6 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Model;
-using MongoDB.Driver.Linq;
 
 namespace DAL
 {
@@ -116,55 +115,11 @@ namespace DAL
             return closedTickets;
         }
 
-
-        //kim
-        public List<Ticket> GetAllTicketsFromUser(User user)
+        public long GetTicketCountForUser(string userEmail)
         {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.ReportedBy == user.Username
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetOpenTicketsFromUser(User user)
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.ReportedBy == user.Username
-                                              where tickets.Status == Status.Pending || tickets.Status == Status.Opened
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetClosedTicketsFromUser(User user)
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.ReportedBy == user.Username
-                                              where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetAllTickets1()
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetAllOpenTickets()
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.Status == Status.Pending || tickets.Status == Status.Opened
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetAllClosedTickets()
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
-                                              select tickets;
-            return results.ToList();
+            var filter = Builders<Ticket>.Filter.Eq("Email", userEmail);
+            long ticketCount = _ticketCollection.CountDocuments(filter);
+            return ticketCount;
         }
     }
 }
