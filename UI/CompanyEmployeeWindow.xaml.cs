@@ -11,6 +11,8 @@ public partial class CompanyEmployeeWindow : Window
 
     private AddTicketPage AddTicketPage { get; }
 
+    private ViewTicketsForEmployeePage ViewTicketsForEmployeePage { get; }
+
     public CompanyEmployeeWindow()
     {
         InitializeComponent();
@@ -18,6 +20,7 @@ public partial class CompanyEmployeeWindow : Window
         CreateTicketPage = new CreateTicketPage();
         DashboardPage = new DashboardPage();
         AddTicketPage = new AddTicketPage();
+        ViewTicketsForEmployeePage = new ViewTicketsForEmployeePage();
     }
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)
@@ -27,7 +30,7 @@ public partial class CompanyEmployeeWindow : Window
 
     private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        // ContentPage.NavigationService.Navigate(ViewTicketsPage);
+        ContentPage.NavigationService.Navigate(ViewTicketsForEmployeePage);
     }
 
     private void CreateTicketButton_Click(object sender, RoutedEventArgs e)
