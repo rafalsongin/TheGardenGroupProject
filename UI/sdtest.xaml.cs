@@ -1,27 +1,21 @@
-using System.Windows;
-using System.Windows.Media;
-using UI;
+﻿using System.Windows;
 
 namespace TheGardenGroupProject;
 
-public partial class ServiceDeskWindow : Window
+public partial class sdtest : Window
 {
     private ViewUsersPage ViewUsersPage { get; }
     private NewUserPage NewUserPage { get; }
     private AddTicketPage AddTicketPage { get; }
     private ViewTicketsPage ViewTicketsPage { get; }
     private CreateTicketPage CreateTicketPage { get; }
-    
-    public ServiceDeskWindow()
+
+    public sdtest()
     {
-        InitializeComponent();
-        
-        ViewUsersPage = new ViewUsersPage();
-        NewUserPage = new NewUserPage();
-        AddTicketPage = new AddTicketPage();
-        ViewTicketsPage = new ViewTicketsPage();
-        CreateTicketPage = new CreateTicketPage();
-        
+        // ViewUsersPage = new ViewUsersPage();
+        // NewUserPage = new NewUserPage();
+        // AddTicketPage = new AddTicketPage();
+        // RudTicketPage = new RUDTicketPage();
         InitializeComponent();
     }
 
@@ -40,19 +34,15 @@ public partial class ServiceDeskWindow : Window
         ContentPage.NavigationService.Navigate(AddTicketPage);
     }
 
+
+
     private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = ViewTicketsPage;
-    }
-    private void CreateTicketsButton_Click(object sender, RoutedEventArgs e)
-    {
-        ContentPage.Content = CreateTicketPage;
+        ContentPage.NavigationService.Navigate(ViewTicketsPage);
     }
 
-    private void LogoutButton_Click(object sender, RoutedEventArgs e)
+    private void CreateTicketButton_Click(object sender, RoutedEventArgs e)
     {
-        LoginUI loginWindow = new LoginUI();
-        loginWindow.Show();
-        this.Close();
+        ContentPage.NavigationService.Navigate(CreateTicketPage);
     }
 }
