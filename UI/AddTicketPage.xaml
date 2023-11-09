@@ -1,11 +1,10 @@
-﻿<Window x:Class="TheGardenGroupProject.AddTicketUI"
+﻿<Page x:Class="TheGardenGroupProject.AddTicketPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TheGardenGroupProject"
         mc:Ignorable="d"
-        Title="AddTicketUI" Height="450" Width="800">
+        Title="AddTicketUI" Height="700" Width="1000">
     <Grid>
         <WrapPanel Margin="0,0,10,377">
             <Label Content="Label"/>
@@ -32,4 +31,4 @@
         <Label x:Name="descriptionError" HorizontalAlignment="Left" Margin="436,253,0,0" VerticalAlignment="Top"/>
 
     </Grid>
-</Window>
+</Page>

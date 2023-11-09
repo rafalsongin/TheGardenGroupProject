@@ -4,14 +4,13 @@ using MongoDB.Driver;
 
 namespace DAL;
 
-public class PasswordResetDao
+public class EmailDao : BaseDao
 {
     private readonly IMongoCollection<User> _userCollection;
 
-    public PasswordResetDao()
+    public EmailDao()
     {
-        var baseDao = new BaseDao();
-        _userCollection = baseDao.GetUserCollection();
+        _userCollection = GetUserCollection();
     }
     
     public void AddPasswordResetToken(string userUsername, string token)

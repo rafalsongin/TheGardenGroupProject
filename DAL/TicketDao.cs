@@ -2,32 +2,27 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Model;
-using System.Net.Sockets;
-using MongoDB.Driver.Linq;
 
 namespace DAL
 {
     public class TicketDao : BaseDao
     {
-/*        private MongoClient client;
-        private IMongoCollection<Ticket> ticketCollection;
-        private IMongoDatabase database;*/
-/*        public TicketDao()
+        private readonly IMongoCollection<Ticket> _ticketCollection;
+        
+        public TicketDao() 
         {
-            client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
-            database = client.GetDatabase("TheGardenGroup");//geting the database
-            ticketCollection = database.GetCollection<Ticket>("IncidentTicket");//the table that we want to work on
-        }
-*/
-        public void CreateTicket(Ticket ticket)
-        {
-            GetTicketCollection().InsertOne(ticket);
-            //ticketCollection.InsertOne(ticket);
+            _ticketCollection = GetTicketCollection();
         }
 
-        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket)
+        public void CreateTicket(Ticket ticket)
         {
-            Ticket existingTicket = GetTicketByFilter(filter);
+            _ticketCollection.InsertOne(ticket);
+        }
+
+        public void UpdateTicket(Ticket updatedTicket)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
+            var existingTicket = GetTicketByFilter(filter);
 
             if (existingTicket != null)
             {
@@ -35,26 +30,20 @@ namespace DAL
                 existingTicket.TicketId = updatedTicket.TicketId;
                 existingTicket.Subject = updatedTicket.Subject;
                 existingTicket.IncidentType = updatedTicket.IncidentType;
-                existingTicket.Assignedby = updatedTicket.Assignedby;
+                existingTicket.ReportedBy = updatedTicket.ReportedBy;
                 existingTicket.Priority = updatedTicket.Priority;
                 existingTicket.Deadline = updatedTicket.Deadline;
+                existingTicket.Status = updatedTicket.Status;
 
                 // Replace the existing ticket in the collection with the updated ticket
-                GetTicketCollection().ReplaceOne(filter, existingTicket);
+               _ticketCollection.ReplaceOne(filter, existingTicket);
             }
         }
 
-        public void DeleteTicket(FilterDefinition<Ticket> filter)
+        public void DeleteTicket(Ticket ticket)
         {
-            // FilterDefinition<Ticket> deleteDefinitions = GetTicketByFilter(new );
-
-            var ticketToDelete = GetTicketByFilter(filter);
-            //Execute the delete operation
-            if(ticketToDelete != null)
-            { 
-                GetTicketCollection().DeleteOne(filter);
-            }
-
+            var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, ticket.TicketId);
+            _ticketCollection.DeleteOne(filter);
         }
 
         public Ticket ReadTicket(Ticket ticket)
@@ -63,66 +52,67 @@ namespace DAL
             var filter = Builders<Ticket>.Filter.Eq("_id", ticket.TicketId);
 
             // Execute the find operation to retrieve the ticket
-            return GetTicketCollection().Find(filter).FirstOrDefault();
+            return _ticketCollection.Find(filter).FirstOrDefault();
         }
 
 
         public Ticket GetTicketByFilter(FilterDefinition<Ticket> filter)
         {
             // Assuming ticketCollection is your MongoDB collection
-            var ticket = GetTicketCollection().Find(filter).FirstOrDefault();
+            var ticket = _ticketCollection.Find(filter).FirstOrDefault();
             return ticket;
-        }
-
-        //kim
-        public List<Ticket> GetAllTicketsFromUser(User user)
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.reportedBy.Username == user.Username
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetOpenTicketsFromUser(User user)
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.reportedBy.Username == user.Username
-                                              where tickets.Status == Status.Pending || tickets.Status == Status.Opened
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetClosedTicketsFromUser(User user)
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.reportedBy.Username == user.Username
-                                              where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
-                                              select tickets;
-            return results.ToList();
         }
 
         public List<Ticket> GetAllTickets()
         {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              select tickets;
-            return results.ToList();
+            // Find all tickets
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
+            return tickets;
         }
 
-        public List<Ticket> GetAllOpenTickets()
+        public List<Ticket> GetOpenedTickets()
         {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.Status == Status.Pending || tickets.Status == Status.Opened
-                                              select tickets;
-            return results.ToList();
+            // Find all tickets
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
+            List<Ticket> openedTickets = new List<Ticket>();
+            foreach (var ticket in tickets)
+            {
+                if (ticket.Status == Status.Opened)
+                {
+                    openedTickets.Add(ticket);
+                }
+            }
+            return openedTickets;   
         }
 
-        public List<Ticket> GetAllClosedTickets()
+        public List<Ticket> GetResolvedTickets()
         {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
-                                              select tickets;
-            return results.ToList();
+            // Find all tickets
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
+            List<Ticket> resolvedTickets = new List<Ticket>();
+            foreach (var ticket in tickets)
+            {
+                if (ticket.Status == Status.Resolved)
+                {
+                    resolvedTickets.Add(ticket);
+                }
+            }
+            return resolvedTickets;
         }
 
+        public List<Ticket> GetClosedTickets()
+        {
+            // Find all tickets
+            var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
+            List<Ticket> closedTickets = new List<Ticket>();
+            foreach (var ticket in tickets)
+            {
+                if (ticket.Status == Status.Closed)
+                {
+                    closedTickets.Add(ticket);
+                }
+            }
+            return closedTickets;
+        }
     }
 }

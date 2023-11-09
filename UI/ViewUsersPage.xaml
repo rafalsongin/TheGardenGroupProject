@@ -1,24 +1,23 @@
-﻿<Window x:Class="TheGardenGroupProject.ViewUsersUI"
+﻿<Page x:Class="TheGardenGroupProject.ViewUsersPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TheGardenGroupProject"
         mc:Ignorable="d"
-        Title="ViewUsersUI" Height="450" Width="800">
+        Title="ViewUsersUI" Height="700" Width="1000">
     <Grid>
         <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,71,30,37" SelectionChanged="listViewAllUsers_SelectionChanged" Grid.ColumnSpan="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
                     <GridViewColumn Header="First Name" Width="100" DisplayMemberBinding="{Binding FirstName}" />
                     <GridViewColumn Header="Last Name" Width="100" DisplayMemberBinding="{Binding LastName}" />
-                    <GridViewColumn Header="#tickets" Width="75" DisplayMemberBinding="{Binding TicketCount}" />
+                    <GridViewColumn Header="#tickets" Width="75" DisplayMemberBinding="{Binding AmountOfTickets}" />
 
                 </GridView>
             </ListView.View>
         </ListView>
 
     </Grid>
-</Window>
+</Page>

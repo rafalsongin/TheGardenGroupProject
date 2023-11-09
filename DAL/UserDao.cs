@@ -6,16 +6,14 @@ using MongoDB.Driver;
 
 namespace DAL;
 
-public class UserDao
+public class UserDao : BaseDao
 {
     private readonly IMongoCollection<User> _userCollection;
 
     public UserDao()
     {
-        var baseDao = new BaseDao();
-        _userCollection = baseDao.GetUserCollection();
+        _userCollection = GetUserCollection();
     }
-    
 
     public User GetUserByUsername(string? username)
     {
@@ -30,7 +28,7 @@ public class UserDao
         var filter = Builders<User>.Filter.Empty;
     
         // Define the projection to exclude the "_id" field
-        var projection = Builders<User>.Projection.Exclude(u => u.ObjectId);
+        var projection = Builders<User>.Projection.Exclude(u => u.Id);
     
         var userList = _userCollection.Find(filter).Project<User>(projection).ToList();
 
@@ -42,5 +40,4 @@ public class UserDao
     {
         _userCollection.InsertOne(user);
     }
-
 }

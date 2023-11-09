@@ -4,14 +4,14 @@ using UI;
 
 namespace TheGardenGroupProject;
 
-public partial class PasswordResetUI : Window
+public partial class PasswordResetWindow : Window
 {
-    private readonly PasswordResetService _passwordResetService;
+    private readonly EmailService _emailService;
     
-    public PasswordResetUI()
+    public PasswordResetWindow()
     {
         InitializeComponent();
-        _passwordResetService = new PasswordResetService();
+        _emailService = new EmailService();
     }
 
     private void buttonPasswordReset_Click(object sender, RoutedEventArgs e)
@@ -23,20 +23,20 @@ public partial class PasswordResetUI : Window
             return;
         }
             
-        if (!_passwordResetService.ValidateUsername(TextBoxPasswordResetUsername.Text))
+        if (!_emailService.ValidateUsername(TextBoxPasswordResetUsername.Text))
         {
             LabelPasswordResetError.Visibility = Visibility.Visible;
             return;
         }
 
         ShowGridTokenValidation();
-        _passwordResetService.SendEmailConfirmation(TextBoxPasswordResetUsername.Text);
+        _emailService.SendEmailConfirmation(TextBoxPasswordResetUsername.Text);
     }
 
     private void buttonTokenSubmit_Click(object sender, RoutedEventArgs e)
     {
         string tokenInput = TextBoxTokenInput.Text;
-        bool isTokenValid = _passwordResetService.ValidateResetToken(tokenInput);
+        bool isTokenValid = _emailService.ValidateResetToken(tokenInput);
 
         if (isTokenValid)
         {
@@ -64,7 +64,7 @@ public partial class PasswordResetUI : Window
             return;
         }
 
-        _passwordResetService.ChangePassword(newPassword);
+        _emailService.ChangePassword(newPassword);
         ShowInfoPasswordChangeSuccess();
     }
 

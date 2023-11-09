@@ -12,4 +12,9 @@
       <ProjectReference Include="..\Service\Service.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="LiveCharts" Version="0.9.7" />
+      <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    </ItemGroup>
+
 </Project>

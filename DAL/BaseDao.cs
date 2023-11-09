@@ -4,39 +4,42 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Model;
 
-namespace DAL
+namespace DAL;
+
+public class BaseDao
 {
-    public class BaseDao
+    private MongoClient _client;
+    private IMongoDatabase _database;
+
+    protected BaseDao()
     {
-        private readonly MongoClient _client;
-        private readonly IMongoDatabase _database;
+        // Server (testing)
+        _client = new MongoClient("mongodb+srv://dbUser:9BPqGfB5pEvENADf@thegardengroupserver.cbkve.mongodb.net/");
+            
+        // Serverless
+        // _client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
+        _database = _client.GetDatabase("Database");
+    }
 
-        public BaseDao()
+    public List<DatabasesModel> GetDatabases()
+    {
+        List<DatabasesModel> allDatabases = new List<DatabasesModel>();
+
+        foreach (BsonDocument db in _client.ListDatabases().ToList())
         {
-            _client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
-            _database = _client.GetDatabase("TheGardenGroup");
+            allDatabases.Add(BsonSerializer.Deserialize<DatabasesModel>(db));
         }
-
-        public List<DatabasesModel> GetDatabases()
-        {
-            List<DatabasesModel> allDatabases = new List<DatabasesModel>();
-
-            foreach (BsonDocument db in _client.ListDatabases().ToList())
-            {
-                allDatabases.Add(BsonSerializer.Deserialize<DatabasesModel>(db));
-            }
-            return allDatabases;
-        }
+        return allDatabases;
+    }
         
-        // Add your GetCollection methods here below
-        public IMongoCollection<User> GetUserCollection()
-        {
-            return _database.GetCollection<User>("User");
-        }
+    // Add your GetCollection methods here below
+    protected IMongoCollection<User> GetUserCollection()
+    {
+        return _database.GetCollection<User>("User");
+    }
 
-        public IMongoCollection<Ticket> GetTicketCollection()
-        {
-            return _database.GetCollection<Ticket>("IncidentTicket");
-        }
+    protected IMongoCollection<Ticket> GetTicketCollection()
+    {
+        return _database.GetCollection<Ticket>("Ticket");
     }
 }

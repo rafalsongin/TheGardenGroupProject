@@ -7,25 +7,23 @@ namespace Service
     public class TicketService
     {
         private readonly TicketDao ticketDao;
-        //private TicketDao2 ticketDao2;
         public TicketService()
         {
             ticketDao = new TicketDao();
-            //ticketDao2 = new TicketDao2();
         }
         public void CreateTicket(Ticket ticket)
         {
             ticketDao.CreateTicket(ticket);
         }
 
-        public void UpdateTicket(FilterDefinition<Ticket> filter, Ticket updatedTicket) 
+        public void UpdateTicket( Ticket updatedTicket) 
         {
-             ticketDao.UpdateTicket(filter, updatedTicket);
+            ticketDao.UpdateTicket(updatedTicket);
         }
 
-        public void DeleteTicket(FilterDefinition<Ticket> filter)
+        public void DeleteTicket(Ticket ticket)
         {
-            ticketDao.DeleteTicket(filter);
+            ticketDao.DeleteTicket(ticket);
         }
         public Ticket ReadTicket(Ticket ticket) 
         {
@@ -36,36 +34,24 @@ namespace Service
         { 
             return ticketDao.GetTicketByFilter(filter);
         }
-
-        //kim
-        public List<Ticket> GetAllTicketsFromUser(User user)
+        
+        public List<Ticket> GetOpenedTickets()
         {
-            return ticketDao.GetAllTicketsFromUser(user);
+            return ticketDao.GetOpenedTickets();
         }
-
-        public List<Ticket> GetOpenTicketsFromUser(User user)
+        
+        public List<Ticket> GetResolvedTickets()
         {
-            return ticketDao.GetOpenTicketsFromUser(user);
+            return ticketDao.GetResolvedTickets();
         }
-
-        public List<Ticket> GetClosedTicketsFromUser(User user)
+        
+        public List<Ticket> GetClosedTickets()
         {
-            return ticketDao.GetClosedTicketsFromUser(user);
+            return ticketDao.GetClosedTickets();
         }
-
         public List<Ticket> GetAllTickets()
         {
             return ticketDao.GetAllTickets();
-        }
-
-        public List<Ticket> GetAllOpenTickets()
-        {
-            return ticketDao.GetAllOpenTickets();
-        }
-
-        public List<Ticket> GetAllClosedTickets()
-        {
-            return ticketDao.GetAllClosedTickets();
         }
     }
 }

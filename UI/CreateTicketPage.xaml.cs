@@ -20,14 +20,20 @@ namespace TheGardenGroupProject
     /// <summary>
     /// Interaction logic for CreateTicketUIxaml.xaml
     /// </summary>
-    public partial class CreateTicketUIxaml : Window
+    public partial class CreateTicketPage : Page
     {
-        private TicketService ticketService;
+        private readonly TicketService ticketService;
+        public List<Priority> Priorities { get; set; }
+        public List<IncidentType> IncidentTypes { get; set; }
 
-        public CreateTicketUIxaml()
+        public CreateTicketPage()
         {
             InitializeComponent();
             ticketService = new TicketService();
+            //filling the comboBoxes
+            Priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            IncidentTypes = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+            DataContext = this;
 
             // Disable user input for DpTimeReported to ensure it reflects the date when the ticket is assigned
             DpTimeReported.IsEnabled = false;
@@ -35,38 +41,31 @@ namespace TheGardenGroupProject
 
             // To be sure the user will not pick a date which is already passed 
             DpDeadline.DisplayDateStart = DateTime.Now;
+
+
         }
 
         private void btnCreateTicket_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                // Get the selected incident type as a string from the ComboBox
-                string incidentType = ((ComboBoxItem)boxIncidentType.SelectedItem).Content.ToString();
-                string Priority= ((ComboBoxItem)boxPriority.SelectedItem).Content.ToString();
-                // Get the selected date from the DatePicker control
-                DateTime selectedDate = DpDeadline.SelectedDate ?? DateTime.MinValue;
+            {   
+                DateTime deadLine = DpDeadline.SelectedDate ?? DateTime.MinValue;
                 DateTime dateReported = DateTime.Now;
-                Ticket ticket = new Ticket
-                {
-                    ReportedOn = dateReported,
-                    Subject = txtSubjectOfIncident.Text,
-                    IncidentType = (IncidentType)Enum.Parse(typeof(IncidentType), incidentType),// Convert string to enum
-                    Assignedby = txtReportedBy.Text,
-                    Priority = (Priority)Enum.Parse(typeof(Priority), Priority),
-                    Deadline = selectedDate,
+                IncidentType selectedIncidentType = (IncidentType)boxIncidentType.SelectedItem;
+                Priority selectedPriority = (Priority)boxPriority.SelectedItem;
 
-                };
+                Ticket ticket = new Ticket(dateReported, txtSubjectOfIncident.Text, txtDescription.Text, selectedIncidentType, txtReportedBy.Text, selectedPriority, deadLine);
 
-                ticketService.CreateTicket(ticket);
+                 ticketService.CreateTicket(ticket);
+                ClearUIElements();
                 MessageBox.Show("Ticket created successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             // Display a confirmation message box
@@ -75,20 +74,20 @@ namespace TheGardenGroupProject
             // Check the user's response
             if (result == MessageBoxResult.Yes)
             {
-                DpTimeReported.SelectedDate = DateTime.Now;
-                txtSubjectOfIncident.Text = "";
-                boxIncidentType.SelectedIndex = -1; // Clear the selection
-                txtReportedBy.Text = "";
-                boxPriority.SelectedIndex = -1; 
-                DpDeadline.SelectedDate = null;
+                ClearUIElements();
             }
         }
-
-        private void btnRUDTicket_Click(object sender, RoutedEventArgs e)
+        private void ClearUIElements()
         {
-            RUDTicket rudTicket = new RUDTicket();
-            rudTicket.Show();
-            this.Close();
+            DpTimeReported.SelectedDate = DateTime.Now;
+            txtSubjectOfIncident.Text = "";
+            boxIncidentType.SelectedIndex = -1; // Clear the selection
+            txtReportedBy.Text = "";
+            txtDescription.Text = "";
+            boxPriority.SelectedIndex = -1;
+            DpDeadline.SelectedDate = null;
+
         }
+
     }
 }
