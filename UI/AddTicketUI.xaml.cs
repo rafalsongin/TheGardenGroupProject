@@ -51,10 +51,12 @@ namespace TheGardenGroupProject
             ticket.createConceptTicket(title, priority, description, incidentType, user);
 
             TicketService service = new TicketService();
+            service.CreateTicket(ticket);
         }
 
         private bool CheckIfFieldsFilledIn()
         {
+            typeComboBox.SelectedValue = IncidentType.Access;
             bool filledIn = true;
             if (!CheckIfTitleFilled())
             {

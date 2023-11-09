@@ -24,7 +24,7 @@ namespace TheGardenGroupProject
         User user;
         public ViewTickets()
         {
-            user = new User("testing", "kim123", "Kim", "van Schagen", UserType.CompanyEmployee, "smt", "000", City.Amsterdam);
+            user = new User("testing", "kim123", "Kim", "van Schagen", UserType.Manager, "smt", "000", City.Amsterdam);
             InitializeComponent();            
             if (user.UserType == UserType.CompanyEmployee)
             {

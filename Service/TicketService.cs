@@ -7,11 +7,11 @@ namespace Service
     public class TicketService
     {
         private readonly TicketDao ticketDao;
-        private TicketDao2 ticketDao2;
+        //private TicketDao2 ticketDao2;
         public TicketService()
         {
             ticketDao = new TicketDao();
-            ticketDao2 = new TicketDao2();
+            //ticketDao2 = new TicketDao2();
         }
         public void CreateTicket(Ticket ticket)
         {
@@ -40,32 +40,32 @@ namespace Service
         //kim
         public List<Ticket> GetAllTicketsFromUser(User user)
         {
-            return ticketDao2.GetAllTicketsFromUser(user);
+            return ticketDao.GetAllTicketsFromUser(user);
         }
 
         public List<Ticket> GetOpenTicketsFromUser(User user)
         {
-            return ticketDao2.GetOpenTicketsFromUser(user);
+            return ticketDao.GetOpenTicketsFromUser(user);
         }
 
         public List<Ticket> GetClosedTicketsFromUser(User user)
         {
-            return ticketDao2.GetClosedTicketsFromUser(user);
+            return ticketDao.GetClosedTicketsFromUser(user);
         }
 
         public List<Ticket> GetAllTickets()
         {
-            return ticketDao2.GetAllTickets();
+            return ticketDao.GetAllTickets();
         }
 
         public List<Ticket> GetAllOpenTickets()
         {
-            return ticketDao2.GetAllOpenTickets();
+            return ticketDao.GetAllOpenTickets();
         }
 
         public List<Ticket> GetAllClosedTickets()
         {
-            return ticketDao2.GetAllClosedTickets();
+            return ticketDao.GetAllClosedTickets();
         }
     }
 }
