@@ -5,64 +5,43 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Title="NewUserPage" Height="700" Width="1000">
-    <Grid>
-        <Label x:Name="Dashboard" Content="Dashboard" HorizontalAlignment="Left" Margin="30,58,0,0"
-               VerticalAlignment="Top" Height="28" Width="81" />
-        <Label x:Name="ViewUser" Content="View Users" HorizontalAlignment="Left" Margin="30,98,0,0"
-               VerticalAlignment="Top" Height="28" Width="81" />
-        <Label x:Name="AddUser" Content="Add User" HorizontalAlignment="Left" Margin="30,139,0,0"
-               VerticalAlignment="Top" Height="28" Width="81" />
-        <Label x:Name="AddTicket" Content="Add Ticket" HorizontalAlignment="Left" Margin="30,178,0,0"
-               VerticalAlignment="Top" Height="28" Width="81" />
-        <Label x:Name="CrudTickets" Content="CRUD Tickets" HorizontalAlignment="Left" Margin="30,217,0,0"
-               VerticalAlignment="Top" Height="28" Width="81" />
-        <GridSplitter HorizontalAlignment="Left" Height="434" Margin="145,0,0,0" VerticalAlignment="Center" Width="5"
-                      RenderTransformOrigin="0.5,0.5">
-            <GridSplitter.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform />
-                    <SkewTransform />
-                    <RotateTransform Angle="0.018" />
-                    <TranslateTransform />
-                </TransformGroup>
-            </GridSplitter.RenderTransform>
-        </GridSplitter>
-        <Label x:Name="CreateNewUser" Content="Create new user" HorizontalAlignment="Left" Margin="276,27,0,0" VerticalAlignment="Top" Height="42" Width="200" FontSize="24" FontWeight="Bold"/>
-        <Label x:Name="FirstName" Content="First name:" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
-        <Label x:Name="LastName" Content="Last name:" HorizontalAlignment="Left" Margin="276,110,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
-        <Label x:Name="TypeOfUser" Content="Type of user:" HorizontalAlignment="Left" Margin="276,143,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
-        <Label x:Name="EmailAddress" Content="E-mail address:" HorizontalAlignment="Left" Margin="276,176,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
-        <Label x:Name="PhoneNumber" Content="Phone number:" HorizontalAlignment="Left" Margin="276,209,0,0" VerticalAlignment="Top" Height="28" Width="93"/>
-        <Label x:Name="Location" Content="Location/branch:" HorizontalAlignment="Left" Margin="276,242,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
-        <Label x:Name="SendPassword" Content="Send password?" HorizontalAlignment="Left" Margin="276,275,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
-        <TextBox x:Name="FirstNameTxt" HorizontalAlignment="Left" Margin="398,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <TextBox x:Name="LastNameTxt" HorizontalAlignment="Left" Margin="398,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <TextBox x:Name="EmailAddressTxt" HorizontalAlignment="Left" Margin="398,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <TextBox x:Name="PhoneNumberTxt" HorizontalAlignment="Left" Margin="398,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
-        <CheckBox x:Name="SendPasswordCheckBox" Content="yes, a password e-mail will be sent to the user" HorizontalAlignment="Left" Margin="398,281,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="TypeOfUseCombo" HorizontalAlignment="Left" Margin="398,148,0,0" VerticalAlignment="Top" Width="187" Height="20">
+    <Grid Background="White">
+        <Label x:Name="CreateNewUser" Content="Create new user" HorizontalAlignment="Left" Margin="274,162,0,0" VerticalAlignment="Top" Height="42" Width="200" FontSize="24" FontWeight="Bold"/>
+        <Label x:Name="FirstName" Content="First name:" HorizontalAlignment="Left" Margin="274,212,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
+        <Label x:Name="LastName" Content="Last name:" HorizontalAlignment="Left" Margin="274,245,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
+        <Label x:Name="TypeOfUser" Content="Type of user:" HorizontalAlignment="Left" Margin="274,278,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
+        <Label x:Name="EmailAddress" Content="E-mail address:" HorizontalAlignment="Left" Margin="274,311,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
+        <Label x:Name="PhoneNumber" Content="Phone number:" HorizontalAlignment="Left" Margin="274,344,0,0" VerticalAlignment="Top" Height="28" Width="93"/>
+        <Label x:Name="Location" Content="Location/branch:" HorizontalAlignment="Left" Margin="274,377,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
+        <Label x:Name="SendPassword" Content="Send password?" HorizontalAlignment="Left" Margin="274,410,0,0" VerticalAlignment="Top" Height="28" Width="101"/>
+        <TextBox x:Name="FirstNameTxt" HorizontalAlignment="Left" Margin="396,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="LastNameTxt" HorizontalAlignment="Left" Margin="396,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="EmailAddressTxt" HorizontalAlignment="Left" Margin="396,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="PhoneNumberTxt" HorizontalAlignment="Left" Margin="396,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+        <CheckBox x:Name="SendPasswordCheckBox" Content="yes, a password e-mail will be sent to the user" HorizontalAlignment="Left" Margin="396,416,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="TypeOfUseCombo" HorizontalAlignment="Left" Margin="396,283,0,0" VerticalAlignment="Top" Width="187" Height="20">
             <ComboBoxItem Content="Service Desk Employee" />
             <ComboBoxItem Content="Company Employee" />
             <ComboBoxItem Content="Manager" />
         </ComboBox>
-        <ComboBox x:Name="LocationCombo" HorizontalAlignment="Left" Margin="398,247,0,0" VerticalAlignment="Top" Width="187" Height="20">
+        <ComboBox x:Name="LocationCombo" HorizontalAlignment="Left" Margin="396,382,0,0" VerticalAlignment="Top" Width="187" Height="20">
             <ComboBoxItem Content="Haarlem" />
             <ComboBoxItem Content="Amsterdam" />
             <ComboBoxItem Content="Den Haag" />
             <ComboBoxItem Content="Rotterdam" />
             <ComboBoxItem Content="Eindhoven" />
         </ComboBox>
-        <Button x:Name="AddUserBtn" Content="ADD USER" HorizontalAlignment="Left" Margin="478,353,0,0" VerticalAlignment="Top" Height="33" Width="103" Background="#FF7FC08B" FontWeight="Bold" Click="AddUser_btn_Click"/>
-        <Button x:Name="CancelBtn" Content="CANCEL" HorizontalAlignment="Left" Margin="339,353,0,0" VerticalAlignment="Top" Height="33" Width="103" FontWeight="Bold" Background="#FFFFFCFC" BorderBrush="#FFB2B2B2"/>
-        <Label x:Name="UserNotAddedMessage" Content="Failed" HorizontalAlignment="Left" Visibility="Hidden" Margin="339,315,0,0" VerticalAlignment="Top" Width="326">
-               <Label.Foreground>
-                      <SolidColorBrush Color="Red" />
-               </Label.Foreground>
+        <Button x:Name="AddUserBtn" Content="ADD USER" HorizontalAlignment="Left" Margin="476,488,0,0" VerticalAlignment="Top" Height="33" Width="103" Background="#FF7FC08B" FontWeight="Bold" Click="AddUser_btn_Click"/>
+        <Button x:Name="CancelBtn" Content="CANCEL" HorizontalAlignment="Left" Margin="337,488,0,0" VerticalAlignment="Top" Height="33" Width="103" FontWeight="Bold" Background="#FFFFFCFC" BorderBrush="#FFB2B2B2" Click="CancelBtn_Click"/>
+        <Label x:Name="UserNotAddedMessage" Content="Failed" HorizontalAlignment="Center" Visibility="Hidden" Margin="0,450,0,0" VerticalAlignment="Top" Width="326">
+            <Label.Foreground>
+                <SolidColorBrush Color="Red" />
+            </Label.Foreground>
         </Label>
-        <Label x:Name="UserSuccessfullyAddedMessage" Content="Successfully added!" HorizontalAlignment="Left" Visibility="Hidden" Margin="339,315,0,0" VerticalAlignment="Top" Width="326">
-               <Label.Foreground>
-                      <SolidColorBrush Color="Green" />
-               </Label.Foreground>
+        <Label x:Name="UserSuccessfullyAddedMessage" Content="Successfully added!" HorizontalAlignment="Center" Visibility="Hidden" Margin="0,450,0,0" VerticalAlignment="Top" Width="326">
+            <Label.Foreground>
+                <SolidColorBrush Color="Green" />
+            </Label.Foreground>
         </Label>
     </Grid>
 </Page>

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="ViewUsersUI" Height="700" Width="1000">
-    <Grid>
-        <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,71,30,37" SelectionChanged="listViewAllUsers_SelectionChanged" Grid.ColumnSpan="1">
+    <Grid Background="White">
+        <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listViewAllUsers_SelectionChanged" Grid.ColumnSpan="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
