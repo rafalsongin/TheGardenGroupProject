@@ -14,7 +14,6 @@
                     <GridViewColumn Header="First Name" Width="100" DisplayMemberBinding="{Binding FirstName}" />
                     <GridViewColumn Header="Last Name" Width="100" DisplayMemberBinding="{Binding LastName}" />
                     <GridViewColumn Header="#tickets" Width="75" DisplayMemberBinding="{Binding AmountOfTickets}" />
-
                 </GridView>
             </ListView.View>
         </ListView>
