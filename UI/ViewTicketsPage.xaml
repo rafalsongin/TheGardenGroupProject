@@ -2,7 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Title="RUDTicket" Height="700" Width="1000">
     <Grid Margin="0,3,0,-3">
@@ -55,16 +55,23 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="1,161,19,204" SelectionChanged="ticketsListView_SelectionChanged">
+        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="1,161,19,204"
+                  SelectionChanged="ticketsListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Subject" DisplayMemberBinding="{Binding Subject, TargetNullValue='Null '}" Width="170" />
+                    <GridViewColumn Header="Subject" DisplayMemberBinding="{Binding Subject, TargetNullValue='Null '}"
+                                    Width="170" />
                     <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" Width="100" />
                     <GridViewColumn Header="ReprotedBy" DisplayMemberBinding="{Binding ReportedBy}" Width="145" />
-                    <GridViewColumn Header="Deadline" DisplayMemberBinding="{Binding Deadline, StringFormat=\{0:dd/MM/yyyy\}}" Width="130"/>
+                    <GridViewColumn Header="Deadline"
+                                    DisplayMemberBinding="{Binding Deadline, StringFormat=\{0:dd/MM/yyyy\}}"
+                                    Width="130" />
                     <GridViewColumn Header="Incident Type" DisplayMemberBinding="{Binding IncidentType}" Width="150" />
-                    <GridViewColumn Header="DateReported" DisplayMemberBinding="{Binding ReportedOn,StringFormat=\{0:dd/MM/yyyy\}}" Width="130"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status,TargetNullValue='Null '}" Width="150"/>
+                    <GridViewColumn Header="DateReported"
+                                    DisplayMemberBinding="{Binding ReportedOn,StringFormat=\{0:dd/MM/yyyy\}}"
+                                    Width="130" />
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status,TargetNullValue='Null '}"
+                                    Width="150" />
 
                 </GridView>
             </ListView.View>
@@ -78,40 +85,47 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="166,507,0,0" VerticalAlignment="Top" Width="92"
-            ItemsSource="{Binding Priorities}" Height="24"/>
-        <TextBox x:Name="reportedByTxt" HorizontalAlignment="Left" Margin="278,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.5,0.5" Height="24">
+        <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="166,507,0,0" VerticalAlignment="Top"
+                  Width="92"
+                  ItemsSource="{Binding Priorities}" Height="24" />
+        <TextBox x:Name="reportedByTxt" HorizontalAlignment="Left" Margin="278,507,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.5,0.5" Height="24">
             <TextBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.136"/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="-0.136" />
+                    <TranslateTransform />
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <TextBox x:Name="subjectOfIncidenttxt" HorizontalAlignment="Left" Margin="8,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" Height="24">
+        <TextBox x:Name="subjectOfIncidenttxt" HorizontalAlignment="Left" Margin="8,507,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" Height="24">
             <TextBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.136"/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="-0.136" />
+                    <TranslateTransform />
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="558,507,0,0" VerticalAlignment="Top" Width="133"
-            ItemsSource="{Binding IncidentTypes}" Height="24"/>
-        <DatePicker x:Name="DPTimeReported" HorizontalAlignment="Left" Margin="709,507,0,0" VerticalAlignment="Top" Width="119"/>
-        <ComboBox x:Name="statusCombobox" HorizontalAlignment="Left" Margin="839,507,0,0" VerticalAlignment="Top" Width="135"
-            ItemsSource="{Binding Statuses}" Height="24"/>
-        <DatePicker x:Name="DPDeadLine" HorizontalAlignment="Left" Margin="425,507,0,0" VerticalAlignment="Top" Width="116" Height="24"/>
+        <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="558,507,0,0" VerticalAlignment="Top"
+                  Width="133"
+                  ItemsSource="{Binding IncidentTypes}" Height="24" />
+        <DatePicker x:Name="DPTimeReported" HorizontalAlignment="Left" Margin="709,507,0,0" VerticalAlignment="Top"
+                    Width="119" />
+        <ComboBox x:Name="statusCombobox" HorizontalAlignment="Left" Margin="839,507,0,0" VerticalAlignment="Top"
+                  Width="135"
+                  ItemsSource="{Binding Statuses}" Height="24" />
+        <DatePicker x:Name="DPDeadLine" HorizontalAlignment="Left" Margin="425,507,0,0" VerticalAlignment="Top"
+                    Width="116" Height="24" />
         <Button x:Name="archiveButton" Content="Archive Ticket" Margin="862,107,24,561" FontSize="14" Height="32"
-            Click="btnArchiveTicekt_Click" Background="#FF157BE3" FontFamily="Yu Gothic UI Semibold">
+                Click="btnArchiveTicekt_Click" Background="#FF157BE3" FontFamily="Yu Gothic UI Semibold">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>

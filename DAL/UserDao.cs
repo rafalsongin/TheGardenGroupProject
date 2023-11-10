@@ -1,7 +1,4 @@
-using System.Collections.ObjectModel;
 using Model;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace DAL;
@@ -19,17 +16,17 @@ public class UserDao : BaseDao
     {
         var filter = Builders<User>.Filter.Eq("username", username);
         var user = _userCollection.Find(filter).FirstOrDefault();
-        
+
         return user;
     }
-    
+
     public List<User> GetAllUsers()
     {
         var filter = Builders<User>.Filter.Empty;
-    
+
         // Define the projection to exclude the "_id" field
         var projection = Builders<User>.Projection.Exclude(u => u.Id);
-    
+
         var userList = _userCollection.Find(filter).Project<User>(projection).ToList();
 
         return userList;

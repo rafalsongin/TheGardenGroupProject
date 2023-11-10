@@ -1,23 +1,24 @@
 ﻿using DAL;
 using Model;
-using MongoDB.Driver;
 
 namespace Service
 {
     public class TicketService
     {
         private readonly TicketDao ticketDao;
+
         public TicketService()
         {
             ticketDao = new TicketDao();
         }
+
         //Ghonim
         public void CreateTicket(Ticket ticket)
         {
             ticketDao.CreateTicket(ticket);
         }
 
-        public void UpdateTicket( Ticket updatedTicket) 
+        public void UpdateTicket(Ticket updatedTicket)
         {
             ticketDao.UpdateTicket(updatedTicket);
         }
@@ -26,6 +27,7 @@ namespace Service
         {
             ticketDao.DeleteTicket(ticket);
         }
+
         public List<Ticket> GetAllTickets()
         {
             return ticketDao.GetAllTickets();
@@ -36,17 +38,17 @@ namespace Service
         {
             return ticketDao.GetOpenedTickets();
         }
-        
+
         public List<Ticket> GetResolvedTickets()
         {
             return ticketDao.GetResolvedTickets();
         }
-        
+
         public List<Ticket> GetClosedTickets()
         {
             return ticketDao.GetClosedTickets();
         }
-    
+
 
         //kim
         public List<Ticket> GetAllTicketsFromUser(User user)

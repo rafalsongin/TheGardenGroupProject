@@ -4,10 +4,11 @@ using UI;
 
 namespace TheGardenGroupProject;
 
+// Rafal
 public partial class PasswordResetWindow : Window
 {
     private readonly EmailService _emailService;
-    
+
     public PasswordResetWindow()
     {
         InitializeComponent();
@@ -16,13 +17,12 @@ public partial class PasswordResetWindow : Window
 
     private void buttonPasswordReset_Click(object sender, RoutedEventArgs e)
     {
-        
         if (TextBoxPasswordResetUsername.Text == "")
         {
             LabelPasswordResetError.Visibility = Visibility.Visible;
             return;
         }
-            
+
         if (!_emailService.ValidateUsername(TextBoxPasswordResetUsername.Text))
         {
             LabelPasswordResetError.Visibility = Visibility.Visible;
@@ -88,19 +88,19 @@ public partial class PasswordResetWindow : Window
         loginWindow.Show();
         this.Close();
     }
-    
+
     private void ShowGridPasswordResetPage()
     {
         GridTokenValidation.Visibility = Visibility.Hidden;
         GridPasswordChange.Visibility = Visibility.Hidden;
     }
-    
+
     private void ShowGridTokenValidation()
     {
         GridTokenValidation.Visibility = Visibility.Visible;
         GridPasswordChange.Visibility = Visibility.Hidden;
     }
-    
+
     private void ShowGridPasswordChange()
     {
         GridTokenValidation.Visibility = Visibility.Hidden;

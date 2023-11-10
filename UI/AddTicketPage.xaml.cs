@@ -1,8 +1,8 @@
-﻿using Model;
-using Service;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Model;
+using Service;
 
 namespace TheGardenGroupProject
 {
@@ -13,14 +13,15 @@ namespace TheGardenGroupProject
 
         public AddTicketPage(User user)
         {
-            InitializeComponent();            
+            InitializeComponent();
             LoadComboBoxes();
             EmptyErrorLabels();
             ClearTicket();
             this.user = user;
         }
 
-        private void LoadComboBoxes() // filling one combo box with all the values of the enum 'IncidentType' and the other combo box with all the values of the enum 'Priority'
+        private void
+            LoadComboBoxes() // filling one combo box with all the values of the enum 'IncidentType' and the other combo box with all the values of the enum 'Priority'
         {
             typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
             priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
@@ -51,15 +52,15 @@ namespace TheGardenGroupProject
                 {
                     CreateTicketConcept(); // create and send the ticket to the database
                     ClearTicket(); //clearing all fields and combo boxes
-                    MessageBox.Show("Ticket Successfully added!"); // showing confirmation that the ticket is successfully added to the database
+                    MessageBox.Show(
+                        "Ticket Successfully added!"); // showing confirmation that the ticket is successfully added to the database
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-            
-        }        
+        }
 
         private void ClearTicket_Click(object sender, RoutedEventArgs e)
         {
@@ -75,17 +76,23 @@ namespace TheGardenGroupProject
                 titleError.Content = "Enter a title";
                 filledIn = false;
             }
-            if (priorityComboBox.SelectedIndex == -1) // if no priority is selected give error and make sure no ticket is created
+
+            if (priorityComboBox.SelectedIndex ==
+                -1) // if no priority is selected give error and make sure no ticket is created
             {
                 priorityError.Content = "Select a priority";
                 filledIn = false;
             }
-            if (typeComboBox.SelectedIndex == -1) // if no type is selected give error and make sure no ticket is created
+
+            if (typeComboBox.SelectedIndex ==
+                -1) // if no type is selected give error and make sure no ticket is created
             {
                 incidentTypeError.Content = "Select an incident type";
                 filledIn = false;
             }
-            if (descriptionTextBox.Text.Length == 0) // if no description is given give error and make sure no ticket is created
+
+            if (descriptionTextBox.Text.Length ==
+                0) // if no description is given give error and make sure no ticket is created
             {
                 descriptionError.Content = "Give a description";
                 filledIn = false;
@@ -97,9 +104,10 @@ namespace TheGardenGroupProject
         private void CreateTicketConcept()
         {
             TicketService service = new();
-            Ticket ticket = new(titleTextBox.Text, (Priority)priorityComboBox.SelectedItem, descriptionTextBox.Text, (IncidentType)typeComboBox.SelectedItem, user);
-            
+            Ticket ticket = new(titleTextBox.Text, (Priority)priorityComboBox.SelectedItem, descriptionTextBox.Text,
+                (IncidentType)typeComboBox.SelectedItem, user);
+
             service.CreateTicket(ticket);
-        }        
+        }
     }
 }

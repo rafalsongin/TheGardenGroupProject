@@ -7,7 +7,5 @@
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="Page1">
 
-    <Grid x:Name="ChartContainer" Background="White">
-        
-    </Grid>
+    <Grid x:Name="ChartContainer" Background="White" />
 </Page>

@@ -4,6 +4,7 @@ using MongoDB.Driver;
 
 namespace DAL;
 
+// Rafal
 public class EmailDao : BaseDao
 {
     private readonly IMongoCollection<User> _userCollection;
@@ -12,19 +13,20 @@ public class EmailDao : BaseDao
     {
         _userCollection = GetUserCollection();
     }
-    
+
     public void AddPasswordResetToken(string userUsername, string token)
     {
         var filter = Builders<User>.Filter.Eq("username", userUsername);
         var update = Builders<User>.Update.Set("passwordResetToken", token);
         _userCollection.UpdateOne(filter, update);
     }
-    
+
     public string? GetPasswordResetToken(string userUsername)
     {
         // get only passwordResetToken field from user document
         var projection = Builders<User>.Projection.Include("passwordResetToken").Exclude("_id");
-        var userToken = _userCollection.Find(new BsonDocument("username", userUsername)).Project(projection).FirstOrDefault();
+        var userToken = _userCollection.Find(new BsonDocument("username", userUsername)).Project(projection)
+            .FirstOrDefault();
         var token = "";
 
         if (userToken.Contains("passwordResetToken"))
@@ -35,7 +37,7 @@ public class EmailDao : BaseDao
         {
             return null;
         }
-        
+
         return token;
     }
 

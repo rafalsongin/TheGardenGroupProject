@@ -1,13 +1,12 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using DAL;
 using Model;
 using Service;
 using TheGardenGroupProject;
 
 namespace UI
 {
+    // Rafal
     public partial class LoginUI : Window
     {
         private UserService _userService;
@@ -30,7 +29,7 @@ namespace UI
             if (_verifyingLoginService.IsCorrectPassword(TextBoxUsername.Text, PasswordBox.Password))
             {
                 User user = _userService.GetUserByUsername(TextBoxUsername.Text);
-                
+
                 if (user.UserType == UserType.ServiceDeskEmployee)
                 {
                     ServiceDeskWindow serviceDeskWindow = new ServiceDeskWindow(user);
@@ -41,7 +40,7 @@ namespace UI
                     CompanyEmployeeWindow companyEmployeeWindow = new CompanyEmployeeWindow(user);
                     companyEmployeeWindow.Show();
                 }
-                
+
                 this.Close();
             }
             else
@@ -54,7 +53,7 @@ namespace UI
         private void labelForgotLoginDetails_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             GridLoginPage.Visibility = Visibility.Hidden;
-            
+
             PasswordResetWindow passwordResetWindow = new PasswordResetWindow();
             passwordResetWindow.Show();
             this.Close();

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using DAL;
+﻿using System.Windows;
 
 namespace TheGardenGroupProject
 {
@@ -14,6 +7,5 @@ namespace TheGardenGroupProject
     /// </summary>
     public partial class App : Application
     {
-        
     }
 }
