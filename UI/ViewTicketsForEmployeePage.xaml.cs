@@ -201,6 +201,33 @@ namespace TheGardenGroupProject
         private List<Ticket> FilterDate(List<Ticket> tickets)
         {
             List<Ticket> newTickets = new List<Ticket>();
+            foreach (Ticket ticket in tickets)
+            {
+                switch (dateAddedComboBox.SelectedItem)
+                {
+                    case "Today":
+                        if (ticket.ReportedOn.Day == DateTime.Today.Day)
+                        {
+                            newTickets.Add(ticket);
+                        }
+                        break;
+                    case "This Week":
+                        break;
+                    case "This Month":
+                        if (ticket.ReportedOn.Month == DateTime.Today.Month)
+                        {
+                            newTickets.Add(ticket);
+                        }
+                        break;
+                    case "This Year":
+                        if (ticket.ReportedOn.Year == DateTime.Today.Year)
+                        {
+                            newTickets.Add(ticket);
+                        }
+                        break;
+                    default: break;
+                }
+            }
             return newTickets;
         }
 
