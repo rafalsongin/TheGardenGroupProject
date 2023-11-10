@@ -6,125 +6,21 @@ using System.Windows.Controls;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for AddTicketUI.xaml
-    /// </summary>
+    // Made by Kim
     public partial class AddTicketPage : Page
     {
         private User user;
 
         public AddTicketPage(User user)
         {
-            InitializeComponent();
-            this.user = user;
+            InitializeComponent();            
             LoadComboBoxes();
-        }
-
-        private void CreateTicket_Click(object sender, RoutedEventArgs e)
-        {
             EmptyErrorLabels();
-            if (CheckIfFieldsFilledIn())
-            {
-                CreateTicketConcept();
-                ClearTicket();
-                MessageBox.Show("Ticket Successfully added!");
-            }
+            ClearTicket();
+            this.user = user;
         }
 
-        private void ClearTicket()
-        {
-            titleTextBox.Text = "";
-            priorityComboBox.SelectedIndex = -1;
-            typeComboBox.SelectedIndex = -1;
-            descriptionTextBox.Text = "";
-        }
-
-        private void CreateTicketConcept()
-        {
-            string title = titleTextBox.Text;
-            Priority priority = (Priority)priorityComboBox.SelectedItem;
-            IncidentType incidentType = (IncidentType)typeComboBox.SelectedItem;
-            string description = descriptionTextBox.Text;
-
-            Ticket ticket = new Ticket();
-            ticket.createConceptTicket(title, priority, description, incidentType, user);
-
-            TicketService service = new TicketService();
-            service.CreateTicket(ticket);
-        }
-
-        private bool CheckIfFieldsFilledIn()
-        {
-            typeComboBox.SelectedValue = IncidentType.Access;
-            bool filledIn = true;
-            if (!CheckIfTitleFilled())
-            {
-                filledIn = false;
-            }
-            if (!CheckIfPrioritySelected())
-            {
-                filledIn = false;
-            }
-            if (!CheckIfIncidentTypeSelected())
-            {
-                filledIn = false;
-            }
-            if (!CheckIfDescriptionFilled())
-            {
-                filledIn = false;
-            }
-
-            return filledIn;
-        }
-
-        private bool CheckIfPrioritySelected()
-        {
-            if (priorityComboBox.SelectedIndex == -1)
-            {
-                priorityError.Content = "Select a priority";
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
-        }
-
-        private bool CheckIfTitleFilled()
-        {
-            if (titleTextBox.Text.Length == 0)
-            {
-                titleError.Content = "Enter a title";
-                return false;
-            }
-            else { return true; }
-        }
-
-        private bool CheckIfIncidentTypeSelected()
-        {
-            if (typeComboBox.SelectedIndex == -1)
-            {
-                incidentTypeError.Content = "Select an incident type";
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private bool CheckIfDescriptionFilled()
-        {
-            if (descriptionTextBox.Text.Length == 0)
-            {
-                descriptionError.Content = "Give a description";
-                return false;
-            }
-            else { return true; }
-        }
-
-        private void LoadComboBoxes()
+        private void LoadComboBoxes() // filling one combo box with all the values of the enum 'IncidentType' and the other combo box with all the values of the enum 'Priority'
         {
             typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
             priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
@@ -137,5 +33,73 @@ namespace TheGardenGroupProject
             incidentTypeError.Content = "";
             descriptionError.Content = "";
         }
+
+        private void ClearTicket()
+        {
+            titleTextBox.Text = "";
+            priorityComboBox.SelectedIndex = -1;
+            typeComboBox.SelectedIndex = -1;
+            descriptionTextBox.Text = "";
+        }
+
+        private void CreateTicket_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EmptyErrorLabels();
+                if (CheckIfFieldsFilledIn()) // if all info needed is given we can go on to create the ticket
+                {
+                    CreateTicketConcept(); // create and send the ticket to the database
+                    ClearTicket(); //clearing all fields and combo boxes
+                    MessageBox.Show("Ticket Successfully added!"); // showing confirmation that the ticket is successfully added to the database
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            
+        }        
+
+        private void ClearTicket_Click(object sender, RoutedEventArgs e)
+        {
+            EmptyErrorLabels();
+            ClearTicket();
+        }
+
+        private bool CheckIfFieldsFilledIn()
+        {
+            bool filledIn = true;
+            if (titleTextBox.Text.Length == 0) // if no title is given give error and make sure no ticket is created
+            {
+                titleError.Content = "Enter a title";
+                filledIn = false;
+            }
+            if (priorityComboBox.SelectedIndex == -1) // if no priority is selected give error and make sure no ticket is created
+            {
+                priorityError.Content = "Select a priority";
+                filledIn = false;
+            }
+            if (typeComboBox.SelectedIndex == -1) // if no type is selected give error and make sure no ticket is created
+            {
+                incidentTypeError.Content = "Select an incident type";
+                filledIn = false;
+            }
+            if (descriptionTextBox.Text.Length == 0) // if no description is given give error and make sure no ticket is created
+            {
+                descriptionError.Content = "Give a description";
+                filledIn = false;
+            }
+
+            return filledIn;
+        }
+
+        private void CreateTicketConcept()
+        {
+            TicketService service = new();
+            Ticket ticket = new(titleTextBox.Text, (Priority)priorityComboBox.SelectedItem, descriptionTextBox.Text, (IncidentType)typeComboBox.SelectedItem, user);
+            
+            service.CreateTicket(ticket);
+        }        
     }
 }

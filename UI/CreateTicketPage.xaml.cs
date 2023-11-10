@@ -113,7 +113,7 @@ namespace TheGardenGroupProject
         private bool IsValidName(string input)
         {
             // Use a regular expression to check if the input contains only letters
-            return System.Text.RegularExpressions.Regex.IsMatch(input, "^[a-zA-Z]+$");
+            return System.Text.RegularExpressions.Regex.IsMatch(input, "^[a-zA-Z ]+$");
         }
 
     }

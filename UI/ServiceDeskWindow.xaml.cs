@@ -30,7 +30,6 @@ public partial class ServiceDeskWindow : Window
     private void ViewUsersButton_Click(object sender, RoutedEventArgs e)
     {
         ContentPage.NavigationService.Navigate(ViewUsersPage);
-        Console.WriteLine(LoggedInUser.Username);
     }
 
     private void AddUsersButton_Click(object sender, RoutedEventArgs e)
