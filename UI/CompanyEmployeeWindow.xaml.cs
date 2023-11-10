@@ -4,6 +4,7 @@ using UI;
 
 namespace TheGardenGroupProject;
 
+// Rafal
 public partial class CompanyEmployeeWindow : Window
 {
     private DashboardPage DashboardPage { get; }
@@ -37,7 +38,7 @@ public partial class CompanyEmployeeWindow : Window
     {
         ContentPage.NavigationService.Navigate(AddTicketPage);
     }
-    
+
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
         LoginUI loginWindow = new LoginUI();

@@ -9,17 +9,15 @@ using Service;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for Page1.xaml
-    /// </summary>
+    // Rafal
     public partial class DashboardPage : Page
     {
         public DashboardPage()
         {
             InitializeComponent();
-            
+
             DataContext = this;
-            
+
             try
             {
                 DisplayPieChart();
@@ -30,17 +28,17 @@ namespace TheGardenGroupProject
                 throw;
             }
         }
-        
+
         private void DisplayPieChart()
         {
             PieChart pieChart = GetPieChart();
-            
+
             // create PieChart in the middle of the screen
             pieChart.Margin = new Thickness(80, 40, 80, 40);
-            
+
             ChartContainer.Children.Add(pieChart);
         }
-        
+
         private static PieChart GetPieChart()
         {
             TicketService ticketService = new TicketService();
@@ -48,9 +46,9 @@ namespace TheGardenGroupProject
             List<Ticket> openedTickets = ticketService.GetOpenedTickets();
             List<Ticket> resolvedTickets = ticketService.GetResolvedTickets();
             List<Ticket> closedTickets = ticketService.GetClosedTickets();
-            
+
             SeriesCollection pieSeries = GetPieSeriesCollection(openedTickets, resolvedTickets, closedTickets);
-            
+
             PieChart pieChart = new PieChart
             {
                 Series = pieSeries,
@@ -62,11 +60,12 @@ namespace TheGardenGroupProject
                 DisableAnimations = true,
                 DataTooltip = null,
             };
-            
+
             return pieChart;
         }
 
-        private static SeriesCollection GetPieSeriesCollection(List<Ticket> openedTickets, List<Ticket> resolvedTickets, List<Ticket> closedTickets)
+        private static SeriesCollection GetPieSeriesCollection(List<Ticket> openedTickets, List<Ticket> resolvedTickets,
+            List<Ticket> closedTickets)
         {
             SeriesCollection pieSeries = new SeriesCollection
             {

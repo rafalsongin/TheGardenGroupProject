@@ -6,6 +6,7 @@ using Model;
 
 namespace Service;
 
+// Rafal
 public class EmailService
 {
     private User _user;
@@ -19,7 +20,7 @@ public class EmailService
         _smtpClient = GetSmtpClient();
         _userService = new UserService();
     }
-    
+
     public void SendTemporaryPasswordByEmail(string emailAddress, string username, string password)
     {
         MailMessage mailMessage = GetMailMessage(emailAddress, username, password);
