@@ -75,5 +75,11 @@ namespace Service
         {
             return ticketDao.GetAllClosedTickets();
         }
+
+        //dana
+        public long GetTicketCountForUser(string userEmail)
+        {
+            return ticketDao.GetTicketCountForUser(userEmail);
+        }
     }
 }

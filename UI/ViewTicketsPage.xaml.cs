@@ -18,6 +18,9 @@ namespace TheGardenGroupProject
 
         private TicketService ticketService;
 
+        //dana
+        private SortingService sortingService;
+
         //filling the cobboboxes with the enums
         public List<Priority> Priorities { get; set; }
         public List<IncidentType> IncidentTypes { get; set; }
@@ -34,8 +37,17 @@ namespace TheGardenGroupProject
 
             DataContext = this;
             InitializeComponent();
+
+            //dana - individual functionality
+            sortingService = new SortingService();
+            SortByPriority();
         }
 
+        private void SortByPriority()
+        {
+            List<Ticket> list = sortingService.SortTicketsByPriority(TicketList.ToList());
+        }
+        //end Dana
 
         private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
         {

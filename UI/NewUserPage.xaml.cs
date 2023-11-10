@@ -70,10 +70,11 @@ namespace TheGardenGroupProject
             MessageBoxResult confirm = MessageBox.Show("Are you sure you want to cancel?", "Confirmation",
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            // Only clear the form controls if the user confirms the cancellation
+
+            //only clear the form controls if the user confirms the cancellation
             if (confirm == MessageBoxResult.Yes)
             {
-                // Call the method to clear form controls
+                //call the method to clear form controls
                 ClearFormControls();
             }
         }
@@ -86,7 +87,7 @@ namespace TheGardenGroupProject
             EmailAddressTxt.Text = "";
             PhoneNumberTxt.Text = "";
 
-            // Reset the ComboBox selections to the first item
+            //reset the ComboBox selections
             TypeOfUseCombo.SelectedIndex = -1;
             LocationCombo.SelectedIndex = -1;
         }
