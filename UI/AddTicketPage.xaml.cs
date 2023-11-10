@@ -46,10 +46,9 @@ namespace TheGardenGroupProject
             IncidentType incidentType = (IncidentType)typeComboBox.SelectedItem;
             string description = descriptionTextBox.Text;
 
-            Ticket ticket = new Ticket();
-            ticket.createConceptTicket(title, priority, description, incidentType, user);
+            Ticket ticket = new(title, priority, description, incidentType, user);
 
-            TicketService service = new TicketService();
+            TicketService service = new();
             service.CreateTicket(ticket);
         }
 
