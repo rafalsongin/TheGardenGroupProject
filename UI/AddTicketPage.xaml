@@ -6,21 +6,21 @@
         mc:Ignorable="d"
         Title="AddTicketUI" Height="700" Width="1000">
     <Grid>
-        <WrapPanel Margin="0,0,10,377"/>
-        <Label Content="New Ticket" HorizontalAlignment="Left" Margin="427,43,0,0" VerticalAlignment="Top"/>
-        <Label Content="Subject" HorizontalAlignment="Left" Margin="244,103,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="titleTextBox" HorizontalAlignment="Left" Margin="244,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Priority" HorizontalAlignment="Left" Margin="244,177,0,0" VerticalAlignment="Top"/>
-        <Label Content="Description" HorizontalAlignment="Left" Margin="244,248,0,0" VerticalAlignment="Top" Width="156"/>
-        <Button Content="Create" HorizontalAlignment="Left" Margin="364,364,0,0" VerticalAlignment="Top" Width="212" Height="38" Click="CreateTicket_Click"/>
-        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="545,217,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="567,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.092,0.021"/>
-        <ComboBox x:Name="priorityComboBox" HorizontalAlignment="Left" Margin="244,212,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="244,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="421" Height="63"/>
-        <Label x:Name="titleError" HorizontalAlignment="Left" Margin="241,116,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="priorityError" HorizontalAlignment="Left" Margin="312,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.7,-0.996"/>
-        <Label x:Name="incidentTypeError" HorizontalAlignment="Left" Margin="627,189,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.045,0.348"/>
-        <Label x:Name="descriptionError" HorizontalAlignment="Left" Margin="436,253,0,0" VerticalAlignment="Top"/>
+        <Label Content="New Ticket" HorizontalAlignment="Left" Margin="387,10,0,0" VerticalAlignment="Top" FontSize="32"/>
+        <Label Content="Subject" HorizontalAlignment="Left" Margin="250,148,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="titleTextBox" HorizontalAlignment="Center" Margin="0,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="25"/>
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="250,214,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="250,280,0,0" VerticalAlignment="Top" Width="156" FontSize="16"/>
+        <Button Content="Create" HorizontalAlignment="Left" Margin="250,554,0,0" VerticalAlignment="Top" Width="350" Height="50" Click="CreateTicket_Click" FontSize="18" Background="#0f4030" Foreground="White" FontWeight="Bold"/>
+        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="525,250,0,0" VerticalAlignment="Top" Width="225" Height="25"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="525,214,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <ComboBox x:Name="priorityComboBox" HorizontalAlignment="Left" Margin="250,250,0,0" VerticalAlignment="Top" Width="225" Height="25"/>
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Center" Margin="0,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="100"/>
+        <Label x:Name="titleError" HorizontalAlignment="Left" Margin="353,154,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label x:Name="priorityError" HorizontalAlignment="Left" Margin="353,220,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label x:Name="incidentTypeError" HorizontalAlignment="Left" Margin="611,220,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label x:Name="descriptionError" HorizontalAlignment="Left" Margin="353,286,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="625,554,0,0" VerticalAlignment="Top" Height="50" Width="125" Click="ClearTicket_Click" FontSize="18" Background="#0f4030" Foreground="White" FontWeight="Bold"/>
 
     </Grid>
 </Page>
