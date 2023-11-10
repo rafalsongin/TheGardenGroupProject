@@ -23,6 +23,8 @@ namespace TheGardenGroupProject
     public partial class ViewTicketsForEmployeePage : Page
     {
         User user;
+        Brush selectedColour = new SolidColorBrush(Color.FromRgb(60, 115, 96));
+        Brush notSelectedColour = new SolidColorBrush(Color.FromRgb(162, 222, 202));
 
         public ViewTicketsForEmployeePage(User user)
         {
@@ -31,14 +33,14 @@ namespace TheGardenGroupProject
             if (user.UserType == UserType.CompanyEmployee)
             {
                 ResetButtons();
-                allButton.Background = Brushes.Green;
+                allButton.Background = selectedColour;
                 EmployeeView();
                 ViewAllTicketsEmployee();
             }
             else if (user.UserType == UserType.Manager)
             {
-                allButton.Background = Brushes.Green;
-                everyButton.Background = Brushes.Green;
+                allButton.Background = selectedColour;
+                everyButton.Background = selectedColour;
                 ViewAllTickets();
             }
         }
@@ -87,32 +89,32 @@ namespace TheGardenGroupProject
 
         private void ShowCorrectView()
         {
-            if (user.UserType == UserType.CompanyEmployee || ((SolidColorBrush)ownButton.Background).Color == Colors.Green)
+            if (user.UserType == UserType.CompanyEmployee || ((SolidColorBrush)ownButton.Background) == selectedColour)
             {
-                if (((SolidColorBrush)allButton.Background).Color == Colors.Green)
+                if (((SolidColorBrush)allButton.Background) == selectedColour)
                 {
                     ViewAllTicketsEmployee();
                 }
-                else if (((SolidColorBrush)openButton.Background).Color == Colors.Green)
+                else if (((SolidColorBrush)openButton.Background) == selectedColour)
                 {
                     ViewOpenTicketsEmployee();
                 }
-                else if (((SolidColorBrush)closedButton.Background).Color == Colors.Green)
+                else if (((SolidColorBrush)closedButton.Background) == selectedColour)
                 {
                     ViewClosedTicketsEmployee();
                 }
             }
-            else if (((SolidColorBrush)everyButton.Background).Color == Colors.Green)
+            else if (((SolidColorBrush)everyButton.Background) == selectedColour)
             {
-                if (((SolidColorBrush)allButton.Background).Color == Colors.Green)
+                if (((SolidColorBrush)allButton.Background) == selectedColour)
                 {
                     ViewAllTickets();
                 }
-                else if (((SolidColorBrush)openButton.Background).Color == Colors.Green)
+                else if (((SolidColorBrush)openButton.Background) == selectedColour)
                 {
                     ViewAllOpenTickets();
                 }
-                else if (((SolidColorBrush)closedButton.Background).Color == Colors.Green)
+                else if (((SolidColorBrush)closedButton.Background) == selectedColour)
                 {
                     ViewAllClosedTickets();
                 }
@@ -121,9 +123,9 @@ namespace TheGardenGroupProject
 
         private void ResetButtons()
         {
-            allButton.Background = Brushes.Beige;
-            openButton.Background = Brushes.Beige;
-            closedButton.Background = Brushes.Beige;
+            allButton.Background = notSelectedColour;
+            openButton.Background = notSelectedColour;
+            closedButton.Background = notSelectedColour;
         }
 
         private void EmployeeView()
@@ -135,35 +137,35 @@ namespace TheGardenGroupProject
         private void AllTickets_Click(object sender, RoutedEventArgs e)
         {
             ResetButtons();
-            allButton.Background = Brushes.Green;
+            allButton.Background = selectedColour;
             ShowCorrectView();
         }
 
         private void OpenTickets_Click(object sender, RoutedEventArgs e)
         {
             ResetButtons();
-            openButton.Background = Brushes.Green;
+            openButton.Background = selectedColour;
             ShowCorrectView();
         }
 
         private void ClosedTickets_Click(object sender, RoutedEventArgs e)
         {
             ResetButtons();
-            closedButton.Background = Brushes.Green;
+            closedButton.Background = selectedColour;
             ShowCorrectView();
         }
 
         private void OwnTickets_Click(object sender, RoutedEventArgs e)
         {
-            everyButton.Background = Brushes.Beige;
-            ownButton.Background = Brushes.Green;
+            everyButton.Background = notSelectedColour;
+            ownButton.Background = selectedColour;
             ShowCorrectView();
         }
 
         private void EveryTickets_Click(Object sender, RoutedEventArgs e)
         {
-            everyButton.Background = Brushes.Green;
-            ownButton.Background = Brushes.Beige;
+            everyButton.Background = selectedColour;
+            ownButton.Background = notSelectedColour;
             ShowCorrectView();
         }
     }
