@@ -20,7 +20,6 @@ namespace TheGardenGroupProject
             
             DataContext = this;
             
-            // TODO: check why it's not working (something with the Model.Ticket)
             try
             {
                 DisplayPieChart();
@@ -34,9 +33,14 @@ namespace TheGardenGroupProject
         
         private void DisplayPieChart()
         {
-            ChartContainer.Children.Add(GetPieChart());
+            PieChart pieChart = GetPieChart();
+            
+            // create PieChart in the middle of the screen
+            pieChart.Margin = new Thickness(80, 40, 80, 40);
+            
+            ChartContainer.Children.Add(pieChart);
         }
-
+        
         private static PieChart GetPieChart()
         {
             TicketService ticketService = new TicketService();
@@ -50,14 +54,15 @@ namespace TheGardenGroupProject
             PieChart pieChart = new PieChart
             {
                 Series = pieSeries,
-                LegendLocation = LegendLocation.Right,
-                Width = 400,
-                Height = 400,
-                Margin = new Thickness(350, 10, 10, 10),
+                LegendLocation = LegendLocation.Bottom,
+                FontSize = 18,
+                Width = 500,
+                Height = 500,
                 Hoverable = true,
                 DisableAnimations = true,
-                DataTooltip = null
+                DataTooltip = null,
             };
+            
             return pieChart;
         }
 
