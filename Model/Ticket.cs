@@ -25,8 +25,6 @@ namespace Model
         [BsonElement("LastUpdated")]
         public DateTime LastUpdated { get; set; }
 
-         private Priority priority;
-
         [BsonElement("Priority")]
         [BsonRepresentation(BsonType.String)]
         public Priority Priority {get;set;}
@@ -43,11 +41,6 @@ namespace Model
         [BsonElement("ReportedBy")]
         public string ReportedBy { get; set; }//based on userName
 
-        public Ticket()
-        {
-
-        }
-
         public Ticket(DateTime reportedOn, string subject, string description, IncidentType incidentType,string reportedBy, Priority priority, DateTime deadLine)//Ghonim
         {
             ReportedOn = reportedOn;
@@ -58,13 +51,16 @@ namespace Model
             Priority = priority;
             Deadline = deadLine;
             Status = Status.Opened;
-          
+            LastUpdated = DateTime.Now;
         }
 
-        public void createConceptTicket(string subject, Priority priority, string description, IncidentType incidentType, User user)
+        /*
+            Made by Kim, is used to create a ticket by company employees and managers. 
+        */
+        public Ticket(string subject, Priority priority, string description, IncidentType incidentType, User user)
         {
             Subject = subject;
-            this.priority = priority; //Kim, why you are using this not the Property cause now we have 2 attributes of type priority
+            Priority = priority;
             Description = description;
             Status = Status.Pending;
             ReportedOn = DateTime.Now;
