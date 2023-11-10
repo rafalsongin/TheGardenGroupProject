@@ -11,6 +11,7 @@ namespace Service
         {
             ticketDao = new TicketDao();
         }
+        //Ghonim
         public void CreateTicket(Ticket ticket)
         {
             ticketDao.CreateTicket(ticket);
@@ -25,16 +26,12 @@ namespace Service
         {
             ticketDao.DeleteTicket(ticket);
         }
-        public Ticket ReadTicket(Ticket ticket) 
+        public List<Ticket> GetAllTickets()
         {
-            return ticketDao.ReadTicket(ticket);
+            return ticketDao.GetAllTickets();
         }
+        //Ghonim end
 
-        public Ticket GetTicketByFilter(FilterDefinition<Ticket> filter)
-        { 
-            return ticketDao.GetTicketByFilter(filter);
-        }
-        
         public List<Ticket> GetOpenedTickets()
         {
             return ticketDao.GetOpenedTickets();
@@ -49,10 +46,7 @@ namespace Service
         {
             return ticketDao.GetClosedTickets();
         }
-        public List<Ticket> GetAllTickets()
-        {
-            return ticketDao.GetAllTickets();
-        }
+    
 
         //kim
         public List<Ticket> GetAllTicketsFromUser(User user)
@@ -70,10 +64,6 @@ namespace Service
             return ticketDao.GetClosedTicketsFromUser(user);
         }
 
-        public List<Ticket> GetAllTickets1()
-        {
-            return ticketDao.GetAllTickets1();
-        }
 
         public List<Ticket> GetAllOpenTickets()
         {

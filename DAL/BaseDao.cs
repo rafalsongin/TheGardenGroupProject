@@ -8,8 +8,8 @@ namespace DAL;
 
 public class BaseDao
 {
-    private MongoClient _client;
-    private IMongoDatabase _database;
+    protected MongoClient _client;
+    protected IMongoDatabase _database;//protected for accessing it in the secondery database
 
     protected BaseDao()
     {
@@ -20,6 +20,7 @@ public class BaseDao
         // _client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
         _database = _client.GetDatabase("Database");
     }
+   
 
     public List<DatabasesModel> GetDatabases()
     {
