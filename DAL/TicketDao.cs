@@ -108,13 +108,29 @@ namespace DAL
             }
             return closedTickets;
         }
-
+        
+        //dana
         public long GetTicketCountForUser(string userEmail)
         {
             var filter = Builders<Ticket>.Filter.Eq("Email", userEmail);
             long ticketCount = _ticketCollection.CountDocuments(filter);
             return ticketCount;
         }
+
+        public List<Ticket> GetTicketsSortingByPriorityDescending()
+        {
+            try
+            {
+                var tickets = _ticketCollection.Find(new BsonDocument()).SortByDescending(ticket => ticket.Priority).ToList();
+                return tickets;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting tickets: {ex.Message}", ex);
+            }
+        }
+
+
 
         //kim
         public List<Ticket> GetAllTicketsFromUser(User user)
