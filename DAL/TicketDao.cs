@@ -14,7 +14,7 @@ namespace DAL
         {
             _ticketCollection = GetTicketCollection();
         }
-
+        //Ghonim
         public void CreateTicket(Ticket ticket)
         {
             _ticketCollection.InsertOne(ticket);
@@ -35,6 +35,7 @@ namespace DAL
                 existingTicket.Priority = updatedTicket.Priority;
                 existingTicket.Deadline = updatedTicket.Deadline;
                 existingTicket.Status = updatedTicket.Status;
+                existingTicket.LastUpdated= DateTime.Now;
 
                 // Replace the existing ticket in the collection with the updated ticket
                _ticketCollection.ReplaceOne(filter, existingTicket);
@@ -45,15 +46,6 @@ namespace DAL
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, ticket.TicketId);
             _ticketCollection.DeleteOne(filter);
-        }
-
-        public Ticket ReadTicket(Ticket ticket)
-        {
-            // Find the ticket by its _id (treated as a string)
-            var filter = Builders<Ticket>.Filter.Eq("_id", ticket.TicketId);
-
-            // Execute the find operation to retrieve the ticket
-            return _ticketCollection.Find(filter).FirstOrDefault();
         }
 
 
@@ -70,6 +62,7 @@ namespace DAL
             var tickets = _ticketCollection.Find(new BsonDocument()).ToList();
             return tickets;
         }
+        //Ghonim end
 
         public List<Ticket> GetOpenedTickets()
         {
@@ -172,5 +165,6 @@ namespace DAL
                                               select tickets;
             return results.ToList();
         }
+
     }
 }

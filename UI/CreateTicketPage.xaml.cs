@@ -17,23 +17,20 @@ using System.Windows.Shapes;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for CreateTicketUIxaml.xaml
-    /// </summary>
     public partial class CreateTicketPage : Page
     {
-        private readonly TicketService ticketService;
         public List<Priority> Priorities { get; set; }
         public List<IncidentType> IncidentTypes { get; set; }
+     
 
         public CreateTicketPage()
         {
             InitializeComponent();
-            ticketService = new TicketService();
             //filling the comboBoxes
             Priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
             IncidentTypes = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
             DataContext = this;
+            
 
             // Disable user input for DpTimeReported to ensure it reflects the date when the ticket is assigned
             DpTimeReported.IsEnabled = false;
@@ -48,15 +45,19 @@ namespace TheGardenGroupProject
         private void btnCreateTicket_Click(object sender, RoutedEventArgs e)
         {
             try
-            {   
+            {
+                if (!AreInputsValid())
+                {
+                    return;
+                }
                 DateTime deadLine = DpDeadline.SelectedDate ?? DateTime.MinValue;
                 DateTime dateReported = DateTime.Now;
-                IncidentType selectedIncidentType = (IncidentType)boxIncidentType.SelectedItem;
-                Priority selectedPriority = (Priority)boxPriority.SelectedItem;
+                IncidentType selectedIncidentType = (IncidentType)incidentTypeCombobox.SelectedItem;
+                Priority selectedPriority = (Priority)priorityCombobox.SelectedItem;
 
-                Ticket ticket = new Ticket(dateReported, txtSubjectOfIncident.Text, txtDescription.Text, selectedIncidentType, txtReportedBy.Text, selectedPriority, deadLine);
-
-                 ticketService.CreateTicket(ticket);
+                Ticket ticket = new Ticket(dateReported, subjectOfIncidenttxt.Text, txtDescription.Text, selectedIncidentType, reportedByTxt.Text, selectedPriority, deadLine);
+                TicketService ticketService = new TicketService();
+                ticketService.CreateTicket(ticket);
                 ClearUIElements();
                 MessageBox.Show("Ticket created successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -80,13 +81,39 @@ namespace TheGardenGroupProject
         private void ClearUIElements()
         {
             DpTimeReported.SelectedDate = DateTime.Now;
-            txtSubjectOfIncident.Text = "";
-            boxIncidentType.SelectedIndex = -1; // Clear the selection
-            txtReportedBy.Text = "";
+            subjectOfIncidenttxt.Text = "";
+            incidentTypeCombobox.SelectedIndex = -1; // Clear the selection
+            reportedByTxt.Text = "";
             txtDescription.Text = "";
-            boxPriority.SelectedIndex = -1;
+            priorityCombobox.SelectedIndex = -1;
             DpDeadline.SelectedDate = null;
 
+        }
+        private bool AreInputsValid()
+        {
+            // Validate inputs before creating a ticket
+            if (string.IsNullOrWhiteSpace(subjectOfIncidenttxt.Text) ||
+                string.IsNullOrWhiteSpace(txtDescription.Text) ||
+                incidentTypeCombobox.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(reportedByTxt.Text) ||
+                priorityCombobox.SelectedItem == null ||
+                DpDeadline.SelectedDate == null)
+            {
+                MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (!IsValidName(subjectOfIncidenttxt.Text) || !IsValidName(reportedByTxt.Text) || !IsValidName(txtDescription.Text))
+            {
+                MessageBox.Show("Please enter valid values for certain fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }
+        private bool IsValidName(string input)
+        {
+            // Use a regular expression to check if the input contains only letters
+            return System.Text.RegularExpressions.Regex.IsMatch(input, "^[a-zA-Z]+$");
         }
 
     }

@@ -5,7 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
       mc:Ignorable="d"
       Title="RUDTicket" Height="700" Width="1000">
-    <Grid Margin="0,2,0,-2">
+    <Grid Margin="0,3,0,-3">
         <!--<TextBlock Text="GardenGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14" FontWeight="Bold" FontFamily="Times New Roman" Foreground="#FF23A908"/>
         <Button x:Name="btnDashboard" Content="Dashboard" Style="{StaticResource ModernButtonStyle}" Margin="10,60,0,0" Width="95" Background="#FFC8C6C8" />
         <Button x:Name="btnViewUser" Content="View User" Style="{StaticResource ModernButtonStyle}" Margin="10,101,0,0" Width="95" Background="#FFC8C6C8" />
@@ -23,12 +23,12 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>-->
-        <Label Content="View TICKETS" HorizontalAlignment="Left" Margin="324,18,0,0" VerticalAlignment="Top"
-               RenderTransformOrigin="0.404,0.629" FontFamily="Segoe UI Semibold" FontSize="18" />
+        <Label Content="VIEW TICKETS" HorizontalAlignment="Left" Margin="344,22,0,0" VerticalAlignment="Top"
+               RenderTransformOrigin="0.404,0.629" FontFamily="Arial Black" FontSize="36" Height="56" Width="300" />
 
 
-        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="687,385,217,283" Width="96" FontSize="14" Height="32"
-                Click="btnUpdateTicekt_Click">
+        <Button x:Name="btnUpdateTicekt" Content="Update" Margin="862,617,24,51" FontSize="14" Height="32"
+                Click="btnUpdateTicekt_Click" FontFamily="Yu Gothic UI Semibold">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
@@ -44,8 +44,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnDeleteTicket" Content="Delete" Margin="556,385,348,283" Width="96" FontSize="14" Height="32"
-                Click="btnDeleteTicket_Click" Background="#FFED0E0E">
+        <Button x:Name="btnDeleteTicket" Content="Delete" Margin="693,617,193,51" FontSize="14" Height="32"
+                Click="btnDeleteTicket_Click" Background="#FFED0E0E" Width="114" FontFamily="Yu Gothic UI Semibold">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
@@ -55,16 +55,16 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="18,58,238,404" SelectionChanged="ticketsListView_SelectionChanged">
+        <ListView x:Name="ticketsListView" ItemsSource="{Binding TicketList}" Margin="1,161,19,204" SelectionChanged="ticketsListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Subject" DisplayMemberBinding="{Binding Subject, TargetNullValue='Null '}" Width="120" />
-                    <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" Width="80" />
-                    <GridViewColumn Header="ReprotedBy" DisplayMemberBinding="{Binding ReportedBy}" Width="100" />
-                    <GridViewColumn Header="Deadline" DisplayMemberBinding="{Binding Deadline, StringFormat=\{0:dd/MM/yyyy\}}" Width="100"/>
+                    <GridViewColumn Header="Subject" DisplayMemberBinding="{Binding Subject, TargetNullValue='Null '}" Width="170" />
+                    <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" Width="100" />
+                    <GridViewColumn Header="ReprotedBy" DisplayMemberBinding="{Binding ReportedBy}" Width="145" />
+                    <GridViewColumn Header="Deadline" DisplayMemberBinding="{Binding Deadline, StringFormat=\{0:dd/MM/yyyy\}}" Width="130"/>
                     <GridViewColumn Header="Incident Type" DisplayMemberBinding="{Binding IncidentType}" Width="150" />
-                    <GridViewColumn Header="DateReported" DisplayMemberBinding="{Binding ReportedOn,StringFormat=\{0:dd/MM/yyyy\}}" Width="100"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status,TargetNullValue='Null '}" Width="105"/>
+                    <GridViewColumn Header="DateReported" DisplayMemberBinding="{Binding ReportedOn,StringFormat=\{0:dd/MM/yyyy\}}" Width="130"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status,TargetNullValue='Null '}" Width="150"/>
 
                 </GridView>
             </ListView.View>
@@ -78,9 +78,9 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="119,301,0,0" VerticalAlignment="Top" Width="77"
+        <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="166,507,0,0" VerticalAlignment="Top" Width="92"
             ItemsSource="{Binding Priorities}" Height="24"/>
-        <TextBox x:Name="reportedByTxt" HorizontalAlignment="Left" Margin="207,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" RenderTransformOrigin="0.5,0.5" Height="24">
+        <TextBox x:Name="reportedByTxt" HorizontalAlignment="Left" Margin="278,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.5,0.5" Height="24">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -90,7 +90,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <TextBox x:Name="subjectTxt" HorizontalAlignment="Left" Margin="17,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91" RenderTransformOrigin="0.5,0.5" Height="24">
+        <TextBox x:Name="subjectOfIncidenttxt" HorizontalAlignment="Left" Margin="8,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" Height="24">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -100,12 +100,23 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="425,302,0,0" VerticalAlignment="Top" Width="121"
+        <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="558,507,0,0" VerticalAlignment="Top" Width="133"
             ItemsSource="{Binding IncidentTypes}" Height="24"/>
-        <DatePicker x:Name="DPTimeReported" HorizontalAlignment="Left" Margin="566,302,0,0" VerticalAlignment="Top" Width="106"/>
-        <ComboBox x:Name="statusCombobox" HorizontalAlignment="Left" Margin="687,302,0,0" VerticalAlignment="Top" Width="86"
+        <DatePicker x:Name="DPTimeReported" HorizontalAlignment="Left" Margin="709,507,0,0" VerticalAlignment="Top" Width="119"/>
+        <ComboBox x:Name="statusCombobox" HorizontalAlignment="Left" Margin="839,507,0,0" VerticalAlignment="Top" Width="135"
             ItemsSource="{Binding Statuses}" Height="24"/>
-        <DatePicker x:Name="DPDeadLine" HorizontalAlignment="Left" Margin="301,302,0,0" VerticalAlignment="Top" Width="111" Height="24"/>
+        <DatePicker x:Name="DPDeadLine" HorizontalAlignment="Left" Margin="425,507,0,0" VerticalAlignment="Top" Width="116" Height="24"/>
+        <Button x:Name="archiveButton" Content="Archive Ticket" Margin="862,107,24,561" FontSize="14" Height="32"
+            Click="btnArchiveTicekt_Click" Background="#FF157BE3" FontFamily="Yu Gothic UI Semibold">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </Page>
