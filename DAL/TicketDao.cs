@@ -117,7 +117,7 @@ namespace DAL
         }
 
         //kim
-        public List<Ticket> GetAllTicketsFromUser(User user)
+        public List<Ticket> GetAllTicketsFromUser(User user) //getting all tickets based on username
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
                                               where tickets.ReportedBy == user.Username
@@ -125,7 +125,7 @@ namespace DAL
             return results.ToList();
         }
 
-        public List<Ticket> GetOpenTicketsFromUser(User user)
+        public List<Ticket> GetOpenTicketsFromUser(User user) //getting pending and open tickets based on username
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
                                               where tickets.ReportedBy == user.Username
@@ -134,7 +134,7 @@ namespace DAL
             return results.ToList();
         }
 
-        public List<Ticket> GetClosedTicketsFromUser(User user)
+        public List<Ticket> GetClosedTicketsFromUser(User user) // getting closed and resolved tickets based on username
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
                                               where tickets.ReportedBy == user.Username
@@ -143,14 +143,7 @@ namespace DAL
             return results.ToList();
         }
 
-        public List<Ticket> GetAllTickets1()
-        {
-            IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              select tickets;
-            return results.ToList();
-        }
-
-        public List<Ticket> GetAllOpenTickets()
+        public List<Ticket> GetAllOpenTickets() // getting all open and pending tickets
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
                                               where tickets.Status == Status.Pending || tickets.Status == Status.Opened
@@ -158,7 +151,7 @@ namespace DAL
             return results.ToList();
         }
 
-        public List<Ticket> GetAllClosedTickets()
+        public List<Ticket> GetAllClosedTickets() // getting all closed and resolved tickets
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
                                               where tickets.Status == Status.Closed || tickets.Status == Status.Resolved

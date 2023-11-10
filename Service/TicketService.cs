@@ -64,7 +64,6 @@ namespace Service
             return ticketDao.GetClosedTicketsFromUser(user);
         }
 
-
         public List<Ticket> GetAllOpenTickets()
         {
             return ticketDao.GetAllOpenTickets();
