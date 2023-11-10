@@ -15,6 +15,8 @@ namespace TheGardenGroupProject
         {
             InitializeComponent();            
             LoadComboBoxes();
+            EmptyErrorLabels();
+            ClearTicket();
             this.user = user;
         }
 
@@ -22,6 +24,22 @@ namespace TheGardenGroupProject
         {
             typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
             priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
+        }
+
+        private void EmptyErrorLabels()
+        {
+            titleError.Content = "";
+            priorityError.Content = "";
+            incidentTypeError.Content = "";
+            descriptionError.Content = "";
+        }
+
+        private void ClearTicket()
+        {
+            titleTextBox.Text = "";
+            priorityComboBox.SelectedIndex = -1;
+            typeComboBox.SelectedIndex = -1;
+            descriptionTextBox.Text = "";
         }
 
         private void CreateTicket_Click(object sender, RoutedEventArgs e)
@@ -41,14 +59,12 @@ namespace TheGardenGroupProject
                 MessageBox.Show(ex.ToString());
             }
             
-        }
+        }        
 
-        private void EmptyErrorLabels()
+        private void ClearTicket_Click(object sender, RoutedEventArgs e)
         {
-            titleError.Content = "";
-            priorityError.Content = "";
-            incidentTypeError.Content = "";
-            descriptionError.Content = "";
+            EmptyErrorLabels();
+            ClearTicket();
         }
 
         private bool CheckIfFieldsFilledIn()
@@ -84,14 +100,6 @@ namespace TheGardenGroupProject
             Ticket ticket = new(titleTextBox.Text, (Priority)priorityComboBox.SelectedItem, descriptionTextBox.Text, (IncidentType)typeComboBox.SelectedItem, user);
             
             service.CreateTicket(ticket);
-        }
-
-        private void ClearTicket()
-        {
-            titleTextBox.Text = "";
-            priorityComboBox.SelectedIndex = -1;
-            typeComboBox.SelectedIndex = -1;
-            descriptionTextBox.Text = "";
-        }               
+        }        
     }
 }
