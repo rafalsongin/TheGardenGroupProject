@@ -198,7 +198,14 @@ namespace TheGardenGroupProject
         }
         //Ghonim individual Functionality end
 
-       
+
+        private void sortingTickets ()
+        {
+            SortingTicketsService sortingTicketsService = new SortingTicketsService();
+            List<Ticket> tickets = sortingTicketsService.GetAllTicketsSortedByPriorityDescending();
+
+        }
+
     }
 
 
