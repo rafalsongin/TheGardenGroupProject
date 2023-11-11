@@ -11,7 +11,7 @@ namespace Service
     {
         // Made by: Kim
         // Individual functionality
-        public List<Ticket> FilterDate(List<Ticket> tickets, String selectedItem)
+        public List<Ticket> FilterDate(List<Ticket> tickets, String selectedItem) // returning a list of all tickets with the correct dates as given
         {
             List<Ticket> newTickets = new List<Ticket>();
             foreach (Ticket ticket in tickets)
@@ -42,7 +42,7 @@ namespace Service
             return newTickets;
         }
 
-        public List<Ticket> FilterType(List<Ticket> tickets, IncidentType type)
+        public List<Ticket> FilterType(List<Ticket> tickets, IncidentType type) // returning a list of all tickets with the same type as given
         {
             List<Ticket> newTickets = new List<Ticket>();
             foreach (Ticket ticket in tickets)
@@ -55,7 +55,7 @@ namespace Service
             return newTickets;
         }
 
-        public List<Ticket> FilterPriority(List<Ticket> tickets, Priority priority)
+        public List<Ticket> FilterPriority(List<Ticket> tickets, Priority priority) // returning a list of all tickets with the same prioriy as given
         {
             List<Ticket> newTickets = new List<Ticket>();
             foreach (Ticket ticket in tickets)
