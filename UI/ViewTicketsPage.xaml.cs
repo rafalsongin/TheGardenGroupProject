@@ -9,45 +9,28 @@ using Service;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for RUDTicket.xaml
-    /// </summary>
-    public partial class ViewTicketsPage : Page //Ghonim
+
+    public partial class ViewTicketsPage : Page // made by Ghonim
     {
         public ObservableCollection<Ticket> TicketList { get; set; }
 
         private TicketService ticketService;
 
-        //dana
-        private SortingService sortingService;
-
-        //filling the cobboboxes with the enums
-        public List<Priority> Priorities { get; set; }
-        public List<IncidentType> IncidentTypes { get; set; }
-        public List<Status> Statuses { get; set; }
+     
 
         public ViewTicketsPage()
         {
-            ticketService = new TicketService();
-            TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
-
-            Priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
-            IncidentTypes = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
-            Statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
-
-            DataContext = this;
             InitializeComponent();
+       ticketService=new TicketService();
+     TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
+           
+            creatingComboBox();
+            DataContext = this;
 
-            //dana - individual functionality
-            sortingService = new SortingService();
-            SortByPriority();
-        }
+          
+ 
 
-        private void SortByPriority()
-        {
-            List<Ticket> list = sortingService.SortTicketsByPriority(TicketList.ToList());
         }
-        //end Dana
 
         private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
         {
@@ -123,6 +106,13 @@ namespace TheGardenGroupProject
             DPDeadLine.SelectedDate = null;
             DPTimeReported.SelectedDate = null;
         }
+        private void creatingComboBox ()
+        {  //filling the cobboboxes with the enums
+            priorityCombobox.ItemsSource= Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            incidentTypeCombobox.ItemsSource=Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+            var statusValues = Enum.GetValues(typeof(Status)).Cast<Status>().Where(s => s != Status.Pending).ToList();
+            statusCombobox.ItemsSource = statusValues;
+        }
 
         private void RefreshTableView()
         {
@@ -131,6 +121,7 @@ namespace TheGardenGroupProject
             {
                 TicketList.Add(ticket);
             }
+
         }
 
         private bool AreChangesMade(Ticket selectedTicket)
@@ -158,6 +149,7 @@ namespace TheGardenGroupProject
 
         private void ticketsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (ticketsListView.SelectedItem != null)
             {
                 Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
@@ -182,16 +174,21 @@ namespace TheGardenGroupProject
 
             return true;
         }
-
-        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e) //individual Functionality
+        //Ghonim individual Functionality
+        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e) 
         {
             if (!IsTicketSelected())
             {
                 return;
             }
-
-            ArchivingService archivingTicket = new ArchivingService();
             Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
+
+            if (selectedTicket.Status != Status.Closed)
+            {
+                MessageBox.Show("Only tickets with a closed status can be archived.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            ArchivingService archivingTicket = new ArchivingService();
             archivingTicket.ArchiveTicket(selectedTicket);
             ticketService.DeleteTicket(selectedTicket);
             RefreshTableView();
@@ -199,5 +196,10 @@ namespace TheGardenGroupProject
             MessageBox.Show("Ticket archived successfully!", "Success", MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }
+        //Ghonim individual Functionality end
+
+       
     }
+
+
 }

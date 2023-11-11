@@ -9,19 +9,14 @@ using Service;
 
 namespace TheGardenGroupProject
 {
-    public partial class CreateTicketPage : Page
+    public partial class CreateTicketPage : Page // made by Ghonim
     {
-        public List<Priority> Priorities { get; set; }
-        public List<IncidentType> IncidentTypes { get; set; }
-
-
         public CreateTicketPage()
         {
             InitializeComponent();
             //filling the comboBoxes
-            Priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
-            IncidentTypes = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
-            DataContext = this;
+            creatingComboBoxes();
+              DataContext = this;
 
 
             // Disable user input for DpTimeReported to ensure it reflects the date when the ticket is assigned
@@ -56,6 +51,7 @@ namespace TheGardenGroupProject
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
@@ -83,6 +79,11 @@ namespace TheGardenGroupProject
             txtDescription.Text = "";
             priorityCombobox.SelectedIndex = -1;
             DpDeadline.SelectedDate = null;
+        }
+        private void creatingComboBoxes()
+        {
+            priorityCombobox.ItemsSource= Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            incidentTypeCombobox.ItemsSource = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
         }
 
         private bool AreInputsValid()

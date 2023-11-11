@@ -36,7 +36,7 @@ namespace Model
         [BsonElement("ReportedBy")] public string ReportedBy { get; set; } //based on userName
 
         public Ticket(DateTime reportedOn, string subject, string description, IncidentType incidentType,
-            string reportedBy, Priority priority, DateTime deadLine) //Ghonim
+            string reportedBy, Priority priority, DateTime deadLine) //Made by Ghonim, for creating tickets by service employees.
         {
             ReportedOn = reportedOn;
             Subject = subject;

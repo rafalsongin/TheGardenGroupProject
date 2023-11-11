@@ -28,6 +28,7 @@ public class BaseDao
 
     protected IMongoCollection<Ticket> GetArchivedTicketCollection()
     {
-        return _database.GetCollection<Ticket>("ClosedTickets_Archive");
+        var database = _client.GetDatabase("Database_Archive");
+        return database.GetCollection<Ticket>("ClosedTickets_Archive");
     }
 }

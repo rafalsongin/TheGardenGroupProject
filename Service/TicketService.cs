@@ -15,7 +15,29 @@ namespace Service
         //Ghonim
         public void CreateTicket(Ticket ticket)
         {
-            ticketDao.CreateTicket(ticket);
+            // Check if the reported user exists before creating the ticket
+            if (UserExists(ticket.ReportedBy))
+            {
+                // User exists, proceed with creating the ticket
+                ticketDao.CreateTicket(ticket);
+            }
+            else
+            {
+                // User does not exist, handle accordingly (show a message, log, etc.)
+                throw new Exception($"Error: User '{ticket.ReportedBy}' does not exist.");
+            }
+        }
+       
+        private bool UserExists(string username)
+        {
+            UserDao userDao = new UserDao();
+
+            // Convert both the input username and usernames from the database to lowercase
+            string lowercaseUsername = username.ToLower();
+
+            // Check if the user exists in the user collection (case-insensitive)
+            User existingUser = userDao.GetAllUsers().FirstOrDefault(user => user.Username.ToLower() == lowercaseUsername);
+            return existingUser != null;
         }
 
         public void UpdateTicket(Ticket updatedTicket)
