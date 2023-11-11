@@ -67,5 +67,31 @@ namespace Service
             }
             return newTickets;
         }
+
+        public List<Ticket> FilterStatus(List<Ticket> tickets, Status status) // returning a list of all tickets with the same status as given
+        {
+            List<Ticket> newTickets = new List<Ticket>();
+            foreach (Ticket ticket in tickets)
+            {
+                if (ticket.Status == status)
+                {
+                    newTickets.Add(ticket);
+                }
+            }
+            return newTickets;
+        }
+
+        public List<Ticket> FilterSearch(List<Ticket> tickets, string search) // returning a list of all tickets with the same search as given
+        {
+            List<Ticket> newTickets = new List<Ticket>();
+            foreach (Ticket ticket in tickets)
+            {
+                if (ticket.Subject.Contains(search) || ticket.Description.Contains(search))
+                {
+                    newTickets.Add(ticket);
+                }
+            }
+            return newTickets;
+        }
     }
 }

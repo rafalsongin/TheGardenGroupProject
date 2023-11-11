@@ -16,20 +16,18 @@ namespace TheGardenGroupProject
 
         private TicketService ticketService;
 
-     
 
         public ViewTicketsPage()
         {
             InitializeComponent();
-       ticketService=new TicketService();
-     TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
-           
+            ticketService = new TicketService();
+            TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
+
             creatingComboBox();
+
+            FillComboBoxesFiltering(); // used for Kim's personal functionality
+
             DataContext = this;
-
-          
- 
-
         }
 
         private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
@@ -89,8 +87,8 @@ namespace TheGardenGroupProject
                 MessageBoxImage.Information);
             RefreshTableView();
 
-            ClearUIElements(); 
-         }
+            ClearUIElements();
+        }
 
 
 
@@ -106,10 +104,10 @@ namespace TheGardenGroupProject
             DPDeadLine.SelectedDate = null;
             DPTimeReported.SelectedDate = null;
         }
-        private void creatingComboBox ()
+        private void creatingComboBox()
         {  //filling the cobboboxes with the enums
-            priorityCombobox.ItemsSource= Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
-            incidentTypeCombobox.ItemsSource=Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+            priorityCombobox.ItemsSource = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            incidentTypeCombobox.ItemsSource = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
             var statusValues = Enum.GetValues(typeof(Status)).Cast<Status>().Where(s => s != Status.Pending).ToList();
             statusCombobox.ItemsSource = statusValues;
         }
@@ -175,7 +173,7 @@ namespace TheGardenGroupProject
             return true;
         }
         //Ghonim individual Functionality
-        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e) 
+        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e)
         {
             if (!IsTicketSelected())
             {
@@ -199,6 +197,7 @@ namespace TheGardenGroupProject
         //Ghonim individual Functionality end
 
 
+
         private void sortingTickets ()
         {
             SortingTicketsService sortingTicketsService = new SortingTicketsService();
@@ -209,4 +208,73 @@ namespace TheGardenGroupProject
     }
 
 
+        // Kim individual Functionality: Filtering
+        private void FillComboBoxesFiltering() // filling combo boxes for filtering
+        {
+            typeFilterComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
+            priorityFilterComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
+            statusFilterComboBox.ItemsSource = Enum.GetValues(typeof(Status));
+            var dataSource = new List<string>();
+            dataSource.Add("Today");
+            dataSource.Add("This Month");
+            dataSource.Add("This Year");
+            dateReportedFilterComboBox.ItemsSource = dataSource;
+        }
+        private void ClearFilter_Click(object sender, RoutedEventArgs e) // remove the filters and show normal list without filters
+        {
+            searchTextBox.Text = "";
+            typeFilterComboBox.SelectedIndex = -1;
+            priorityFilterComboBox.SelectedIndex = -1;
+            dateReportedFilterComboBox.SelectedIndex = -1;
+            statusFilterComboBox.SelectedIndex = -1;
+            RefreshTableView();
+        }
+
+        private void FilterSelected(object sender, SelectionChangedEventArgs e) // when an item is selected from one of the filtering combo boxes show filtered list
+        {
+            List<Ticket> tickets = ticketService.GetAllTickets();
+            ShowFilteredList(tickets);
+        }
+
+        private void SearchTyped(object sender, TextChangedEventArgs e) // when something is typed in the searched show filtered list
+        {
+            List<Ticket> tickets = ticketService.GetAllTickets();
+            ShowFilteredList(tickets);
+        }
+
+        private void ShowFilteredList(List<Ticket> tickets) // filter list then show filtered list
+        {
+            List<Ticket> filteredList = FilterList(tickets);
+            ticketsListView.ItemsSource = filteredList;
+        }
+
+        private List<Ticket> FilterList(List<Ticket> tickets) // filtering tickets based on type, priority, date, subject, description, status
+        {
+            FilteringService filteringService = new FilteringService();
+            List<Ticket> filteredTickets = tickets;
+            if (searchTextBox.Text.Length > 0)
+            {
+                filteredTickets = filteringService.FilterSearch(filteredTickets, searchTextBox.Text);
+            }
+            if (typeFilterComboBox.SelectedIndex != -1)
+            {
+                filteredTickets = filteringService.FilterType(filteredTickets, (IncidentType)typeFilterComboBox.SelectedItem);
+            }
+            if (priorityFilterComboBox.SelectedIndex != -1)
+            {
+                filteredTickets = filteringService.FilterPriority(filteredTickets, (Priority)priorityFilterComboBox.SelectedItem);
+            }
+            if (dateReportedFilterComboBox.SelectedIndex != -1)
+            {
+                filteredTickets = filteringService.FilterDate(filteredTickets, dateReportedFilterComboBox.SelectedItem.ToString());
+            }
+            if (statusFilterComboBox.SelectedIndex != -1)
+            {
+                filteredTickets = filteringService.FilterStatus(filteredTickets, (Status)statusFilterComboBox.SelectedItem);
+            }
+            return filteredTickets;
+        }
+
+        // Kim individual Functionality end
+    }
 }
