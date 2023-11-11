@@ -158,6 +158,10 @@ namespace TheGardenGroupProject
         {
             FilteringService filteringService = new FilteringService();
             List<Ticket> filteredTickets = tickets;
+            if (searchTextBox.Text.Length > 0)
+            {
+                filteredTickets = filteringService.FilterSearch(filteredTickets, searchTextBox.Text);
+            }
             if (typeComboBox.SelectedIndex != -1)
             {
                 filteredTickets = filteringService.FilterType(filteredTickets, (IncidentType)typeComboBox.SelectedItem);
@@ -213,10 +217,16 @@ namespace TheGardenGroupProject
             typeComboBox.SelectedIndex = -1;
             priorityComboBox.SelectedIndex = -1;
             dateAddedComboBox.SelectedIndex = -1;
+            searchTextBox.Text = "";
             ShowCorrectView();
         }
 
         private void FilterSelected(object sender, SelectionChangedEventArgs e)
+        {
+            ShowCorrectView();
+        }
+
+        private void SearchTyped(object sender, TextChangedEventArgs e) // when something is typed in the searched show filtered list
         {
             ShowCorrectView();
         }
