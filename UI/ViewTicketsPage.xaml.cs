@@ -197,6 +197,17 @@ namespace TheGardenGroupProject
         //Ghonim individual Functionality end
 
 
+
+        private void sortingTickets ()
+        {
+            SortingTicketsService sortingTicketsService = new SortingTicketsService();
+            List<Ticket> tickets = sortingTicketsService.GetAllTicketsSortedByPriorityDescending();
+
+        }
+
+    }
+
+
         // Kim individual Functionality: Filtering
         private void FillComboBoxesFiltering() // filling combo boxes for filtering
         {
