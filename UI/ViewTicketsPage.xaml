@@ -5,7 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Title="RUDTicket" Height="700" Width="1000">
-    <Grid Margin="0,3,0,-3">
+    <Grid x:Name="viewTicketsPage" Margin="0,3,0,-3">
         <!--<TextBlock Text="GardenGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14" FontWeight="Bold" FontFamily="Times New Roman" Foreground="#FF23A908"/>
         <Button x:Name="btnDashboard" Content="Dashboard" Style="{StaticResource ModernButtonStyle}" Margin="10,60,0,0" Width="95" Background="#FFC8C6C8" />
         <Button x:Name="btnViewUser" Content="View User" Style="{StaticResource ModernButtonStyle}" Margin="10,101,0,0" Width="95" Background="#FFC8C6C8" />
@@ -85,6 +85,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        
         <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="166,507,0,0" VerticalAlignment="Top"
                   Width="92"
                   ItemsSource="{Binding Priorities}" Height="24" />
