@@ -32,6 +32,6 @@
         <Button Content="Clear Filter" HorizontalAlignment="Left" Margin="827,100,0,0" VerticalAlignment="Top" Height="25" Width="125" FontSize="14" Background="#3c7360" Click="ClearFilter_Click"/>
         <Label Content="Type" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
         <Label Content="Priority" HorizontalAlignment="Left" Margin="185,69,0,0" VerticalAlignment="Top"/>
-        <Label Content="Date" HorizontalAlignment="Left" Margin="360,69,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date added" HorizontalAlignment="Left" Margin="360,69,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
