@@ -2,5 +2,7 @@
 
 public enum UserType
 {
-    ServiceDeskEmployee, CompanyEmployee, Manager
+    ServiceDeskEmployee,
+    CompanyEmployee,
+    Manager
 }

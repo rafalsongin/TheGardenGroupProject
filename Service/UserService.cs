@@ -1,6 +1,5 @@
 ﻿using DAL;
 using Model;
-using System.Net.Mail;
 
 namespace Service;
 
@@ -15,11 +14,12 @@ public class UserService
         _userDao = new UserDao();
         _ticketDao = new TicketDao();
     }
-    
+
     public List<User> GetAllUsers()
     {
         return _userDao.GetAllUsers();
     }
+
 
     public User GetUserByUsername(string? username)
     {
@@ -31,17 +31,21 @@ public class UserService
     {
         City newCity = GetCityEnum(city);
         UserType newUserType = GetUserTypeEnum(userType);
-        
+
         string username = firstName.ToLower() + lastName.ToLower();
-        string password = firstName.ToLower() + lastName.ToLower() + "login"; // hardcoded temporary password (will be sent by email) (not generated randomly, to make it easier to remember for testing purposes)
-        User newUser = new User(username, password, firstName, lastName, newUserType, emailAddress, phoneNumber, newCity);
-        
+        string
+            password = firstName.ToLower() + lastName.ToLower() +
+                       "login"; // hardcoded temporary password (will be sent by email) (not generated randomly, to make it easier to remember for testing purposes)
+        User newUser = new User(username, password, firstName, lastName, newUserType, emailAddress, phoneNumber,
+            newCity);
+
+        //  Rafal
         if (doSendPassword)
         {
             EmailService emailService = new EmailService();
             emailService.SendTemporaryPasswordByEmail(emailAddress, username, password);
         }
-        
+
         try
         {
             _userDao.AddUser(newUser);
@@ -54,6 +58,7 @@ public class UserService
             throw new Exception(ex.Message);
         }
     }
+
     public long GetTicketCountForUser(string userEmail)
     {
         return _ticketDao.GetTicketCountForUser(userEmail);

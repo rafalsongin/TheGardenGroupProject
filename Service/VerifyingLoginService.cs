@@ -3,8 +3,7 @@ using Model;
 
 namespace Service;
 
-using BCrypt.Net;
-
+// Rafal
 public class VerifyingLoginService
 {
     private readonly UserDao _userDb;
@@ -13,7 +12,6 @@ public class VerifyingLoginService
     {
         _userDb = new UserDao();
     }
-
     
     public bool IsCorrectPassword(string? inputUsername, string inputPassword)
     {
@@ -27,14 +25,14 @@ public class VerifyingLoginService
         string hashedPassword = user.Password;
 
         // check if the password is correct
-        bool passwordMatch = BCrypt.Verify(inputPassword, hashedPassword);
+        bool passwordMatch = BCrypt.Net.BCrypt.Verify(inputPassword, hashedPassword);
         
         return passwordMatch;
     }
     
     public string HashPassword(string password)
     {
-        string hashedPassword = BCrypt.HashPassword(password);
+        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
         return hashedPassword;
     }
     

@@ -1,14 +1,7 @@
-﻿using Model;
-using MongoDB.Bson;
-using Service;
-using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Printing;
-using System.Windows;
-using System.Windows.Automation.Peers;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Documents;
+using Model;
+using Service;
 
 namespace TheGardenGroupProject
 {
@@ -45,15 +38,14 @@ namespace TheGardenGroupProject
                 //int.Parse(user.AmountOfTickets); 
                 // hardcoded
 
-               
+
                 id++;
 
                 dataList.Add(data);
-                
+
                 //here I create a ListViewItem with the user's username 
                 //ListViewItem item = new ListViewItem();
                 //item.Content = user.Username;
-                
             }
 
             ListViewAllUsers.ItemsSource = dataList;
@@ -68,11 +60,10 @@ namespace TheGardenGroupProject
         }
 
 
-        private void listViewAllUsers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void listViewAllUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
-       
+
         public class ListViewItemData
         {
             public int Id { get; set; }
