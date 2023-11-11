@@ -1,4 +1,5 @@
 ﻿using Model;
+using MongoDB.Driver.Linq;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,6 @@ namespace TheGardenGroupProject
             priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
             var dataSource = new List<string>();
             dataSource.Add("Today");
-            dataSource.Add("This Week");
             dataSource.Add("This Month");
             dataSource.Add("This Year");
             dateAddedComboBox.ItemsSource = dataSource;
@@ -211,8 +211,6 @@ namespace TheGardenGroupProject
                             newTickets.Add(ticket);
                         }
                         break;
-                    case "This Week":
-                        break;
                     case "This Month":
                         if (ticket.ReportedOn.Month == DateTime.Today.Month)
                         {
@@ -263,6 +261,14 @@ namespace TheGardenGroupProject
         {
             everyButton.Background = selectedColour;
             ownButton.Background = notSelectedColour;
+            ShowCorrectView();
+        }
+
+        private void ClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            typeComboBox.SelectedIndex = -1;
+            priorityComboBox.SelectedIndex = -1;
+            dateAddedComboBox.SelectedIndex = -1;
             ShowCorrectView();
         }
 

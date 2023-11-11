@@ -9,12 +9,12 @@
       Title="ViewTicketsForEmployeePage">
 
     <Grid>
-        <Button x:Name="allButton"  Content="All" Width="150" Height="35" Click="AllTickets_Click"  Background="#3c7360" FontSize="16" Margin="10,10,840,655"/>
-        <Button x:Name="openButton" Content="Open" Width="150" Click="OpenTickets_Click" Height="35" Background="#a2deca" FontSize="16" Margin="165,10,685,655"/>
-        <Button x:Name="closedButton" Content="Closed" Width="150" Click="ClosedTickets_Click" Height="35" Background="#a2deca" FontSize="16" Margin="320,10,530,655"/>
-        <Button x:Name="ownButton" Content="Own" Width="150" Click="OwnTickets_Click" Height="35" Background="#a2deca" FontSize="16" Margin="475,10,375,655"/>
-        <Button x:Name="everyButton" Content="Every" Width="150" Click="EveryTickets_Click" Height="35" Background="#3c7360" FontSize="16" Margin="630,10,220,655"/>
-        <ListView x:Name="viewTicketsListView" Margin="10,102,10,10" Grid.ColumnSpan="2">
+        <Button x:Name="allButton" Content="All" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="35" Width="150" Background="#3c7360" FontSize="16" Click="AllTickets_Click"/>
+        <Button x:Name="openButton" Content="Open" HorizontalAlignment="Left" Margin="165,10,0,0" VerticalAlignment="Top" Height="35" Width="150" Background="#a2deca" FontSize="16" Click="OpenTickets_Click"/>
+        <Button x:Name="closedButton" Content="Closed" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Height="35" Width="150" Background="#a2deca" FontSize="16" Click="ClosedTickets_Click"/>
+        <Button x:Name="ownButton" Content="Own" HorizontalAlignment="Left" Margin="475,10,0,0" VerticalAlignment="Top" Height="35" Width="150" Background="#a2deca" FontSize="16" Click="OwnTickets_Click"/>
+        <Button x:Name="everyButton" Content="Every" HorizontalAlignment="Left" Margin="630,10,0,0" VerticalAlignment="Top" Height="35" Width="150" Background="#3c7360" FontSize="16" Click="EveryTickets_Click"/>
+        <ListView x:Name="viewTicketsListView" Margin="10,132,10,10">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Title" Width="250" DisplayMemberBinding="{Binding Subject}"/>
@@ -26,8 +26,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Width="150" Height="25" SelectionChanged="FilterTypeSelected"/>
-        <ComboBox x:Name="priorityComboBox" HorizontalAlignment="Left" Margin="185,61,0,0" VerticalAlignment="Top" Width="150" Height="25" SelectionChanged="FilterPrioritySelected"/>
-        <ComboBox x:Name="dateAddedComboBox" HorizontalAlignment="Left" Margin="360,61,0,0" VerticalAlignment="Top" Width="150" Height="25" SelectionChanged="FilterDateSelected"/>
+        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="150" Height="25" SelectionChanged="FilterTypeSelected"/>
+        <ComboBox x:Name="priorityComboBox" HorizontalAlignment="Left" Margin="185,100,0,0" VerticalAlignment="Top" Width="150" Height="25" SelectionChanged="FilterPrioritySelected"/>
+        <ComboBox x:Name="dateAddedComboBox" HorizontalAlignment="Left" Margin="360,100,0,0" VerticalAlignment="Top" Width="150" Height="25" SelectionChanged="FilterDateSelected"/>
+        <Button Content="Clear Filter" HorizontalAlignment="Left" Margin="827,100,0,0" VerticalAlignment="Top" Height="25" Width="125" FontSize="14" Background="#3c7360" Click="ClearFilter_Click"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="185,69,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date" HorizontalAlignment="Left" Margin="360,69,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
