@@ -7,7 +7,8 @@
       Title="ViewUsersUI" Height="700" Width="1000">
     <Grid Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=20}" SelectionChanged="listViewAllUsers_SelectionChanged" Grid.ColumnSpan="1">
+            <ListView x:Name="ListViewAllUsers" d:ItemsSource="{d:SampleData ItemCount=20}" Grid.ColumnSpan="1"
+                      Height="662" Width="940">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />

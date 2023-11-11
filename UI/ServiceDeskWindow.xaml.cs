@@ -7,7 +7,6 @@ namespace TheGardenGroupProject;
 // Rafal
 public partial class ServiceDeskWindow : Window
 {
-    private ViewUsersPage ViewUsersPage { get; }
     private NewUserPage NewUserPage { get; }
     private ViewTicketsPage ViewTicketsPage { get; }
     private CreateTicketPage CreateTicketPage { get; }
@@ -17,10 +16,8 @@ public partial class ServiceDeskWindow : Window
     public ServiceDeskWindow(User user)
     {
         InitializeComponent();
-
-        ViewUsersPage = new ViewUsersPage();
+        
         NewUserPage = new NewUserPage();
-        ViewTicketsPage = new ViewTicketsPage();
         CreateTicketPage = new CreateTicketPage();
 
         LoggedInUser = user;
@@ -28,7 +25,8 @@ public partial class ServiceDeskWindow : Window
 
     private void ViewUsersButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.NavigationService.Navigate(ViewUsersPage);
+        // to refresh the page when the user clicks on the button
+        ContentPage.NavigationService.Navigate(new ViewUsersPage());
     }
 
     private void AddUsersButton_Click(object sender, RoutedEventArgs e)
@@ -38,13 +36,13 @@ public partial class ServiceDeskWindow : Window
 
     private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.NavigationService.Navigate(ViewTicketsPage);
+        // to refresh the page when the user clicks on the button
+        ContentPage.NavigationService.Navigate(new ViewTicketsPage());
     }
 
     private void CreateTicketsButton_Click(object sender, RoutedEventArgs e)
     {
         ContentPage.NavigationService.Navigate(CreateTicketPage);
-
     }
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)

@@ -31,12 +31,11 @@ namespace Model
         [BsonRepresentation(BsonType.String)]
         public Status Status { get; set; }
 
-        public bool IsClosed => Status == Status.Closed; //for UI purpose 
-
         [BsonElement("ReportedBy")] public string ReportedBy { get; set; } //based on userName
 
         public Ticket(DateTime reportedOn, string subject, string description, IncidentType incidentType,
-            string reportedBy, Priority priority, DateTime deadLine) //Made by Ghonim, for creating tickets by service employees.
+            string reportedBy, Priority priority,
+            DateTime deadLine) //Made by Ghonim, for creating tickets by service employees.
         {
             ReportedOn = reportedOn;
             Subject = subject;
@@ -49,9 +48,7 @@ namespace Model
             LastUpdated = DateTime.Now;
         }
 
-        /*
-            Made by Kim, is used to create a ticket by company employees and managers.
-        */
+        // Made by Kim, is used to create a ticket by company employees and managers.
         public Ticket(string subject, Priority priority, string description, IncidentType incidentType, User user)
         {
             Subject = subject;
@@ -62,8 +59,6 @@ namespace Model
             LastUpdated = DateTime.Now;
             IncidentType = incidentType;
             ReportedBy = user.Username;
-
         }
-
     }
 }

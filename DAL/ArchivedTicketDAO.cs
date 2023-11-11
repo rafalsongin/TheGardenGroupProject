@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace DAL
 {
-    public class ArchivedTicketDao : BaseDao //Ghonim
+    public class ArchivedTicketDao : BaseDao // Ghonim
     {
         private readonly IMongoCollection<Ticket> _closedTicketCollection;
 

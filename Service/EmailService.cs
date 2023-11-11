@@ -6,7 +6,7 @@ using Model;
 
 namespace Service;
 
-// Rafal
+// Rafal (Individual functionality)
 public class EmailService
 {
     private User _user;

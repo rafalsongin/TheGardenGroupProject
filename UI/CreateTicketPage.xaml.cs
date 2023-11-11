@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -15,10 +14,9 @@ namespace TheGardenGroupProject
         {
             InitializeComponent();
             //filling the comboBoxes
-            creatingComboBoxes();
-              DataContext = this;
-
-
+            CreatingComboBoxes();
+            DataContext = this;
+            
             // Disable user input for DpTimeReported to ensure it reflects the date when the ticket is assigned
             DpTimeReported.IsEnabled = false;
             DpTimeReported.Text = DateTime.Now.ToString();
@@ -38,11 +36,11 @@ namespace TheGardenGroupProject
 
                 DateTime deadLine = DpDeadline.SelectedDate ?? DateTime.MinValue;
                 DateTime dateReported = DateTime.Now;
-                IncidentType selectedIncidentType = (IncidentType)incidentTypeCombobox.SelectedItem;
-                Priority selectedPriority = (Priority)priorityCombobox.SelectedItem;
+                IncidentType selectedIncidentType = (IncidentType)IncidentTypeComboBox.SelectedItem;
+                Priority selectedPriority = (Priority)PriorityComboBox.SelectedItem;
 
-                Ticket ticket = new Ticket(dateReported, subjectOfIncidenttxt.Text, txtDescription.Text,
-                    selectedIncidentType, reportedByTxt.Text, selectedPriority, deadLine);
+                Ticket ticket = new Ticket(dateReported, SubjectOfIncidentTextBox.Text, DescriptionTextBox.Text,
+                    selectedIncidentType, ReportedByTextBox.Text, selectedPriority, deadLine);
                 TicketService ticketService = new TicketService();
                 ticketService.CreateTicket(ticket);
                 ClearUIElements();
@@ -51,7 +49,6 @@ namespace TheGardenGroupProject
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
@@ -73,27 +70,28 @@ namespace TheGardenGroupProject
         private void ClearUIElements()
         {
             DpTimeReported.SelectedDate = DateTime.Now;
-            subjectOfIncidenttxt.Text = "";
-            incidentTypeCombobox.SelectedIndex = -1; // Clear the selection
-            reportedByTxt.Text = "";
-            txtDescription.Text = "";
-            priorityCombobox.SelectedIndex = -1;
+            SubjectOfIncidentTextBox.Text = "";
+            IncidentTypeComboBox.SelectedIndex = -1; // Clear the selection
+            ReportedByTextBox.Text = "";
+            DescriptionTextBox.Text = "";
+            PriorityComboBox.SelectedIndex = -1;
             DpDeadline.SelectedDate = null;
         }
-        private void creatingComboBoxes()
+
+        private void CreatingComboBoxes()
         {
-            priorityCombobox.ItemsSource= Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
-            incidentTypeCombobox.ItemsSource = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+            PriorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            IncidentTypeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
         }
 
         private bool AreInputsValid()
         {
             // Validate inputs before creating a ticket
-            if (string.IsNullOrWhiteSpace(subjectOfIncidenttxt.Text) ||
-                string.IsNullOrWhiteSpace(txtDescription.Text) ||
-                incidentTypeCombobox.SelectedItem == null ||
-                string.IsNullOrWhiteSpace(reportedByTxt.Text) ||
-                priorityCombobox.SelectedItem == null ||
+            if (string.IsNullOrWhiteSpace(SubjectOfIncidentTextBox.Text) ||
+                string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
+                IncidentTypeComboBox.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(ReportedByTextBox.Text) ||
+                PriorityComboBox.SelectedItem == null ||
                 DpDeadline.SelectedDate == null)
             {
                 MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK,
@@ -101,8 +99,7 @@ namespace TheGardenGroupProject
                 return false;
             }
 
-            if (!IsValidName(subjectOfIncidenttxt.Text) || !IsValidName(reportedByTxt.Text) ||
-                !IsValidName(txtDescription.Text))
+            if (!IsValidName(ReportedByTextBox.Text))
             {
                 MessageBox.Show("Please enter valid values for certain fields.", "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);

@@ -1,99 +1,86 @@
-﻿using Model;
-using MongoDB.Driver.Linq;
-using Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Model;
+using Service;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for ViewTicketsForEmployeePage.xaml
-    /// </summary>
     public partial class ViewTicketsForEmployeePage : Page
     {
-        User user;
-        Brush selectedColour = new SolidColorBrush(Color.FromRgb(60, 115, 96));
-        Brush notSelectedColour = new SolidColorBrush(Color.FromRgb(162, 222, 202));
+        private readonly User _user;
+        private readonly Brush _selectedColour = new SolidColorBrush(Color.FromRgb(60, 115, 96));
+        private readonly Brush _notSelectedColour = new SolidColorBrush(Color.FromRgb(162, 222, 202));
 
         public ViewTicketsForEmployeePage(User user)
         {
-            this.user = user;
+            _user = user;
             InitializeComponent();
             LoadComboBoxes();
             ResetButtons();
 
             if (user.UserType == UserType.CompanyEmployee) // if the user is a company employee dont show the buttons for the manager and set colours correctly
             {
-                allButton.Background = selectedColour;
+                AllButton.Background = _selectedColour;
                 EmployeeView();
                 ViewAllTicketsEmployee();
             }
             else if (user.UserType == UserType.Manager) // if the user is a manager show all buttons and set colours correctly
             {
-                allButton.Background = selectedColour;
-                everyButton.Background = selectedColour;
+                AllButton.Background = _selectedColour;
+                EveryButton.Background = _selectedColour;
                 ViewAllTickets();
             }
         }
 
         private void ResetButtons()
         {
-            allButton.Background = notSelectedColour;
-            openButton.Background = notSelectedColour;
-            closedButton.Background = notSelectedColour;
+            AllButton.Background = _notSelectedColour;
+            OpenButton.Background = _notSelectedColour;
+            ClosedButton.Background = _notSelectedColour;
         }
 
         private void LoadComboBoxes() // filling one combo box with all the values of the enum 'IncidentType' and the other combo box with all the values of the enum 'Priority'
         {
-            typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
-            priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
+            TypeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
+            PriorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
             var dataSource = new List<string>();
             dataSource.Add("Today");
             dataSource.Add("This Month");
             dataSource.Add("This Year");
-            dateAddedComboBox.ItemsSource = dataSource;
+            DateAddedComboBox.ItemsSource = dataSource;
         }
 
         private void EmployeeView() // hide manager buttons
         {
-            ownButton.Visibility = Visibility.Hidden;
-            everyButton.Visibility = Visibility.Hidden;
+            OwnButton.Visibility = Visibility.Hidden;
+            EveryButton.Visibility = Visibility.Hidden;
         }
 
         private void ViewAllTicketsEmployee() // view all tickets from the user
         {
             TicketService ticketService = new();
-            List<Ticket> tickets = ticketService.GetAllTicketsFromUser(user);
+            List<Ticket> tickets = ticketService.GetAllTicketsFromUser(_user);
             tickets = FilterList(tickets);
-            viewTicketsListView.ItemsSource = tickets;
+            ViewTicketsListView.ItemsSource = tickets;
         }
 
         private void ViewOpenTicketsEmployee() // view all pending and open tickets from the user
         {
             TicketService ticketService = new();
-            List<Ticket> tickets = ticketService.GetOpenTicketsFromUser(user);
+            List<Ticket> tickets = ticketService.GetOpenTicketsFromUser(_user);
             tickets = FilterList(tickets);
-            viewTicketsListView.ItemsSource = tickets;
+            ViewTicketsListView.ItemsSource = tickets;
         }
 
         private void ViewClosedTicketsEmployee() // view all closed and resolved tickets from the user
         {
             TicketService ticketService = new();
-            List<Ticket> tickets = ticketService.GetClosedTicketsFromUser(user);
+            List<Ticket> tickets = ticketService.GetClosedTicketsFromUser(_user);
             tickets = FilterList(tickets);
-            viewTicketsListView.ItemsSource = tickets;
+            ViewTicketsListView.ItemsSource = tickets;
         }
 
         private void ViewAllTickets() // view all tickets
@@ -101,7 +88,7 @@ namespace TheGardenGroupProject
             TicketService ticketService = new();
             List<Ticket> tickets = ticketService.GetAllTickets();
             tickets = FilterList(tickets);
-            viewTicketsListView.ItemsSource = tickets;
+            ViewTicketsListView.ItemsSource = tickets;
         }
 
         private void ViewAllOpenTickets() // view all pending and open tickets
@@ -109,7 +96,7 @@ namespace TheGardenGroupProject
             TicketService ticketService = new();
             List<Ticket> tickets = ticketService.GetAllOpenTickets();
             tickets = FilterList(tickets);
-            viewTicketsListView.ItemsSource = tickets;
+            ViewTicketsListView.ItemsSource = tickets;
         }
 
         private void ViewAllClosedTickets() // view all closed and resolved tickets
@@ -117,37 +104,37 @@ namespace TheGardenGroupProject
             TicketService ticketService = new TicketService();
             List<Ticket> tickets = ticketService.GetAllClosedTickets();
             tickets = FilterList(tickets);
-            viewTicketsListView.ItemsSource = tickets;
+            ViewTicketsListView.ItemsSource = tickets;
         }
 
         private void ShowCorrectView() // fill the list view with the correct data according to what buttons are active
         {
-            if (user.UserType == UserType.CompanyEmployee || ((SolidColorBrush)ownButton.Background) == selectedColour)
+            if (_user.UserType == UserType.CompanyEmployee || ((SolidColorBrush)OwnButton.Background) == _selectedColour)
             {
-                if (((SolidColorBrush)allButton.Background) == selectedColour)
+                if (((SolidColorBrush)AllButton.Background) == _selectedColour)
                 {
                     ViewAllTicketsEmployee();
                 }
-                else if (((SolidColorBrush)openButton.Background) == selectedColour)
+                else if (((SolidColorBrush)OpenButton.Background) == _selectedColour)
                 {
                     ViewOpenTicketsEmployee();
                 }
-                else if (((SolidColorBrush)closedButton.Background) == selectedColour)
+                else if (((SolidColorBrush)ClosedButton.Background) == _selectedColour)
                 {
                     ViewClosedTicketsEmployee();
                 }
             }
-            else if (((SolidColorBrush)everyButton.Background) == selectedColour)
+            else if (((SolidColorBrush)EveryButton.Background) == _selectedColour)
             {
-                if (((SolidColorBrush)allButton.Background) == selectedColour)
+                if (((SolidColorBrush)AllButton.Background) == _selectedColour)
                 {
                     ViewAllTickets();
                 }
-                else if (((SolidColorBrush)openButton.Background) == selectedColour)
+                else if (((SolidColorBrush)OpenButton.Background) == _selectedColour)
                 {
                     ViewAllOpenTickets();
                 }
-                else if (((SolidColorBrush)closedButton.Background) == selectedColour)
+                else if (((SolidColorBrush)ClosedButton.Background) == _selectedColour)
                 {
                     ViewAllClosedTickets();
                 }
@@ -158,21 +145,21 @@ namespace TheGardenGroupProject
         {
             FilteringService filteringService = new FilteringService();
             List<Ticket> filteredTickets = tickets;
-            if (searchTextBox.Text.Length > 0)
+            if (SearchTextBox.Text.Length > 0)
             {
-                filteredTickets = filteringService.FilterSearch(filteredTickets, searchTextBox.Text);
+                filteredTickets = filteringService.FilterSearch(filteredTickets, SearchTextBox.Text);
             }
-            if (typeComboBox.SelectedIndex != -1)
+            if (TypeComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterType(filteredTickets, (IncidentType)typeComboBox.SelectedItem);
+                filteredTickets = filteringService.FilterType(filteredTickets, (IncidentType)TypeComboBox.SelectedItem);
             }
-            if (priorityComboBox.SelectedIndex != -1)
+            if (PriorityComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterPriority(filteredTickets, (Priority)priorityComboBox.SelectedItem);
+                filteredTickets = filteringService.FilterPriority(filteredTickets, (Priority)PriorityComboBox.SelectedItem);
             }
-            if (dateAddedComboBox.SelectedIndex != -1)
+            if (DateAddedComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterDate(filteredTickets, dateAddedComboBox.SelectedItem.ToString());
+                filteredTickets = filteringService.FilterDate(filteredTickets, DateAddedComboBox.SelectedItem.ToString());
             }
             return filteredTickets;
         }
@@ -180,44 +167,44 @@ namespace TheGardenGroupProject
         private void AllTickets_Click(object sender, RoutedEventArgs e)
         {
             ResetButtons();
-            allButton.Background = selectedColour;
+            AllButton.Background = _selectedColour;
             ShowCorrectView();
         }
 
         private void OpenTickets_Click(object sender, RoutedEventArgs e)
         {
             ResetButtons();
-            openButton.Background = selectedColour;
+            OpenButton.Background = _selectedColour;
             ShowCorrectView();
         }
 
         private void ClosedTickets_Click(object sender, RoutedEventArgs e)
         {
             ResetButtons();
-            closedButton.Background = selectedColour;
+            ClosedButton.Background = _selectedColour;
             ShowCorrectView();
         }
 
         private void OwnTickets_Click(object sender, RoutedEventArgs e)
         {
-            everyButton.Background = notSelectedColour;
-            ownButton.Background = selectedColour;
+            EveryButton.Background = _notSelectedColour;
+            OwnButton.Background = _selectedColour;
             ShowCorrectView();
         }
 
         private void EveryTickets_Click(object sender, RoutedEventArgs e)
         {
-            everyButton.Background = selectedColour;
-            ownButton.Background = notSelectedColour;
+            EveryButton.Background = _selectedColour;
+            OwnButton.Background = _notSelectedColour;
             ShowCorrectView();
         }
 
         private void ClearFilter_Click(object sender, RoutedEventArgs e)
         {
-            typeComboBox.SelectedIndex = -1;
-            priorityComboBox.SelectedIndex = -1;
-            dateAddedComboBox.SelectedIndex = -1;
-            searchTextBox.Text = "";
+            TypeComboBox.SelectedIndex = -1;
+            PriorityComboBox.SelectedIndex = -1;
+            DateAddedComboBox.SelectedIndex = -1;
+            SearchTextBox.Text = "";
             ShowCorrectView();
         }
 

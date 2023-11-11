@@ -1,20 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using Model;
-using MongoDB.Driver;
 using Service;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for NewUserUI.xaml
-    /// </summary>
     public partial class NewUserPage : Page
 
     {
-        private IMongoCollection<User> _userCollection;
-
         public NewUserPage()
         {
             InitializeComponent();
@@ -93,13 +86,13 @@ namespace TheGardenGroupProject
         }
 
 
-        //the IsValidEmail method is defined here
+        // the IsValidEmail method is defined here
         private bool IsValidEmail(string email)
         {
-            //regular expression pattern for email validation
+            // regular expression pattern for email validation
             string pattern = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)*(\.[a-z]{2,4})$";
 
-            //Regex.IsMatch is used to check if the email matches the pattern
+            // Regex.IsMatch is used to check if the email matches the pattern
             return Regex.IsMatch(email, pattern);
         }
     }

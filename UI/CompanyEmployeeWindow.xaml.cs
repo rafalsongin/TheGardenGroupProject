@@ -7,31 +7,27 @@ namespace TheGardenGroupProject;
 // Rafal
 public partial class CompanyEmployeeWindow : Window
 {
-    private DashboardPage DashboardPage { get; }
-
     private AddTicketPage AddTicketPage { get; }
-
-    private ViewTicketsForEmployeePage ViewTicketsForEmployeePage { get; }
     private User LoggedInUser { get; }
 
     public CompanyEmployeeWindow(User user)
     {
         InitializeComponent();
         LoggedInUser = user;
-
-        DashboardPage = new DashboardPage();
+        
         AddTicketPage = new AddTicketPage(LoggedInUser);
-        ViewTicketsForEmployeePage = new ViewTicketsForEmployeePage(LoggedInUser);
     }
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.NavigationService.Navigate(DashboardPage);
+        // to refresh the page when the user clicks on the button
+        ContentPage.NavigationService.Navigate(new DashboardPage());
     }
 
     private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.NavigationService.Navigate(ViewTicketsForEmployeePage);
+        // to refresh the page when the user clicks on the button
+        ContentPage.NavigationService.Navigate(new ViewTicketsForEmployeePage(LoggedInUser));
     }
 
     private void CreateTicketButton_Click(object sender, RoutedEventArgs e)

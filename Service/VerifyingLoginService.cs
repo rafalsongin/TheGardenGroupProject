@@ -12,7 +12,7 @@ public class VerifyingLoginService
     {
         _userDb = new UserDao();
     }
-    
+
     public bool IsCorrectPassword(string? inputUsername, string inputPassword)
     {
         if (_userDb?.GetUserByUsername(inputUsername) == null)
@@ -26,14 +26,13 @@ public class VerifyingLoginService
 
         // check if the password is correct
         bool passwordMatch = BCrypt.Net.BCrypt.Verify(inputPassword, hashedPassword);
-        
+
         return passwordMatch;
     }
-    
+
     public string HashPassword(string password)
     {
         string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
         return hashedPassword;
     }
-    
 }

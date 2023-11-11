@@ -2,8 +2,6 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using System.Collections;
-using System.Collections.ObjectModel;
 
 namespace DAL
 {
@@ -19,10 +17,9 @@ namespace DAL
         //Ghonim
         public void CreateTicket(Ticket ticket)
         {
-
             _ticketCollection.InsertOne(ticket);
         }
-      
+
         public void UpdateTicket(Ticket updatedTicket)
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
@@ -114,13 +111,12 @@ namespace DAL
 
             return closedTickets;
         }
-        
+
         //dana
-        public long GetTicketCountForUser(string userEmail)
+        public long GetTicketCountForUser(string username)
         {
-            var filter = Builders<Ticket>.Filter.Eq("Email", userEmail);
-            long ticketCount = _ticketCollection.CountDocuments(filter);
-            return ticketCount;
+            // Return the number of tickets for the specified user
+            return _ticketCollection.CountDocuments(ticket => ticket.ReportedBy == username);
         }
 
         public List<Ticket> GetAllTicketsSortedByPriorityDescending()
@@ -140,11 +136,7 @@ namespace DAL
                 throw new Exception($"Error getting and sorting tickets: {ex.Message}", ex);
             }
         }
-
-
-
         // dana end 
-
 
 
         //kim
