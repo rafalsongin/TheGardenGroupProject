@@ -154,79 +154,23 @@ namespace TheGardenGroupProject
             }
         }
 
-        private List<Ticket> FilterList(List<Ticket> tickets)
+        private List<Ticket> FilterList(List<Ticket> tickets) // filtering tickets based on type, priority and date
         {
+            FilteringService filteringService = new FilteringService();
             List<Ticket> filteredTickets = tickets;
             if (typeComboBox.SelectedIndex != -1)
             {
-                filteredTickets = FilterType(filteredTickets);
+                filteredTickets = filteringService.FilterType(filteredTickets, (IncidentType)typeComboBox.SelectedItem);
             }
             if (priorityComboBox.SelectedIndex != -1)
             {
-                filteredTickets = FilterPriority(filteredTickets);
+                filteredTickets = filteringService.FilterPriority(filteredTickets, (Priority)priorityComboBox.SelectedItem);
             }
             if (dateAddedComboBox.SelectedIndex != -1)
             {
-                filteredTickets = FilterDate(filteredTickets);
+                filteredTickets = filteringService.FilterDate(filteredTickets, dateAddedComboBox.SelectedItem.ToString());
             }
             return filteredTickets;
-        }
-
-        private List<Ticket> FilterType(List<Ticket> tickets)
-        {
-            List<Ticket> newTickets = new List<Ticket>();
-            foreach (Ticket ticket in tickets)
-            {
-                if (ticket.IncidentType == (IncidentType)typeComboBox.SelectedItem)
-                {
-                    newTickets.Add(ticket);
-                }
-            }
-            return newTickets;
-        }
-
-        private List<Ticket> FilterPriority(List<Ticket> tickets)
-        {
-            List<Ticket> newTickets = new List<Ticket>();
-            foreach (Ticket ticket in tickets)
-            {
-                if (ticket.Priority == (Priority)priorityComboBox.SelectedItem)
-                {
-                    newTickets.Add(ticket);
-                }
-            }
-            return newTickets;
-        }
-
-        private List<Ticket> FilterDate(List<Ticket> tickets)
-        {
-            List<Ticket> newTickets = new List<Ticket>();
-            foreach (Ticket ticket in tickets)
-            {
-                switch (dateAddedComboBox.SelectedItem)
-                {
-                    case "Today":
-                        if (ticket.ReportedOn.Day == DateTime.Today.Day)
-                        {
-                            newTickets.Add(ticket);
-                        }
-                        break;
-                    case "This Month":
-                        if (ticket.ReportedOn.Month == DateTime.Today.Month)
-                        {
-                            newTickets.Add(ticket);
-                        }
-                        break;
-                    case "This Year":
-                        if (ticket.ReportedOn.Year == DateTime.Today.Year)
-                        {
-                            newTickets.Add(ticket);
-                        }
-                        break;
-                    default: break;
-                }
-            }
-            return newTickets;
         }
 
         private void AllTickets_Click(object sender, RoutedEventArgs e)
@@ -272,17 +216,7 @@ namespace TheGardenGroupProject
             ShowCorrectView();
         }
 
-        private void FilterTypeSelected(object sender, SelectionChangedEventArgs e)
-        {
-            ShowCorrectView();
-        }
-
-        private void FilterPrioritySelected(object sender, SelectionChangedEventArgs e)
-        {
-            ShowCorrectView();
-        }
-
-        private void FilterDateSelected(object sender, SelectionChangedEventArgs e)
+        private void FilterSelected(object sender, SelectionChangedEventArgs e)
         {
             ShowCorrectView();
         }
