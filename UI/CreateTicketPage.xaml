@@ -3,34 +3,34 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Create Ticket" Height="700" Width="1000">
     <Grid Margin="0,2,0,-2">
-        <Label Content="Create New Incident Ticket" HorizontalAlignment="Left" Margin="125,10,0,0"
-               VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="20" />
+        <Label Content="Create New Incident Ticket" HorizontalAlignment="Left" Margin="137,29,0,0"
+               VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="20" Height="44" Width="305" />
         <Label Content="Date/Time reported:" HorizontalAlignment="Left" Margin="180,89,0,0" VerticalAlignment="Top"
                Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
         <Label Content="Subject of incident:" HorizontalAlignment="Left" Margin="180,127,0,0" VerticalAlignment="Top"
                Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Type of incident:" HorizontalAlignment="Left" Margin="180,198,0,0" VerticalAlignment="Top"
+        <Label Content="Type of incident:" HorizontalAlignment="Left" Margin="180,266,0,0" VerticalAlignment="Top"
                Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Reported by:" HorizontalAlignment="Left" Margin="180,232,0,0" VerticalAlignment="Top"
+        <Label Content="Reported by:" HorizontalAlignment="Left" Margin="180,300,0,0" VerticalAlignment="Top"
                Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Priority:" HorizontalAlignment="Left" Margin="180,272,0,0" VerticalAlignment="Top" Width="146"
+        <Label Content="Priority:" HorizontalAlignment="Left" Margin="180,340,0,0" VerticalAlignment="Top" Width="146"
                FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <Label Content="Deadline/Follow up:" HorizontalAlignment="Left" Margin="180,306,0,0" VerticalAlignment="Top"
+        <Label Content="Deadline/Follow up:" HorizontalAlignment="Left" Margin="180,374,0,0" VerticalAlignment="Top"
                Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <TextBox x:Name="subjectOfIncidenttxt" HorizontalAlignment="Left" Margin="382,137,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="reportedByTxt" HorizontalAlignment="Left" Margin="382,243,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="120" />
-        <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="382,206,0,0" VerticalAlignment="Top"
-                  Width="120"
+        <TextBox x:Name="SubjectOfIncidentTextBox" HorizontalAlignment="Left" Margin="382,137,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="307" />
+        <TextBox x:Name="ReportedByTextBox" HorizontalAlignment="Left" Margin="382,311,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="307" />
+        <ComboBox x:Name="IncidentTypeComboBox" HorizontalAlignment="Left" Margin="382,274,0,0" VerticalAlignment="Top"
+                  Width="307"
                   ItemsSource="{Binding IncidentTypes}" Height="24" />
 
 
-        <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="382,276,0,0" VerticalAlignment="Top"
-                  Width="120" ItemsSource="{Binding Priorities}" Height="24" />
+        <ComboBox x:Name="PriorityComboBox" HorizontalAlignment="Left" Margin="382,344,0,0" VerticalAlignment="Top"
+                  Width="307" ItemsSource="{Binding Priorities}" Height="24" />
 
-        <Button x:Name="btnCreateTicket" Content="Create Ticket" HorizontalAlignment="Left" Margin="469,357,0,0"
-                VerticalAlignment="Top" Width="96" FontSize="14" Height="33" RenderTransformOrigin="0.504,0.567"
+        <Button x:Name="CreateTicketButton" Content="Create Ticket" HorizontalAlignment="Left" Margin="552,450,0,0"
+                VerticalAlignment="Top" Width="137" FontSize="14" Height="61" RenderTransformOrigin="0.504,0.567"
                 Click="btnCreateTicket_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -47,8 +47,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnCancelTicket" Content="Cancel" HorizontalAlignment="Left" Margin="300,357,0,0"
-                VerticalAlignment="Top" Width="96" FontSize="14" Height="33" RenderTransformOrigin="0.504,0.567"
+        <Button x:Name="CancelTicketButton" Content="Cancel" HorizontalAlignment="Left" Margin="280,450,0,0"
+                VerticalAlignment="Top" Width="137" FontSize="14" Height="61" RenderTransformOrigin="0.504,0.567"
                 Click="btnCancel_Click" Background="#FFDFDADA">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -59,14 +59,14 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <DatePicker x:Name="DpDeadline" HorizontalAlignment="Left" Margin="382,311,0,0" VerticalAlignment="Top"
-                    Width="120" />
-        <DatePicker HorizontalAlignment="Left" Height="0" Margin="442,311,0,0" VerticalAlignment="Top" Width="0" />
+        <DatePicker x:Name="DpDeadline" HorizontalAlignment="Left" Margin="382,379,0,0" VerticalAlignment="Top"
+                    Width="307" />
+        <DatePicker HorizontalAlignment="Left" Height="0" Margin="442,379,0,0" VerticalAlignment="Top" Width="0" />
         <DatePicker x:Name="DpTimeReported" HorizontalAlignment="Left" Margin="382,96,0,0" VerticalAlignment="Top"
                     Width="120" />
         <Label Content="Description" HorizontalAlignment="Left" Margin="180,162,0,0" VerticalAlignment="Top"
                Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="382,171,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Left" Margin="382,171,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="307" Height="87" />
     </Grid>
 </Page>

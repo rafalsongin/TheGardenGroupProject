@@ -9,7 +9,6 @@ public class User
     public User(string username, string password, string firstName, string lastName, UserType userType, string email,
         string phoneNumber, City city)
     {
-        //ObjectId = objectId;
         Username = username;
         Password = password;
         FirstName = firstName;

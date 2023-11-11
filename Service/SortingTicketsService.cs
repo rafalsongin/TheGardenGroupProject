@@ -1,29 +1,23 @@
 ﻿using DAL;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service
 {
     public class SortingTicketsService
     {
-        private TicketDao sortingTicketDao;
+        private readonly TicketDao _sortingTicketDao;
+
         public SortingTicketsService()
         {
-            sortingTicketDao = new TicketDao();
+            _sortingTicketDao = new TicketDao();
         }
 
-        //dana
-
+        // dana
         public List<Ticket> GetAllTicketsSortedByPriorityDescending()
         {
             try
             {
-                return sortingTicketDao.GetAllTicketsSortedByPriorityDescending();
+                return _sortingTicketDao.GetAllTicketsSortedByPriorityDescending();
             }
             catch (Exception ex)
             {
@@ -31,7 +25,5 @@ namespace Service
                 throw new Exception($"Error in TicketService: {ex.Message}", ex);
             }
         }
-
-
     }
 }

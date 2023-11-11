@@ -5,17 +5,17 @@ namespace Service
 {
     public class ArchivingService
     {
-        private ArchivedTicketDao closedTicketArchiveDAO;
+        private readonly ArchivedTicketDao _closedTicketArchiveDao;
 
         public ArchivingService()
         {
-            closedTicketArchiveDAO = new ArchivedTicketDao();
+            _closedTicketArchiveDao = new ArchivedTicketDao();
         }
 
         public void ArchiveTicket(Ticket ticket)
         {
             // Archive the ticket in the secondary database
-            closedTicketArchiveDAO.ArchiveTicket(ticket);
+            _closedTicketArchiveDao.ArchiveTicket(ticket);
         }
     }
 }

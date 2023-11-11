@@ -9,7 +9,7 @@ namespace TheGardenGroupProject
     // Made by Kim
     public partial class AddTicketPage : Page
     {
-        private User user;
+        private readonly User _user;
 
         public AddTicketPage(User user)
         {
@@ -17,30 +17,30 @@ namespace TheGardenGroupProject
             LoadComboBoxes();
             EmptyErrorLabels();
             ClearTicket();
-            this.user = user;
+            _user = user;
         }
 
         private void
             LoadComboBoxes() // filling one combo box with all the values of the enum 'IncidentType' and the other combo box with all the values of the enum 'Priority'
         {
-            typeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
-            priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
+            TypeComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
+            PriorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
         }
 
         private void EmptyErrorLabels()
         {
-            titleError.Content = "";
-            priorityError.Content = "";
-            incidentTypeError.Content = "";
-            descriptionError.Content = "";
+            TitleError.Content = "";
+            PriorityError.Content = "";
+            IncidentTypeError.Content = "";
+            DescriptionError.Content = "";
         }
 
         private void ClearTicket()
         {
-            titleTextBox.Text = "";
-            priorityComboBox.SelectedIndex = -1;
-            typeComboBox.SelectedIndex = -1;
-            descriptionTextBox.Text = "";
+            TitleTextBox.Text = "";
+            PriorityComboBox.SelectedIndex = -1;
+            TypeComboBox.SelectedIndex = -1;
+            DescriptionTextBox.Text = "";
         }
 
         private void CreateTicket_Click(object sender, RoutedEventArgs e)
@@ -71,30 +71,30 @@ namespace TheGardenGroupProject
         private bool CheckIfFieldsFilledIn()
         {
             bool filledIn = true;
-            if (titleTextBox.Text.Length == 0) // if no title is given give error and make sure no ticket is created
+            if (TitleTextBox.Text.Length == 0) // if no title is given give error and make sure no ticket is created
             {
-                titleError.Content = "Enter a title";
+                TitleError.Content = "Enter a title";
                 filledIn = false;
             }
 
-            if (priorityComboBox.SelectedIndex ==
+            if (PriorityComboBox.SelectedIndex ==
                 -1) // if no priority is selected give error and make sure no ticket is created
             {
-                priorityError.Content = "Select a priority";
+                PriorityError.Content = "Select a priority";
                 filledIn = false;
             }
 
-            if (typeComboBox.SelectedIndex ==
+            if (TypeComboBox.SelectedIndex ==
                 -1) // if no type is selected give error and make sure no ticket is created
             {
-                incidentTypeError.Content = "Select an incident type";
+                IncidentTypeError.Content = "Select an incident type";
                 filledIn = false;
             }
 
-            if (descriptionTextBox.Text.Length ==
+            if (DescriptionTextBox.Text.Length ==
                 0) // if no description is given give error and make sure no ticket is created
             {
-                descriptionError.Content = "Give a description";
+                DescriptionError.Content = "Give a description";
                 filledIn = false;
             }
 
@@ -104,8 +104,8 @@ namespace TheGardenGroupProject
         private void CreateTicketConcept()
         {
             TicketService service = new();
-            Ticket ticket = new(titleTextBox.Text, (Priority)priorityComboBox.SelectedItem, descriptionTextBox.Text,
-                (IncidentType)typeComboBox.SelectedItem, user);
+            Ticket ticket = new(TitleTextBox.Text, (Priority)PriorityComboBox.SelectedItem, DescriptionTextBox.Text,
+                (IncidentType)TypeComboBox.SelectedItem, _user);
 
             service.CreateTicket(ticket);
         }

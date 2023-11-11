@@ -59,9 +59,10 @@ public class UserService
         }
     }
 
-    public long GetTicketCountForUser(string userEmail)
+    // dana
+    public long GetTicketCountForUser(string username)
     {
-        return _ticketDao.GetTicketCountForUser(userEmail);
+        return _ticketDao.GetTicketCountForUser(username);
     }
 
 

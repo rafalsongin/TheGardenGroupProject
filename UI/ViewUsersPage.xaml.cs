@@ -5,9 +5,6 @@ using Service;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for ViewUsersUI.xaml
-    /// </summary>
     public partial class ViewUsersPage : Page
     {
         public ViewUsersPage()
@@ -16,7 +13,7 @@ namespace TheGardenGroupProject
             DisplayAllUsers();
         }
 
-        //dana
+        // dana
         private void DisplayAllUsers()
         {
             UserService userService = new UserService();
@@ -29,23 +26,18 @@ namespace TheGardenGroupProject
 
             foreach (User user in usersList)
             {
-                ListViewItemData data = new ListViewItemData();
-                data.Id = id;
-                data.Email = user.Email;
-                data.FirstName = user.FirstName;
-                data.LastName = user.LastName;
-                data.AmountOfTickets = GetUserTicketCount(user);
-                //int.Parse(user.AmountOfTickets); 
-                // hardcoded
-
+                ListViewItemData data = new ListViewItemData
+                {
+                    Id = id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    AmountOfTickets = GetUserTicketCount(user)
+                };
 
                 id++;
 
                 dataList.Add(data);
-
-                //here I create a ListViewItem with the user's username 
-                //ListViewItem item = new ListViewItem();
-                //item.Content = user.Username;
             }
 
             ListViewAllUsers.ItemsSource = dataList;
@@ -54,14 +46,9 @@ namespace TheGardenGroupProject
         private int GetUserTicketCount(User user)
         {
             UserService userService = new UserService();
-            string userEmail = user.Email;
-            long ticketCount = userService.GetTicketCountForUser(userEmail);
+            long ticketCount = userService.GetTicketCountForUser(user.Username);
+
             return (int)ticketCount;
-        }
-
-
-        private void listViewAllUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
         }
 
         public class ListViewItemData

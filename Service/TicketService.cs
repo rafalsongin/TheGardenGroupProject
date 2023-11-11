@@ -12,7 +12,7 @@ namespace Service
             ticketDao = new TicketDao();
         }
 
-        //Ghonim
+        // Ghonim
         public void CreateTicket(Ticket ticket)
         {
             // Check if the reported user exists before creating the ticket
@@ -54,7 +54,7 @@ namespace Service
         {
             return ticketDao.GetAllTickets();
         }
-        //Ghonim end
+        // Ghonim end
 
         public List<Ticket> GetOpenedTickets()
         {
@@ -98,7 +98,7 @@ namespace Service
             return ticketDao.GetAllClosedTickets();
         }
 
-        //dana
+        // dana
         public long GetTicketCountForUser(string userEmail)
         {
             return ticketDao.GetTicketCountForUser(userEmail);

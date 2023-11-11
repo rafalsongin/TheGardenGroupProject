@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="NoDesk Application" Height="465" Width="495" ResizeMode="NoResize"
+        Title="The Garden Group Login" Height="465" Width="495" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" Loaded="LoginWindow_Loaded">
     <Grid x:Name="GridLoginPage" Height="450" VerticalAlignment="Center" Background="White" Visibility="Visible">
         <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Left" VerticalContentAlignment="Center"

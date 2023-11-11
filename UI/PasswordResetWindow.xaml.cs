@@ -4,7 +4,7 @@ using UI;
 
 namespace TheGardenGroupProject;
 
-// Rafal
+// Rafal (Individual functionality)
 public partial class PasswordResetWindow : Window
 {
     private readonly EmailService _emailService;

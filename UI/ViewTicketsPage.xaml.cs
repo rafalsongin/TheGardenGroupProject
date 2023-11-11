@@ -9,28 +9,32 @@ using Service;
 
 namespace TheGardenGroupProject
 {
-
     public partial class ViewTicketsPage : Page // made by Ghonim
     {
-        public ObservableCollection<Ticket> TicketList { get; set; }
+        private ObservableCollection<Ticket> TicketList { get; }
 
-        private TicketService ticketService;
+        private readonly TicketService _ticketService;
 
 
         public ViewTicketsPage()
         {
             InitializeComponent();
-            ticketService = new TicketService();
-            TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
+            _ticketService = new TicketService();
 
-            creatingComboBox();
 
+            // TicketList = new ObservableCollection<Ticket>(_ticketService.GetAllTickets()); - default list
+            TicketList =
+                new ObservableCollection<Ticket>(SortingTickets()); // sorted list (Dana's individual functionality)
+
+
+            CreatingComboBox();
             FillComboBoxesFiltering(); // used for Kim's personal functionality
 
             DataContext = this;
+            TicketsListView.ItemsSource = TicketList;
         }
 
-        private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
+        private void UpdateTicketButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -40,7 +44,7 @@ namespace TheGardenGroupProject
                 }
 
                 // Get the selected ticket from the list
-                Ticket selectedTicket = (Ticket)ticketsListView.SelectedItem;
+                Ticket selectedTicket = (Ticket)TicketsListView.SelectedItem;
 
                 // Check if any changes are made in the UI elements
                 if (!AreChangesMade(selectedTicket))
@@ -49,8 +53,8 @@ namespace TheGardenGroupProject
                         MessageBoxImage.Information);
                     return;
                 }
-                else if (string.IsNullOrWhiteSpace(subjectOfIncidenttxt.Text) ||
-                         string.IsNullOrWhiteSpace(reportedByTxt.Text))
+                else if (string.IsNullOrWhiteSpace(SubjectOfIncidentTextBox.Text) ||
+                         string.IsNullOrWhiteSpace(ReportedByTxt.Text))
                 {
                     MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK,
                         MessageBoxImage.Error);
@@ -60,9 +64,9 @@ namespace TheGardenGroupProject
                 // Update the properties of the selected ticket with the values from the UI
                 UpdateTicketProperties(selectedTicket);
 
-                ticketService.UpdateTicket(selectedTicket);
+                _ticketService.UpdateTicket(selectedTicket);
                 RefreshTableView();
-                ClearUIElements();
+                ClearUiElements();
 
                 MessageBox.Show("Ticket updated successfully!", "Success", MessageBoxButton.OK,
                     MessageBoxImage.Information);
@@ -74,97 +78,96 @@ namespace TheGardenGroupProject
             }
         }
 
-        private void btnDeleteTicket_Click(object sender, RoutedEventArgs e)
+        private void DeleteTicketButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsTicketSelected())
             {
                 return;
             }
 
-            Ticket selectedTicket = (Ticket)ticketsListView.SelectedItem;
-            ticketService.DeleteTicket(selectedTicket);
+            Ticket selectedTicket = (Ticket)TicketsListView.SelectedItem;
+            _ticketService.DeleteTicket(selectedTicket);
             MessageBox.Show("Ticket deleted successfully!", "Success", MessageBoxButton.OK,
                 MessageBoxImage.Information);
             RefreshTableView();
 
-            ClearUIElements();
+            ClearUiElements();
         }
 
 
-
-        private void ClearUIElements()
+        private void ClearUiElements()
         {
-            reportedByTxt.Text = "";
-            subjectOfIncidenttxt.Text = "";
+            ReportedByTxt.Text = "";
+            SubjectOfIncidentTextBox.Text = "";
 
-            priorityCombobox.SelectedIndex = -1;
-            incidentTypeCombobox.SelectedIndex = -1;
-            statusCombobox.SelectedIndex = -1;
+            PriorityCombobox.SelectedIndex = -1;
+            IncidentTypeCombobox.SelectedIndex = -1;
+            StatusCombobox.SelectedIndex = -1;
 
-            DPDeadLine.SelectedDate = null;
-            DPTimeReported.SelectedDate = null;
+            DpDeadLine.SelectedDate = null;
+            DpTimeReported.SelectedDate = null;
         }
-        private void creatingComboBox()
-        {  //filling the cobboboxes with the enums
-            priorityCombobox.ItemsSource = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
-            incidentTypeCombobox.ItemsSource = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+
+        private void CreatingComboBox()
+        {
+            //filling the combo boxes with the enums
+            PriorityCombobox.ItemsSource = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            IncidentTypeCombobox.ItemsSource = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
             var statusValues = Enum.GetValues(typeof(Status)).Cast<Status>().Where(s => s != Status.Pending).ToList();
-            statusCombobox.ItemsSource = statusValues;
+            StatusCombobox.ItemsSource = statusValues;
         }
 
         private void RefreshTableView()
         {
             TicketList.Clear();
-            foreach (Ticket ticket in ticketService.GetAllTickets())
+            foreach (Ticket ticket in _ticketService.GetAllTickets())
             {
                 TicketList.Add(ticket);
             }
-
         }
 
         private bool AreChangesMade(Ticket selectedTicket)
         {
             // Compare the properties of the selected ticket with the values from the UI
-            return selectedTicket.Subject != subjectOfIncidenttxt.Text
-                   || selectedTicket.IncidentType != (IncidentType)incidentTypeCombobox.SelectedItem
-                   || selectedTicket.ReportedBy != reportedByTxt.Text
-                   || selectedTicket.Priority != (Priority)priorityCombobox.SelectedItem
-                   || selectedTicket.Deadline != (DPDeadLine.SelectedDate ?? DateTime.MinValue)
-                   || selectedTicket.Status != (Status)statusCombobox.SelectedItem
-                   || selectedTicket.ReportedOn != (DPTimeReported.SelectedDate ?? DateTime.MinValue);
+            return selectedTicket.Subject != SubjectOfIncidentTextBox.Text
+                   || selectedTicket.IncidentType != (IncidentType)IncidentTypeCombobox.SelectedItem
+                   || selectedTicket.ReportedBy != ReportedByTxt.Text
+                   || selectedTicket.Priority != (Priority)PriorityCombobox.SelectedItem
+                   || selectedTicket.Deadline != (DpDeadLine.SelectedDate ?? DateTime.MinValue)
+                   || selectedTicket.Status != (Status)StatusCombobox.SelectedItem
+                   || selectedTicket.ReportedOn != (DpTimeReported.SelectedDate ?? DateTime.MinValue);
         }
 
         private void UpdateTicketProperties(Ticket ticket)
         {
-            ticket.Subject = subjectOfIncidenttxt.Text; // Replace with the actual UI elements
-            ticket.IncidentType = (IncidentType)incidentTypeCombobox.SelectedItem;
-            ticket.ReportedBy = reportedByTxt.Text;
-            ticket.Priority = (Priority)priorityCombobox.SelectedItem;
-            ticket.Deadline = DPDeadLine.SelectedDate ?? DateTime.MinValue;
-            ticket.Status = (Status)statusCombobox.SelectedItem;
-            ticket.ReportedOn = DPTimeReported.SelectedDate ?? DateTime.MinValue;
+            ticket.Subject = SubjectOfIncidentTextBox.Text; // Replace with the actual UI elements
+            ticket.IncidentType = (IncidentType)IncidentTypeCombobox.SelectedItem;
+            ticket.ReportedBy = ReportedByTxt.Text;
+            ticket.Priority = (Priority)PriorityCombobox.SelectedItem;
+            ticket.Deadline = DpDeadLine.SelectedDate ?? DateTime.MinValue;
+            ticket.Status = (Status)StatusCombobox.SelectedItem;
+            ticket.ReportedOn = DpTimeReported.SelectedDate ?? DateTime.MinValue;
         }
 
         private void ticketsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            if (ticketsListView.SelectedItem != null)
+            if (TicketsListView.SelectedItem != null)
             {
-                Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
+                Ticket selectedTicket = (Ticket)TicketsListView.SelectedValue;
 
-                subjectOfIncidenttxt.Text = selectedTicket.Subject;
-                priorityCombobox.SelectedValue = selectedTicket.Priority;
-                reportedByTxt.Text = selectedTicket.ReportedBy;
-                DPTimeReported.SelectedDate = selectedTicket.ReportedOn;
-                DPDeadLine.SelectedDate = selectedTicket.Deadline;
-                incidentTypeCombobox.SelectedValue = selectedTicket.IncidentType;
-                statusCombobox.SelectedValue = selectedTicket.Status;
+                SubjectOfIncidentTextBox.Text = selectedTicket.Subject;
+                PriorityCombobox.SelectedValue = selectedTicket.Priority;
+                ReportedByTxt.Text = selectedTicket.ReportedBy;
+                DpTimeReported.SelectedDate = selectedTicket.ReportedOn;
+                DpDeadLine.SelectedDate = selectedTicket.Deadline;
+                IncidentTypeCombobox.SelectedValue = selectedTicket.IncidentType;
+                StatusCombobox.SelectedValue = selectedTicket.Status;
             }
         }
 
         private bool IsTicketSelected()
         {
-            if (ticketsListView.SelectedItem == null)
+            if (TicketsListView.SelectedItem == null)
             {
                 MessageBox.Show("Please select a ticket.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
@@ -172,109 +175,121 @@ namespace TheGardenGroupProject
 
             return true;
         }
+
         //Ghonim individual Functionality
-        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e)
+        private void ArchiveTicketButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsTicketSelected())
             {
                 return;
             }
-            Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
+
+            Ticket selectedTicket = (Ticket)TicketsListView.SelectedValue;
 
             if (selectedTicket.Status != Status.Closed)
             {
-                MessageBox.Show("Only tickets with a closed status can be archived.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Only tickets with a closed status can be archived.", "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
                 return;
             }
+
             ArchivingService archivingTicket = new ArchivingService();
             archivingTicket.ArchiveTicket(selectedTicket);
-            ticketService.DeleteTicket(selectedTicket);
+            _ticketService.DeleteTicket(selectedTicket);
             RefreshTableView();
-            ClearUIElements();
+            ClearUiElements();
             MessageBox.Show("Ticket archived successfully!", "Success", MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }
-        //Ghonim individual Functionality end
+        // Ghonim individual Functionality end
 
 
-
-        private void sortingTickets ()
+        private List<Ticket> SortingTickets()
         {
             SortingTicketsService sortingTicketsService = new SortingTicketsService();
-            List<Ticket> tickets = sortingTicketsService.GetAllTicketsSortedByPriorityDescending();
-
+            return sortingTicketsService.GetAllTicketsSortedByPriorityDescending();
         }
-
-    }
-
 
         // Kim individual Functionality: Filtering
         private void FillComboBoxesFiltering() // filling combo boxes for filtering
         {
-            typeFilterComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
-            priorityFilterComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
-            statusFilterComboBox.ItemsSource = Enum.GetValues(typeof(Status));
+            TypeFilterComboBox.ItemsSource = Enum.GetValues(typeof(IncidentType));
+            PriorityFilterComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
+            StatusFilterComboBox.ItemsSource = Enum.GetValues(typeof(Status));
             var dataSource = new List<string>();
             dataSource.Add("Today");
             dataSource.Add("This Month");
             dataSource.Add("This Year");
-            dateReportedFilterComboBox.ItemsSource = dataSource;
+            DateReportedFilterComboBox.ItemsSource = dataSource;
         }
-        private void ClearFilter_Click(object sender, RoutedEventArgs e) // remove the filters and show normal list without filters
+
+        private void ClearFilter_Click(object sender,
+            RoutedEventArgs e) // remove the filters and show normal list without filters
         {
-            searchTextBox.Text = "";
-            typeFilterComboBox.SelectedIndex = -1;
-            priorityFilterComboBox.SelectedIndex = -1;
-            dateReportedFilterComboBox.SelectedIndex = -1;
-            statusFilterComboBox.SelectedIndex = -1;
+            SearchTextBox.Text = "";
+            TypeFilterComboBox.SelectedIndex = -1;
+            PriorityFilterComboBox.SelectedIndex = -1;
+            DateReportedFilterComboBox.SelectedIndex = -1;
+            StatusFilterComboBox.SelectedIndex = -1;
             RefreshTableView();
         }
 
-        private void FilterSelected(object sender, SelectionChangedEventArgs e) // when an item is selected from one of the filtering combo boxes show filtered list
+        private void FilterSelected(object sender,
+            SelectionChangedEventArgs e) // when an item is selected from one of the filtering combo boxes show filtered list
         {
-            List<Ticket> tickets = ticketService.GetAllTickets();
+            List<Ticket> tickets = _ticketService.GetAllTickets();
             ShowFilteredList(tickets);
         }
 
-        private void SearchTyped(object sender, TextChangedEventArgs e) // when something is typed in the searched show filtered list
+        private void SearchTyped(object sender,
+            TextChangedEventArgs e) // when something is typed in the searched show filtered list
         {
-            List<Ticket> tickets = ticketService.GetAllTickets();
+            List<Ticket> tickets = _ticketService.GetAllTickets();
             ShowFilteredList(tickets);
         }
 
         private void ShowFilteredList(List<Ticket> tickets) // filter list then show filtered list
         {
             List<Ticket> filteredList = FilterList(tickets);
-            ticketsListView.ItemsSource = filteredList;
+            TicketsListView.ItemsSource = filteredList;
         }
 
-        private List<Ticket> FilterList(List<Ticket> tickets) // filtering tickets based on type, priority, date, subject, description, status
+        private List<Ticket>
+            FilterList(List<Ticket> tickets) // filtering tickets based on type, priority, date, subject, description, status
         {
             FilteringService filteringService = new FilteringService();
             List<Ticket> filteredTickets = tickets;
-            if (searchTextBox.Text.Length > 0)
+            if (SearchTextBox.Text.Length > 0)
             {
-                filteredTickets = filteringService.FilterSearch(filteredTickets, searchTextBox.Text);
+                filteredTickets = filteringService.FilterSearch(filteredTickets, SearchTextBox.Text);
             }
-            if (typeFilterComboBox.SelectedIndex != -1)
+
+            if (TypeFilterComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterType(filteredTickets, (IncidentType)typeFilterComboBox.SelectedItem);
+                filteredTickets =
+                    filteringService.FilterType(filteredTickets, (IncidentType)TypeFilterComboBox.SelectedItem);
             }
-            if (priorityFilterComboBox.SelectedIndex != -1)
+
+            if (PriorityFilterComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterPriority(filteredTickets, (Priority)priorityFilterComboBox.SelectedItem);
+                filteredTickets =
+                    filteringService.FilterPriority(filteredTickets, (Priority)PriorityFilterComboBox.SelectedItem);
             }
-            if (dateReportedFilterComboBox.SelectedIndex != -1)
+
+            if (DateReportedFilterComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterDate(filteredTickets, dateReportedFilterComboBox.SelectedItem.ToString());
+                filteredTickets =
+                    filteringService.FilterDate(filteredTickets, DateReportedFilterComboBox.SelectedItem.ToString());
             }
-            if (statusFilterComboBox.SelectedIndex != -1)
+
+            if (StatusFilterComboBox.SelectedIndex != -1)
             {
-                filteredTickets = filteringService.FilterStatus(filteredTickets, (Status)statusFilterComboBox.SelectedItem);
+                filteredTickets =
+                    filteringService.FilterStatus(filteredTickets, (Status)StatusFilterComboBox.SelectedItem);
             }
+
             return filteredTickets;
         }
-
         // Kim individual Functionality end
     }
 }
