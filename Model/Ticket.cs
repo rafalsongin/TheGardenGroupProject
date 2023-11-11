@@ -62,6 +62,8 @@ namespace Model
             LastUpdated = DateTime.Now;
             IncidentType = incidentType;
             ReportedBy = user.Username;
+
         }
+
     }
 }

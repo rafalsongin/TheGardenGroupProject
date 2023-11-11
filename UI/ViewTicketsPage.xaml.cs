@@ -105,8 +105,11 @@ namespace TheGardenGroupProject
             MessageBox.Show("Ticket deleted successfully!", "Success", MessageBoxButton.OK,
                 MessageBoxImage.Information);
             RefreshTableView();
-            ClearUIElements();
-        }
+
+            ClearUIElements(); 
+         }
+
+
 
         private void ClearUIElements()
         {
