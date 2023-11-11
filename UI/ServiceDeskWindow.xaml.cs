@@ -1,29 +1,28 @@
-using System;
 using System.Windows;
-using System.Windows.Media;
 using Model;
 using UI;
 
 namespace TheGardenGroupProject;
 
+// Rafal
 public partial class ServiceDeskWindow : Window
 {
     private ViewUsersPage ViewUsersPage { get; }
     private NewUserPage NewUserPage { get; }
     private ViewTicketsPage ViewTicketsPage { get; }
     private CreateTicketPage CreateTicketPage { get; }
-    
+
     private User LoggedInUser { get; }
-    
+
     public ServiceDeskWindow(User user)
     {
         InitializeComponent();
-        
+
         ViewUsersPage = new ViewUsersPage();
         NewUserPage = new NewUserPage();
         ViewTicketsPage = new ViewTicketsPage();
         CreateTicketPage = new CreateTicketPage();
-        
+
         LoggedInUser = user;
     }
 
@@ -39,11 +38,13 @@ public partial class ServiceDeskWindow : Window
 
     private void ViewTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = ViewTicketsPage;
+        ContentPage.NavigationService.Navigate(ViewTicketsPage);
     }
+
     private void CreateTicketsButton_Click(object sender, RoutedEventArgs e)
     {
-        ContentPage.Content = CreateTicketPage;
+        ContentPage.NavigationService.Navigate(CreateTicketPage);
+
     }
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)

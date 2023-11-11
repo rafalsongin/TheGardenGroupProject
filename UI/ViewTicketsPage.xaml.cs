@@ -5,40 +5,32 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Model;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using Service;
 
 namespace TheGardenGroupProject
 {
-    /// <summary>
-    /// Interaction logic for RUDTicket.xaml
-    /// </summary>
-    public partial class ViewTicketsPage : Page//Ghonim
+
+    public partial class ViewTicketsPage : Page // made by Ghonim
     {
         public ObservableCollection<Ticket> TicketList { get; set; }
 
         private TicketService ticketService;
 
-        //filling the cobboboxes with the enums
-        public List<Priority> Priorities { get; set; }
-        public List<IncidentType> IncidentTypes { get; set; }
-        public List<Status> Statuses { get; set; }
+     
 
         public ViewTicketsPage()
         {
-            ticketService = new TicketService();
-            TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
-
-            Priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
-            IncidentTypes = Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
-            Statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
-
-            DataContext = this;
             InitializeComponent();
-        }
+       ticketService=new TicketService();
+     TicketList = new ObservableCollection<Ticket>(ticketService.GetAllTickets());
+           
+            creatingComboBox();
+            DataContext = this;
 
-      
+          
+ 
+
+        }
 
         private void btnUpdateTicekt_Click(object sender, RoutedEventArgs e)
         {
@@ -55,12 +47,15 @@ namespace TheGardenGroupProject
                 // Check if any changes are made in the UI elements
                 if (!AreChangesMade(selectedTicket))
                 {
-                    MessageBox.Show("No changes made to the ticket.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("No changes made to the ticket.", "Information", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
                     return;
-                }else if(string.IsNullOrWhiteSpace(subjectOfIncidenttxt.Text) ||
-                string.IsNullOrWhiteSpace(reportedByTxt.Text))
+                }
+                else if (string.IsNullOrWhiteSpace(subjectOfIncidenttxt.Text) ||
+                         string.IsNullOrWhiteSpace(reportedByTxt.Text))
                 {
-                    MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                     return;
                 }
 
@@ -71,33 +66,39 @@ namespace TheGardenGroupProject
                 RefreshTableView();
                 ClearUIElements();
 
-                MessageBox.Show("Ticket updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Ticket updated successfully!", "Success", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
 
         private void btnDeleteTicket_Click(object sender, RoutedEventArgs e)
         {
-            if(!IsTicketSelected())
+            if (!IsTicketSelected())
             {
-              return;
+                return;
             }
-        
+
             Ticket selectedTicket = (Ticket)ticketsListView.SelectedItem;
             ticketService.DeleteTicket(selectedTicket);
-            MessageBox.Show("Ticket deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Ticket deleted successfully!", "Success", MessageBoxButton.OK,
+                MessageBoxImage.Information);
             RefreshTableView();
+
             ClearUIElements(); 
-        }
+         }
+
+
 
         private void ClearUIElements()
         {
             reportedByTxt.Text = "";
             subjectOfIncidenttxt.Text = "";
-               
+
             priorityCombobox.SelectedIndex = -1;
             incidentTypeCombobox.SelectedIndex = -1;
             statusCombobox.SelectedIndex = -1;
@@ -105,6 +106,14 @@ namespace TheGardenGroupProject
             DPDeadLine.SelectedDate = null;
             DPTimeReported.SelectedDate = null;
         }
+        private void creatingComboBox ()
+        {  //filling the cobboboxes with the enums
+            priorityCombobox.ItemsSource= Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+            incidentTypeCombobox.ItemsSource=Enum.GetValues(typeof(IncidentType)).Cast<IncidentType>().ToList();
+            var statusValues = Enum.GetValues(typeof(Status)).Cast<Status>().Where(s => s != Status.Pending).ToList();
+            statusCombobox.ItemsSource = statusValues;
+        }
+
         private void RefreshTableView()
         {
             TicketList.Clear();
@@ -112,23 +121,23 @@ namespace TheGardenGroupProject
             {
                 TicketList.Add(ticket);
             }
+
         }
 
         private bool AreChangesMade(Ticket selectedTicket)
         {
             // Compare the properties of the selected ticket with the values from the UI
             return selectedTicket.Subject != subjectOfIncidenttxt.Text
-                || selectedTicket.IncidentType != (IncidentType)incidentTypeCombobox.SelectedItem
-                || selectedTicket.ReportedBy != reportedByTxt.Text
-                || selectedTicket.Priority != (Priority)priorityCombobox.SelectedItem
-                || selectedTicket.Deadline != (DPDeadLine.SelectedDate ?? DateTime.MinValue)
-                || selectedTicket.Status != (Status)statusCombobox.SelectedItem
-                || selectedTicket.ReportedOn != (DPTimeReported.SelectedDate ?? DateTime.MinValue);
+                   || selectedTicket.IncidentType != (IncidentType)incidentTypeCombobox.SelectedItem
+                   || selectedTicket.ReportedBy != reportedByTxt.Text
+                   || selectedTicket.Priority != (Priority)priorityCombobox.SelectedItem
+                   || selectedTicket.Deadline != (DPDeadLine.SelectedDate ?? DateTime.MinValue)
+                   || selectedTicket.Status != (Status)statusCombobox.SelectedItem
+                   || selectedTicket.ReportedOn != (DPTimeReported.SelectedDate ?? DateTime.MinValue);
         }
 
         private void UpdateTicketProperties(Ticket ticket)
         {
-          
             ticket.Subject = subjectOfIncidenttxt.Text; // Replace with the actual UI elements
             ticket.IncidentType = (IncidentType)incidentTypeCombobox.SelectedItem;
             ticket.ReportedBy = reportedByTxt.Text;
@@ -140,6 +149,7 @@ namespace TheGardenGroupProject
 
         private void ticketsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (ticketsListView.SelectedItem != null)
             {
                 Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
@@ -151,7 +161,6 @@ namespace TheGardenGroupProject
                 DPDeadLine.SelectedDate = selectedTicket.Deadline;
                 incidentTypeCombobox.SelectedValue = selectedTicket.IncidentType;
                 statusCombobox.SelectedValue = selectedTicket.Status;
-
             }
         }
 
@@ -162,23 +171,35 @@ namespace TheGardenGroupProject
                 MessageBox.Show("Please select a ticket.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
+
             return true;
         }
-
-        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e)//individual Functionality
+        //Ghonim individual Functionality
+        private void btnArchiveTicekt_Click(object sender, RoutedEventArgs e) 
         {
             if (!IsTicketSelected())
             {
                 return;
             }
-              ArchivingService archivingTicket = new ArchivingService();
-              Ticket selectedTicket= (Ticket)ticketsListView.SelectedValue;
-              archivingTicket.ArchiveTicket(selectedTicket);
-              ticketService.DeleteTicket(selectedTicket);
-              RefreshTableView();
-              ClearUIElements();
-              MessageBox.Show("Ticket archived successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            Ticket selectedTicket = (Ticket)ticketsListView.SelectedValue;
 
+            if (selectedTicket.Status != Status.Closed)
+            {
+                MessageBox.Show("Only tickets with a closed status can be archived.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            ArchivingService archivingTicket = new ArchivingService();
+            archivingTicket.ArchiveTicket(selectedTicket);
+            ticketService.DeleteTicket(selectedTicket);
+            RefreshTableView();
+            ClearUIElements();
+            MessageBox.Show("Ticket archived successfully!", "Success", MessageBoxButton.OK,
+                MessageBoxImage.Information);
         }
+        //Ghonim individual Functionality end
+
+       
     }
+
+
 }

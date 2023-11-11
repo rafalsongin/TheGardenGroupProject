@@ -8,15 +8,17 @@
     <Grid>
         <StackPanel MinHeight="700" Width="265" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button x:Name="ViewUsersButton" Click="ViewUsersButton_Click" Content="View users" MinHeight="50"
-                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold"/>
+                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold" />
             <Button x:Name="AddUsersButton" Click="AddUsersButton_Click" Content="Add user" MinHeight="50"
-                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold"/>
-            <Button x:Name="CreateTicketsButton" Click="CreateTicketsButton_Click" Content="Create ticket" MinHeight="50"
-                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold"/>
+                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold" />
+            <Button x:Name="CreateTicketsButton" Click="CreateTicketsButton_Click" Content="Create ticket"
+                    MinHeight="50"
+                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold" />
             <Button x:Name="ViewTicketsButton" Click="ViewTicketsButton_Click" Content="View tickets" MinHeight="50"
-        FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold"/>
+                    FontSize="20" Margin="10, 20, 10, 0" Background="#FFA3BB88" FontWeight="Bold" />
             <Button x:Name="LogoutButton" Click="LogoutButton_Click" Content="Logout" MinHeight="50"
-                    FontSize="20" Margin="10, 350, 10, 20" VerticalAlignment="Bottom" Background="#FFA3BB88" FontWeight="Bold"/>
+                    FontSize="20" Margin="10, 350, 10, 20" VerticalAlignment="Bottom" Background="#FFA3BB88"
+                    FontWeight="Bold" />
         </StackPanel>
         <Rectangle HorizontalAlignment="Left" Height="700" Margin="270,10,0,0" VerticalAlignment="Top" Width="2"
                    Fill="Black" />

@@ -2,5 +2,9 @@
 
 public enum City
 {
-    Haarlem, Amsterdam, DenHaag, Rotterdam, Eindhoven
+    Haarlem,
+    Amsterdam,
+    DenHaag,
+    Rotterdam,
+    Eindhoven
 }

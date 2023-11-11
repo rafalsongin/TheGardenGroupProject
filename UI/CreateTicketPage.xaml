@@ -23,12 +23,11 @@
                  VerticalAlignment="Top" Width="120" />
         <ComboBox x:Name="incidentTypeCombobox" HorizontalAlignment="Left" Margin="382,206,0,0" VerticalAlignment="Top"
                   Width="120"
-                 ItemsSource="{Binding IncidentTypes}" Height="24"/>
-
+                  ItemsSource="{Binding IncidentTypes}" Height="24" />
 
 
         <ComboBox x:Name="priorityCombobox" HorizontalAlignment="Left" Margin="382,276,0,0" VerticalAlignment="Top"
-                  Width="120" ItemsSource="{Binding Priorities}" Height="24"/>
+                  Width="120" ItemsSource="{Binding Priorities}" Height="24" />
 
         <Button x:Name="btnCreateTicket" Content="Create Ticket" HorizontalAlignment="Left" Margin="469,357,0,0"
                 VerticalAlignment="Top" Width="96" FontSize="14" Height="33" RenderTransformOrigin="0.504,0.567"
@@ -66,8 +65,8 @@
         <DatePicker x:Name="DpTimeReported" HorizontalAlignment="Left" Margin="382,96,0,0" VerticalAlignment="Top"
                     Width="120" />
         <Label Content="Description" HorizontalAlignment="Left" Margin="180,162,0,0" VerticalAlignment="Top"
-            Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
+               Width="146" FontFamily="Segoe UI Variable Display Semibold" FontSize="14" />
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="382,171,0,0" TextWrapping="Wrap"
-            VerticalAlignment="Top" Width="120" />
+                 VerticalAlignment="Top" Width="120" />
     </Grid>
 </Page>

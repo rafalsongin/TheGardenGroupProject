@@ -1,38 +1,20 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
+﻿using Model;
 using MongoDB.Driver;
-using Model;
 
 namespace DAL;
 
+// Rafal
 public class BaseDao
 {
-    protected MongoClient _client;
-    protected IMongoDatabase _database;//protected for accessing it in the secondery database
+    private readonly MongoClient _client;
+    private readonly IMongoDatabase _database;
 
     protected BaseDao()
     {
-        // Server (testing)
         _client = new MongoClient("mongodb+srv://dbUser:9BPqGfB5pEvENADf@thegardengroupserver.cbkve.mongodb.net/");
-            
-        // Serverless
-        // _client = new MongoClient("mongodb+srv://dbUser:test123@thegardengroupserverles.vovxxor.mongodb.net/");
         _database = _client.GetDatabase("Database");
     }
-   
 
-    public List<DatabasesModel> GetDatabases()
-    {
-        List<DatabasesModel> allDatabases = new List<DatabasesModel>();
-
-        foreach (BsonDocument db in _client.ListDatabases().ToList())
-        {
-            allDatabases.Add(BsonSerializer.Deserialize<DatabasesModel>(db));
-        }
-        return allDatabases;
-    }
-        
     // Add your GetCollection methods here below
     protected IMongoCollection<User> GetUserCollection()
     {
@@ -42,5 +24,11 @@ public class BaseDao
     protected IMongoCollection<Ticket> GetTicketCollection()
     {
         return _database.GetCollection<Ticket>("Ticket");
+    }
+
+    protected IMongoCollection<Ticket> GetArchivedTicketCollection()
+    {
+        var database = _client.GetDatabase("Database_Archive");
+        return database.GetCollection<Ticket>("ClosedTickets_Archive");
     }
 }

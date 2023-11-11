@@ -1,8 +1,9 @@
-﻿
-namespace Model
+﻿namespace Model
 {
     public enum Priority
     {
-        Low, Medium, High 
+        Low,
+        Medium,
+        High
     }
 }

@@ -1,25 +1,28 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
+﻿using Model;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using Model;
 using MongoDB.Driver.Linq;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace DAL
 {
     public class TicketDao : BaseDao
     {
         private readonly IMongoCollection<Ticket> _ticketCollection;
-        
-        public TicketDao() 
+
+        public TicketDao()
         {
             _ticketCollection = GetTicketCollection();
         }
+
         //Ghonim
         public void CreateTicket(Ticket ticket)
         {
+
             _ticketCollection.InsertOne(ticket);
         }
-
+      
         public void UpdateTicket(Ticket updatedTicket)
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
@@ -35,10 +38,10 @@ namespace DAL
                 existingTicket.Priority = updatedTicket.Priority;
                 existingTicket.Deadline = updatedTicket.Deadline;
                 existingTicket.Status = updatedTicket.Status;
-                existingTicket.LastUpdated= DateTime.Now;
+                existingTicket.LastUpdated = DateTime.Now;
 
                 // Replace the existing ticket in the collection with the updated ticket
-               _ticketCollection.ReplaceOne(filter, existingTicket);
+                _ticketCollection.ReplaceOne(filter, existingTicket);
             }
         }
 
@@ -73,10 +76,11 @@ namespace DAL
             {
                 if (ticket.Status == Status.Opened)
                 {
-                    openedTickets.Add(ticket);  
+                    openedTickets.Add(ticket);
                 }
             }
-            return openedTickets;   
+
+            return openedTickets;
         }
 
         public List<Ticket> GetResolvedTickets()
@@ -91,6 +95,7 @@ namespace DAL
                     resolvedTickets.Add(ticket);
                 }
             }
+
             return resolvedTickets;
         }
 
@@ -106,9 +111,11 @@ namespace DAL
                     closedTickets.Add(ticket);
                 }
             }
+
             return closedTickets;
         }
-
+        
+        //dana
         public long GetTicketCountForUser(string userEmail)
         {
             var filter = Builders<Ticket>.Filter.Eq("Email", userEmail);
@@ -116,48 +123,71 @@ namespace DAL
             return ticketCount;
         }
 
+        public List<Ticket> GetAllTicketsSortedByPriorityDescending()
+        {
+            try
+            {
+                var tickets = _ticketCollection
+                    .Find(new BsonDocument())
+                    .ToList();
+
+                var sortedTickets = tickets.OrderByDescending(ticket => ticket.Priority).ToList();
+                return sortedTickets;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (log it, show a message, etc.)
+                throw new Exception($"Error getting and sorting tickets: {ex.Message}", ex);
+            }
+        }
+
+
+
+        // dana end 
+
+
+
         //kim
         public List<Ticket> GetAllTicketsFromUser(User user) //getting all tickets based on username
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.ReportedBy == user.Username
-                                              select tickets;
+                where tickets.ReportedBy == user.Username
+                select tickets;
             return results.ToList();
         }
 
         public List<Ticket> GetOpenTicketsFromUser(User user) //getting pending and open tickets based on username
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.ReportedBy == user.Username
-                                              where tickets.Status == Status.Pending || tickets.Status == Status.Opened
-                                              select tickets;
+                where tickets.ReportedBy == user.Username
+                where tickets.Status == Status.Pending || tickets.Status == Status.Opened
+                select tickets;
             return results.ToList();
         }
 
         public List<Ticket> GetClosedTicketsFromUser(User user) // getting closed and resolved tickets based on username
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.ReportedBy == user.Username
-                                              where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
-                                              select tickets;
+                where tickets.ReportedBy == user.Username
+                where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
+                select tickets;
             return results.ToList();
         }
 
         public List<Ticket> GetAllOpenTickets() // getting all open and pending tickets
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.Status == Status.Pending || tickets.Status == Status.Opened
-                                              select tickets;
+                where tickets.Status == Status.Pending || tickets.Status == Status.Opened
+                select tickets;
             return results.ToList();
         }
 
         public List<Ticket> GetAllClosedTickets() // getting all closed and resolved tickets
         {
             IMongoQueryable<Ticket> results = from tickets in GetTicketCollection().AsQueryable()
-                                              where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
-                                              select tickets;
+                where tickets.Status == Status.Closed || tickets.Status == Status.Resolved
+                select tickets;
             return results.ToList();
         }
-
     }
 }
